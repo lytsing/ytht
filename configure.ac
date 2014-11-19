@@ -1,5 +1,5 @@
 dnl ====================================================
-dnl  configure.in for Firebird BBS v3.0K
+dnl  configure.ac for Firebird BBS v3.0K
 dnl
 dnl ====================================================
 
@@ -454,6 +454,6 @@ You may review the Makefile now. Then, type 'make' to build your system.
 EOF
 
 dnl -------------------- 
-dnl END of configure.in
+dnl END of configure.ac
 dnl --------------------
 
