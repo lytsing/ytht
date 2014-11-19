@@ -1,59 +1,59 @@
-      
-	BBSת�Ź����ֲ�
 
-������ ythtϵͳά���鸺��ά����
-����Ϊ�ڱ����з����˻����д��ĵط������ǲ�ͨ����䡢���ֱ��֣�����sofire@ytht.net��ϵ��
+	BBS转信管理手册
 
-���ĵ�����������:
-        1���������ã�����ά������ ������ȫ�ο� tian �����¡�BBSת�Ź���Ա������
-		1 ____YTHTBBSƪ���� BBSת�Ź���Ա������2 ____YTHTBBSƪ��
-        2�����˵����FAQ
-	3����¼fallnight�ġ�ת��How-To�ο�����Ϊ�ο�
+本文由 ytht系统维护组负责维护。
+您认为在本文中发现了怀疑有错的地方，或是不通的语句、错字别字，请与sofire@ytht.net联系。
 
-��һ���֣�
+本文档分三个部分:
+        1，技术配置，管理维护部分 －－完全参考 tian 的文章《BBS转信管理员轻松做
+		1 ____YTHTBBS篇》《 BBS转信管理员轻松做2 ____YTHTBBS篇》
+        2，相关说明和FAQ
+	3，附录fallnight的《转信How-To参考》作为参考
 
-��������ƪ
-  ��װת��֮ǰ��ȷ�����BBSϵͳtelnet���ֵĹ���������������bbs�û���½��װ��
-  Ū�����Լ���������ģʽ���Ǳ���ģʽ
-  ����Ǳ���ģʽ�����http://cn-bbs.org�ϵõ��Լ�վ�������ļ���Ϣ
+第一部分：
 
-1. [bbs]$ cd ythtbbssrc			 ����ythtbbsԴ��Ŀ¼
-2. [bbs]$ cd innbbsd			 ����ת�ų���Ŀ¼
-3. [bbs]$ make				 ��ʾ��ʾ��Ϣ����ϸ�Ķ�һ�£�Ȼ��ѡ����
-					 ��ϵͳ���˴���linuxϵͳΪ��
-4. [bbs]$ make linux && make install	 ����м�û�б����Ļ������ת�ų�������
-					 ���־Ͱ�װ����
-5. [bbs]$ cd <bbshome>			 �������ʵ������������� bbs �û����û�
-					 Ŀ¼Ϊ /home/bbs
-6. [bbs]$ cd /home/bbs/inndlog  	 �������BBSת������Ŀ¼
-7. [bbs]$ vi bbsname.bbs		 ��д���BBS��Ӣ�����ơ�������뵽http://cn-bbs.org
-8. [bbs]$ touch filter.ctl		 �ַ�ת�����ǿ��ƣ������û��TW�飬����
-					 Ϊ�վͿ���
-9. [bbs]$ vi newsfeeds.bbs		 �޸� newsfeeds.bbs cnnews.active �����ļ�
-   [bbs]$ vi cnnews.active		 �������òμ�cnAdmin�� <cn.bbs.* HOWTO Q6>
-10.[bbs]$ /home/bbs/innd/innbbsd	 ����ת�ŷ�����Ӧ���ܿ�����
+技术配置篇
+  安装转信之前，确保你的BBS系统telnet部分的功能正常，并请用bbs用户登陆安装。
+  弄明白自己是用主动模式还是被动模式
+  如果是被动模式，请从http://cn-bbs.org上得到自己站的配置文件信息
+
+1. [bbs]$ cd ythtbbssrc			 进入ythtbbs源码目录
+2. [bbs]$ cd innbbsd			 进入转信程序目录
+3. [bbs]$ make				 显示提示信息，仔细阅读一下，然后选择你
+					 的系统，此处用linux系统为例
+4. [bbs]$ make linux && make install	 如果中间没有报错的话，你的转信程序主体
+					 部分就安装完了
+5. [bbs]$ cd <bbshome>			 根据你的实际情况，以下设 bbs 用户的用户
+					 目录为 /home/bbs
+6. [bbs]$ cd /home/bbs/inndlog  	 配置你的BBS转信设置目录
+7. [bbs]$ vi bbsname.bbs		 填写你的BBS的英文名称。相关申请到http://cn-bbs.org
+8. [bbs]$ touch filter.ctl		 字符转换过虑控制，如果你没有TW组，暂设
+					 为空就可以
+9. [bbs]$ vi newsfeeds.bbs		 修改 newsfeeds.bbs cnnews.active 配置文件
+   [bbs]$ vi cnnews.active		 具体设置参见cnAdmin版 <cn.bbs.* HOWTO Q6>
+10.[bbs]$ /home/bbs/innd/innbbsd	 启动转信服务，你应该能看到：
 					 PID file is in /usr/tmp/innbbsd-7777.pid
-11.[bbs]$ telnet localhost 7777		 ����һ�£���������������Ϣ���ͱ�ʾ����������
+11.[bbs]$ telnet localhost 7777		 测试一下，如果看到下面的信息，就表示启动正常。
 	Trying 127.0.0.1...
 	Connected to localhost.
 	Escape character is '^]'.
 	502 You are not in my access file. (unknown@127.0.0.1)
 	Connection closed by foreign host.
 
-    ��������µ���ʾ�����innbbsd������bug��һ�����BBSĿ¼������һ��core.
+    如果是如下的显示，你的innbbsd程序有bug，一般会在BBS目录下生成一个core.
 	Trying 127.0.0.1...
 	telnet: connect to address 127.0.0.1: Connection refused
 
-12.�����������ŷ��������ԣ��������òμ�cnAdmin�� <cn.bbs.* HOWTO Q7>
+12.可以连接新闻服务器试试，具体设置参见cnAdmin版 <cn.bbs.* HOWTO Q7>
 
-����ά��ƪ
+管理维护篇
 
-1, �޸� /home/bbs/innd/newsfeeds.bbs
+1, 修改 /home/bbs/innd/newsfeeds.bbs
 
-  ��(A) ϵͳ�������ܱ���>��(S)ysFiles�༭ϵͳ������>[24] ת�Ű���������Ӧ
-  �����޸ģ�
-	#�м�հ��ǰ�Tab�����ɣ���Ҫ��space(�ո�)����
-	#ǰ�����"#",��ʾע�͵������ݡ�
+  ◆(A) 系统管理功能表－>◆(S)ysFiles编辑系统档案－>[24] 转信版和新闻组对应
+  进入修改：
+	#中间空白是按Tab键生成，不要用space(空格)键。
+	#前面加了"#",表示注释掉的内容。
 	cn.bbs.arts.ascii               ASCIIart        cnnews
 	#cn.bbs.comp.hardware            Hardware        cnnews
 	cn.bbs.admin.installbbs         BBSDev          cnnews
@@ -62,90 +62,90 @@
 	cn.bbs.admin.announce           cnAnnounce      null
 	cn.bbs.admin.lists              cnLists         null
 
-2, �޸����۰����ã�����ת�Ű�����Ϊת�Ű档
+2, 修改讨论版设置，将非转信版设置为转信版。
 
-  ��(A) ϵͳ�������ܱ���>��(B)oard �������趨��>��(C)hangeBrd �޸��������趨
+  ◆(A) 系统管理功能表－>◆(B)oard 讨论区设定－>◆(C)hangeBrd 修改讨论区设定
 
-3, Reload Innbbsd �ض�ת������.
+3, Reload Innbbsd 重读转信配置.
 
-  ��(A) ϵͳ�������ܱ���>��(B)oard �������趨��>��(L)ReloadInn �ض�ת�����ã�>Y
+  ◆(A) 系统管理功能表－>◆(B)oard 讨论区设定－>◆(L)ReloadInn 重读转信配置－>Y
 
-  �����������
-    [bbs]$ /home/bbs/innd/ctlinnbbsd reload 
+  或者运行命令：
+    [bbs]$ /home/bbs/innd/ctlinnbbsd reload
 
-4, ��ɡ�
+4, 完成。
 
- �������²���һ�°ɣ�����󣬿��Ե�http://webnews.cn-bbs.org��������鿴����
- 
+ 发个文章测试一下吧，发完后，可以到http://webnews.cn-bbs.org上找相关组看看。
 
-�ڶ����֣�
 
-���˵����
-1.Ϊʲô�ղ�����
+第二部分：
 
-1. �����TW������Ļ�������ô�죿
+相关说明：
+1.为什么收不到信
 
-   [bbs]$ cd ~/ythtbbssrc/local_utl	����BBSԴ��Ŀ¼
-   [bbs]$ make big2gb			�ҵ�big2gb.c,
-   [bbs]$ cp big2gb			�����ɵ�big2gb�����Ƶ�BBSĿ¼��bin/
+1. 想加入TW新闻组的话，该怎么办？
 
-   ���޸� inndlog/filter.ctl ����
+   [bbs]$ cd ~/ythtbbssrc/local_utl	进入BBS源码目录
+   [bbs]$ make big2gb			找到big2gb.c,
+   [bbs]$ cp big2gb			把生成的big2gb程序复制到BBS目录的bin/
+
+   再修改 inndlog/filter.ctl 加入
 	tw.*:/home/bbs/bin/big2gb:/home/bbs/bin/big2gb -r
 
-   ͬʱ�� inndlog Ŀ¼�� 
+   同时在 inndlog 目录下
    [bbs]$ touch ncmperm.bbs
 
-   ���� innbbsd �����innbbsd���������Ļ���һ�о�ok��
+   重启 innbbsd 。如果innbbsd启动正常的话，一切就ok。
    [bbs]$ killall -9 innbbsd
    [bbs]$ /home/bbs/innd/innbbsd
 
-2. ��������ʱ�ļ�����Ҫ����ʾ
-   ��ϸ�Ķ�������Ķ����ĸ�¼��http://cn-bbs.org/������
-   �鿴������Ϣ����־�ļ���inndlog/*��
-   �� cnAdmin���� bbsdev ���Ͻ�������
-   
-3. ��������������� http://cn-bbs.org/doc/HOWTO�� �����˲����޸ĺ�ɾ��
+2. 遇到问题时的几个重要的提示
+   仔细阅读，多次阅读本文附录和http://cn-bbs.org/的文章
+   查看出错信息和日志文件（inndlog/*）
+   到 cnAdmin或者 bbsdev 版上进行讨论
 
-     ��FAQ�����ϣ������cn.bbs.*ת�ŵ��й�bbs��ת�Ź���Ա��ÿ��һ���Զ�
-     ����cn.bbs.admin��cn.bbs.admin.announce�飬�뾡���ο����°汾��
+3. 下面的内容来自于 http://cn-bbs.org/doc/HOWTO， 并做了部分修改和删除
 
-     �κ�����ͽ��飬����ϵ<control@cn-bbs.org>.
+     本FAQ是针对希望加入cn.bbs.*转信的中国bbs的转信管理员。每月一日自动
+     贴于cn.bbs.admin和cn.bbs.admin.announce组，请尽量参考最新版本。
 
-     Q1��ʲô��cn.bbs.*��
-     A1��cn.bbs.*�ƻ���רΪ�й�bbsת�ŷ���ģ������й������Ϳ��м������
-     �ĸ���涨��
-     cn.bbs.*�ƻ�Ŀǰӵ��11̨news server��77��bbsվ̨��108���飬������Χ
-     �鼰ʮ������ҡ�
+     任何意见和建议，请联系<control@cn-bbs.org>.
 
-     Q2����μ���cn.bbs.*��
-     A2��Ŀǰ����news server�ϵ�cn.bbs.admin��cn.bbs.admin.test�鶼�ǿ�
-     �ŵġ�������ʹ��cn.bbs.admin.test���в��ԣ��ɹ�����
-     http://cn-bbs.org/ ����Ȩ�ޡ�
+     Q1：什么是cn.bbs.*？
+     A1：cn.bbs.*计划是专为中国bbs转信服务的，遵守中国教育和科研计算机网
+     的各项规定。
+     cn.bbs.*计划目前拥有11台news server，77个bbs站台，108个组，传播范围
+     遍及十多个国家。
 
-     Q5��Ӧ��ת��Щ�����أ�
-     A5��ת�Ż���������һ���ĳ����ϣ������Ա��ת��֮ǰ��ֿ��ǣ����ܹ�
-     ���ڶ��bbs���������ܹ������Լ�����ɫ�������������а涼����ת�š�
-     ͬʱ��һ������ת�ţ��Ͳ�Ӧ����ֹ�������������У����絥��ת�š�һ��ת
-     �����Լ��޸�S/L��Ĭ�����õȡ�
-     ��Ϊת�ŵ���С���ã��������ٿ������°���:
-        cnAdmin         [ת��] �� cn.bbs.*��������չ����
-        cnAnnounce      [ת��] �� cn.bbs.*��Ҫ����(ֻ��)
-        cnBM            [ת��] �� cn.bbs.*��(��)����
-        cnLists         [ת��] �� cn.bbs.*����ͳ���б����¼(ֻ��)
-        cnTV            [ת��] �� ���ӽ�ĿԤ��(ֻ��)
-        cnWeather       [ת��] �� ����Ԥ��(ֻ��)
-        cnTest          [ת��] �� cn.bbs.*������
+     Q2：如何加入cn.bbs.*？
+     A2：目前各个news server上的cn.bbs.admin和cn.bbs.admin.test组都是开
+     放的。请首先使用cn.bbs.admin.test进行测试，成功后在
+     http://cn-bbs.org/ 申请权限。
 
-     Q6�������дbbsname.bbs��newsfeeds.bbs��nodelist.bbs��active�ļ��أ�
-     A6���������˵���ɲο�innbbsd�е�Readme���������"��ܰС��"��������
-     ��(ʹ������ʽת�ţ�����ת�ź�������)Ϊ�������е�վ�����ֱ��밴��
-     ʵ����������޸ģ���������е�վ�ظ���
+     Q5：应该转哪些版面呢？
+     A5：转信会给版面带来一定的冲击，希望管理员在转信之前充分考虑，既能够
+     跟众多的bbs交流，又能够保持自己的特色。不鼓励将所有版都纳入转信。
+     同时，一旦加入转信，就不应该阻止交流的正常进行，比如单向转信、一版转
+     多组以及修改S/L的默认配置等。
+     作为转信的最小配置，建议至少开设以下版面:
+        cnAdmin         [转信] ● cn.bbs.*管理及发展事务
+        cnAnnounce      [转信] ● cn.bbs.*重要公告(只读)
+        cnBM            [转信] ● cn.bbs.*版(组)务交流
+        cnLists         [转信] ● cn.bbs.*各类统计列表与记录(只读)
+        cnTV            [转信] ● 电视节目预告(只读)
+        cnWeather       [转信] ● 天气预报(只读)
+        cnTest          [转信] ● cn.bbs.*测试区
+
+     Q6：如何书写bbsname.bbs、newsfeeds.bbs、nodelist.bbs和active文件呢？
+     A6：各项具体说明可参看innbbsd中的Readme，这里仅以"温馨小屋"的配置文
+     件(使用主动式转信，被动转信后面会介绍)为例，其中的站名部分必须按照
+     实际情况加以修改，以免和已有的站重复。
      bbsname.bbs:
-	
+
      Feeling
 
      newsfeeds.bbs:
-     
+
      cn.bbs.admin       cnAdmin cnnews
      cn.bbs.admin.announce      cnAnnounce      null
      cn.bbs.admin.lists cnLists null
@@ -154,9 +154,9 @@
      cnbbs.admin.manager        cnBM    cnnews
 
      nodelist.bbs:
-     
-     Feeling    bbs.feeling.smth.org     IHAVE(7777)     ��ܰС��
-     cnnews     news.zixia.net   POST(119)       cn.bbs.*������	
+
+     Feeling    bbs.feeling.smth.org     IHAVE(7777)     温馨小屋
+     cnnews     news.zixia.net   POST(119)       cn.bbs.*新闻组
 
      cnnews.active:
 
@@ -168,181 +168,181 @@
      cnbbs.admin.manager        0000000000      0000000001      y
      control.cancel     0000000000      0000000001      y
 
-     newsfeeds.bbs�е�null��ʾ��ת����
-     cnnews.active�м���control.cancel���Ŀ�����ڿ�վ���š�
+     newsfeeds.bbs中的null表示不转出。
+     cnnews.active中加入control.cancel组的目的在于跨站砍信。
 
-     Q7�����ִ��innbbsd�أ�
-     A7������innbbsd֮����inndĿ¼��ִ��
-     ����ת�룬ִ��:
+     Q7：如何执行innbbsd呢？
+     A7：运行innbbsd之后，在innd目录下执行
+     进行转入，执行:
 	./bbsnnrp news.zixia.net cnnews.active
 
-     ����ת��:     
+     进行转出:
         ./bbslink -v ~bbs
 
-     Ҳ���Լ���crontab�У�ÿ��һ��ʱ���Զ�ִ�С���д��:
+     也可以加入crontab中，每隔一定时间自动执行。如写成:
 	0,15,30,45 * * * * ~bbs/innd/bbsnnrp news.zixia.net cnnews.active>/dev/null 2>&1
 	* * * * * ~bbs/innd/bbslink ~bbs >~bbs/tmp/portnum
 
-     Q8���������ȫ��ʮ�����Ż��⣿
-     A8��ythtϵͳ�Ѿ��д˹��ܡ���֪������Ϣ������� http://cn-bbs.org/doc/HOWTO ԭ�ġ�
+     Q8：如何增加全国十大热门话题？
+     A8：ytht系统已经有此功能。欲知更多信息，请参阅 http://cn-bbs.org/doc/HOWTO 原文。
 
-     Q9��ʲô�Ǳ���ʽת�ţ�
-     A9������ת��bbs����ʹ�ñ���ʽת�ţ����ǲ��Գ�������ʹ������ʽת�š�
-     ���ڱ���ʽת�ź�����ʽת�ŵ�����innbbsd-0.50beta-5F��README�ļ���
-     ����ϸ�Ĳ�����Ԯ������:
+     Q9：什么是被动式转信？
+     A9：建议转信bbs尽量使用被动式转信，但是测试初期请先使用主动式转信。
+     关于被动式转信和主动式转信的区别，innbbsd-0.50beta-5F的README文件有
+     较详细的阐述，援引如下:
 
-        A). ����ʽ (client gateway) �ͱ���ʽ (server gateway) ת�ŵıȽ�
-        
-        Ŀǰ�� tw.bbs ת�ŵ� BBS վ����֮��ʽ���մ��ŵķ�ʽ������Ϊ����:
-        1. ����ȡ�ŵ�, ���Ϊ client gateway.
-                һ�㾭�� modem �绰���ӵ� BBSվ���ô˷�ʽ������ news client����
-		���� news server ��ʱ��ȡ.
-                NSYSU Formosa BBS ����֮ת�ų�ʽ��һ�� client gateway.
-        2. �������ŵ�, ���Ϊ server gateway.
-                BBS վ��һ�� server, ֻ�ܱ����صȴ�����վι��,��һ��news server
-		�������� news article �ķ���.
-                Phoenix BBS ����֮ in.bntpd ����һ�� server gateway.
+        A). 主动式 (client gateway) 和被动式 (server gateway) 转信的比较
 
-        ������ gateway ������ȱ��. ��������:
-        1. client gateway ���� maintain ��ȡ�ļ�¼, ��һ��news reader �� newsrc ���ơ�
-  	   client �����Ը�, ��������������ʱȥȡ��, Ҫ��Щ��������
-        2. server gateway ���� maintain ��ȡ��¼, ֻҪ�����صȴ�����վ�������͹�����
-	    server gateway �Ƚ�������, ����ʱ����ι��֮��������������վ�趨��
+        目前与 tw.bbs 转信的 BBS 站所用之程式依照传信的方式可区分为两类:
+        1. 主动取信的, 或称为 client gateway.
+                一般经由 modem 电话拨接的 BBS站多用此方式主动以 news client的身
+		份向 news server 定时读取.
+                NSYSU Formosa BBS 所用之转信程式是一种 client gateway.
+        2. 被动等信的, 或称为 server gateway.
+                BBS 站跑一个 server, 只能被动地等待上游站喂送,是一般news server
+		用来传送 news article 的方法.
+                Phoenix BBS 所附之 in.bntpd 就是一种 server gateway.
 
-        BBS վ������������ά��֮���Ѷ�, �Ծ���������һ�� gateway��
-        1. ��ȡ֮��������ѡ�
-                ������, client gateway �ȽϺ��ʡ� ����ܶ࣬Ӧ���ǲ���servergateway��
-                ��ȡ��¼����ά��, ������ news server ���ڻ��� renumber active��
-		����, client ��������.
-        2. �Ƿ�������ͬ��ת��, ĳվһ�������ͳ�, ����վ���Ͽɿ��������ֻ���� s
-		erver gateway ��ɡ�
-        3. �Ƿ�Ҫ��վ����. ���� client gateway �����Ƚ��ѡ����Ҫ�����ܽ��ܱ�վ
-		�����Ŀ���ѶϢ,
-                a. ��Ҫ��ȡһ�� ��Ϊ "control" �� "control.cancel" ��news��������
-		   ͨ������������൱��, ����Զ���� BBS վ��ת��������.
-                b. ��¼ artno �� BBS article path �Ķ�Ӧ��ϵ, �� stat news server��
-                c. extract header (xhdr Control) server gateway �������ն������
-		   �������ɿ�վ���š�
-        4. ����ʹ�û�ʹ���߲���� BBS վ������� client gateway.�û���ģ�ת�Ų�
-		����Ӱ��Ƚϴ�,������� server gateway��
-        5. ��Ҫ�����Ըߵ��� client gateway����Ҫ�н�������, ����������һ�߸о���
-		�� server gateway��
+        这两种 gateway 各有优缺点. 分析如下:
+        1. client gateway 必须 maintain 读取的记录, 与一般news reader 的 newsrc 类似。
+  	   client 自主性高, 可以主动决定何时去取信, 要那些讨论区。
+        2. server gateway 无须 maintain 读取记录, 只要被动地等待上游站把新信送过来。
+	    server gateway 比较难自主, 送信时机和喂送之讨论区。由上游站设定。
 
-     ��Ϊ cn.bbs.*�����ǽ������� BBS �����ܲ��ñ���ʽת�ţ�����ʽת�Ž����ڲ��Խ�
-     �Σ���ֻ������ news ������ group �Ͽ��š�
+        BBS 站必须衡量需求和维护之困难度, 以决定采用那一种 gateway。
+        1. 收取之讨论区多寡。
+                若不多, client gateway 比较合适。 如果很多，应考虑采用servergateway。
+                读取记录不好维护, 尤其是 news server 定期会有 renumber active的
+		动作, client 可能误判.
+        2. 是否想连线同步转信, 某站一有新信送出, 其他站马上可看到。这个只能由 s
+		erver gateway 达成。
+        3. 是否要跨站砍信. 若由 client gateway 来做比较难。如果要做到能接受别站
+		送来的砍信讯息,
+                a. 还要收取一个 称为 "control" 或 "control.cancel" 的news讨论区。
+		   通常这个区的量相当大, 可能远大于 BBS 站想转的正常区.
+                b. 记录 artno 与 BBS article path 的对应关系, 再 stat news server。
+                c. extract header (xhdr Control) server gateway 不用再收额外的讨
+		   论区即可跨站砍信。
+        4. 个人使用或使用者不多的 BBS 站建议采用 client gateway.用户多的，转信不
+		正常影响比较大,建议采用 server gateway。
+        5. 想要自主性高的用 client gateway。想要有紧密相连, 有整体连成一线感觉者
+		用 server gateway。
 
-     Q10�����ʹ�ñ���ʽת���أ�
-     A10��������ȷ������ʽת��һ�����������Ѿ�ͨ������(��Q2)�����Ѿ�����ȫ��ʮ��
-     	  ���Ż���(��Q8)��Ȼ���� http://cn-bbs.org/ ������롣
+     作为 cn.bbs.*，我们建议所有 BBS 尽可能采用被动式转信，主动式转信仅用于测试阶
+     段，并只在少数 news 和少数 group 上开放。
 
-     �������ͨ���Ļ������޸�nodelist.bbs����cnnews��Ӧ�иĳ�:
+     Q10：如何使用被动式转信呢？
+     A10：首先请确认主动式转信一切正常，并已经通过申请(见Q2)，且已经增加全国十大
+     	  热门话题(见Q8)。然后在 http://cn-bbs.org/ 提出申请。
 
-     cnnews     166.111.160.80  IHAVE(119)       cn.bbs.*������
+     如果申请通过的话，请修改nodelist.bbs，将cnnews对应行改成:
 
-     ( ���� 166.111.160.80 �����ݾ���������з��䣬���� IP ��ο�ת��������ʾ�� )
-     ��������innbbsd(����reloadһ��)���Ϳ����ˡ�
-     bbslink ������ A7 ��ͬ��
-     ͬʱ�����˴�crontab��ɾ��bbsnnrp��bbsnnrp��cnnews.active�Ѿ����Բ���ʹ���ˡ�
+     cnnews     166.111.160.80  IHAVE(119)       cn.bbs.*新闻组
 
-     Q11���һ��Ǹ㲻������ô�죿
-     A11����ȷ���Ѿ������Ķ���innbbsd�Դ����ĵ���
-     �����������������ʹ��news reader����(��Agent��Outlook Express)
-     ��cn.bbs.admin��ѯ�ʣ���������ת��bbs��cnAdmin��(�����ư�)�н������ۡ�
+     ( 其中 166.111.160.80 将根据具体情况进行分配，具体 IP 请参考转信配置提示。 )
+     重新运行innbbsd(或者reload一次)，就可以了。
+     bbslink 设置与 A7 相同。
+     同时别忘了从crontab中删掉bbsnnrp，bbsnnrp和cnnews.active已经可以不再使用了。
 
-�������֣�
+     Q11：我还是搞不定，怎么办？
+     A11：请确定已经认真阅读了innbbsd自带的文档。
+     还有其它的问题可以使用news reader软件(如Agent，Outlook Express)
+     在cn.bbs.admin组询问，或者在已转信bbs的cnAdmin版(或类似版)中进行讨论。
 
-��¼��
-������: fallnight.bbs@bbs.tju.edu.cn (�ŷ�), ����: cn_bbs_admin
-��  ��: ת��How-To�ο�
-����վ: �����ʵBBSվ (Sat Oct 26 21:28:57 2002)
-ת��վ: YTHT!news.happynet.org!news.tiaozhan.com!UTJ
+第三部分：
 
-��������ʱ�������������ʵ�ı���ת�ţ���лCZZ�Ĵ���������ϣ����ƪ����Ϊ�Ժ� ���
-��ת�ŵ�ս��������������������һ��Ҫ���ñ��ݣ��������ⲻҪ���ң�����Ϊ�� ����Щ
-�����ˣ��д���ĵط���ӭ���ָ����
+附录：
+发信人: fallnight.bbs@bbs.tju.edu.cn (逝风), 信区: cn_bbs_admin
+标  题: 转信How-To参考
+发信站: 天大求实BBS站 (Sat Oct 26 21:28:57 2002)
+转信站: YTHT!news.happynet.org!news.tiaozhan.com!UTJ
+
+用了两天时间做完了天大求实的被动转信，感谢CZZ的大力帮助，希望这篇文章为以后 想参
+加转信的战友能有所帮助。不过你一定要做好备份，出现问题不要骂我：）因为过 程有些
+忘记了，有错误的地方欢迎大家指正。
 
 fallnight @bbs.tju.edu.cn
-����������fb2000-1219(innd0.5)
+本文适用于fb2000-1219(innd0.5)
 -------------------------------------------------------------------
 
-   cn.bbs.*��Ϊ�й���½bbsת�ŷ����news server�������Ǵ�������ڸ�Уbbsת�� ��server.
-   ������Դ��http://cn-bbs.org����ܰС��bbs(cn-bbs.org)����������Ҫ�õ���
+   cn.bbs.*是为中国大陆bbs转信服务的news server，现在是大多数国内高校bbs转信 的server.
+   两个资源：http://cn-bbs.org和温馨小屋bbs(cn-bbs.org)，下面我们要用到。
 
-1����������
-   ��½��ҳhttps://cn-bbs.org/cnweb/�������������롣������е���Ϣ��Ҷ����� Ϥ
-   �ˣ�����������վ������Ҫ��������ע���˵���Ϣ�����Ҹ�����email,�ҵ�163�ľ� 
-   ��������������Ҫ�����е��ظ�������󣬵Ⱥ���֤�š������������ߵĻ���һ���� 
-   �����̺ܿ졣�յ���֤���е���֤���룬�Ϳ��Ե���վ�ϼ�������ʺ��ˡ�������� 
-   ��������ϡ�
+1。域名申请
+   登陆网页https://cn-bbs.org/cnweb/，进入域名申请。申请表中的信息大家都很熟 悉
+   了，填上申请网站、你想要的域名和注册人的信息。（找个快点的email,我的163的就
+   不错）。域名不要和已有的重复。填完后，等候验证信。如果审核人在线的话，一般这
+   个过程很快。收到验证信中的验证密码，就可以到网站上激活你的帐号了。到这里，域
+   名申请完毕。
 
-2������ת�Ű�װ������ת�źͱ���ת�ŵ������innd��readme��
-     ������û����������½��http://cn-bbs.org,����ת�����롣��ʾĿǰ��ת��״ ̬
-     : δת�ţ�     innd�˿ڣ�7777��һ�㲻�øģ�
-   ��ҳ�����б�����Ŀǰ���ڵ�ת���飬ǰ�ĸ��Ǳ�������ģ������������Ҫ����ת ��
-   �����������������ˡ���������ĺ���������վ�϶�Ӧ�İ�����֣���Ȼ������Ҫ�� ��
-   ��Щ���档Ȼ��ȷ�����ȱ�ˮ����֪ͨ�Űɡ�
-     �յ����ˣ����ˣ���������Ȩ���ˡ�������ҳ�����ת��������ʾ������ļ��� ��
-     �ö��������ˣ���ϸ������û����Ļ����������inndԴ��Ŀ¼(һ����
-     /home/bbs/bbssrc/util/innbbsd/)��������վ�ṩ��ת�����ã�ճ������Ŀ¼�µ�
-     innbbsd/nodelist .bbs��~/innbbsd/newsfeeds.bbs�У����ԭ�������ݡ�
-     ���ڻ��м���Ҫ�ĵĵط���
-    ��~/innbbsd/Makefile,�����⼸��Ϊ�����Ϣ
+2。主动转信安装（主动转信和被动转信的区别见innd的readme）
+     用你的用户名和密码登陆到http://cn-bbs.org,进入转信申请。显示目前的转信状 态
+     : 未转信；     innd端口：7777（一般不用改）
+   网页下面列表中是目前存在的转信组，前四个是必须申请的，如果将来你想要被动转 信
+   ，就再申请两个好了。在申请组的后面填上你站上对应的版的名字，当然，首先要建 好
+   这些版面。然后确定。喝杯水，等通知信吧。
+     收到信了？好了，现在你有权限了。看看网页中你的转信配置提示里，几个文件的 配
+     置都告诉你了，仔细看看，没问题的话，进到你的innd源码目录(一般是
+     /home/bbs/bbssrc/util/innbbsd/)，复制网站提供的转信配置，粘贴到你目录下的
+     innbbsd/nodelist .bbs和~/innbbsd/newsfeeds.bbs中，替掉原来的内容。
+     现在还有几个要改的地方：
+    打开~/innbbsd/Makefile,更改这几行为你的信息
         ADMINUSER = youremail@xxx.xxx
-        BBSHOME = /yourbbshome           //bbs��װ�ĸ�Ŀ¼
-        BBSHOST = bbs.tju.edu.cn         //bbs��������ip
-        BBS_SRC = /home/bbs              //bbs��Դ��λ��
+        BBSHOME = /yourbbshome           //bbs安装的根目录
+        BBSHOST = bbs.tju.edu.cn         //bbs的域名或ip
+        BBS_SRC = /home/bbs              //bbs的源码位置
 
-    ���滹��һ���ط���153������
-         echo 'UTJ' > bbsname.bbs           //������ĳ������������
-    �ĺ��ˣ������˳���
-   ������innbbsd��,makeһ�¡����ˣ����ڿ�����û��bbslink,bbsbbrp��innbbsd���� �ˣ�
-   �ǾͿ���make install��,�����Զ������bbshome�н�һ��inndĿ¼����ȥ��Դ�� �е�
-   newsfeeds.bbs��nodelists.bbs�ļ�copy�������ٸ���������İ��棬��һ������ ��
-   cnnews.active�����������£�
+    下面还有一个地方：153行左右
+         echo 'UTJ' > bbsname.bbs           //引号里改成你申请的域名
+    改好了？存盘退出。
+   现在在innbbsd中,make一下。好了，现在看看有没有bbslink,bbsbbrp和innbbsd？有 了？
+   那就可以make install了,它会自动再你的bbshome中建一个innd目录，进去把源码 中的
+   newsfeeds.bbs和nodelists.bbs文件copy过来。再根据你申请的版面，建一个新文 件
+   cnnews.active内容类似如下：
 
     cn.bbs.admin 0000000000 0000000001 y
     cn.bbs.admin.announce 0000000000 0000000001 y
     cn.bbs.admin.lists 0000000000 0000000001 y
     cn.bbs.admin.test 0000000000 0000000001 y
     control.cancel 0000000000 0000000001 y
-   �����˳���
-   ��������һ��bbshome/innbbsd,Ӧ����ʾ
+   存盘退出。
+   现在运行一下bbshome/innbbsd,应该显示
    PID file is in /usr/tmp/innbbsd-7777.pid
    Try to listen in port 7777 and path /bbsdata/innd/.innbbsd
 
-   ���ˣ����������һ�£�׼�������ܲ����յ����ˣ�
-   ����bbsnnrp 202.108.36.140 cnnews.active  //����ip�÷������ġ�
+   好了，现在深呼吸一下，准备看看能不能收到信了！
+   运行bbsnnrp 202.108.36.140 cnnews.active  //其中ip用分配给你的。
 
-   �����ļ��б��ˣ���İ����ж��˲�������,right��һ��˳����Ҫ�����鷳�������� ��
-   ϸ������վ��faq��
-   ���ˣ��Լ������ת�Ű��﷢�����ӣ�����һ��bbslink -v /BBSHOME(�������Ŀ¼),
-   �������ʾ���վ���͵�ַ��post��շ������³�ȥ��������������ﻹû�����⣬ ��
-   ϲ��ϲ���������ת�Ŵ󹦸���ˣ���
-   �������ǵ�½��cn-bbs.org��bbsȥ������û��������Ӳŷ��ġ������շ������� ��
-   ��ӵ�cron.bbs��
+   看到文件列表了？你的版面中多了不少贴子,right，一切顺利。要是有麻烦，建议你 仔
+   细看看网站的faq。
+   好了，自己在你的转信版里发个贴子，运行一下bbslink -v /BBSHOME(你的数据目录),
+   程序会显示你的站名和地址并post你刚发的文章出去。你如果到了这里还没有问题， 恭
+   喜恭喜，你的主动转信大功告成了：）
+   不过还是登陆到cn-bbs.org的bbs去看看有没有你的贴子才放心。最后把收发的两个 命
+   令加到cron.bbs里
     */5 * * * *  /bbsdata/innd/bbsnnrp 202.108.36.140 cnnews.active
-      * * * * *  /bbsdata/innd/bbslink /BBSHOME���������λ�ã�
-    ��ʱִ�оͿ����ˡ�
+      * * * * *  /bbsdata/innd/bbslink /BBSHOME（你的数据位置）
+    定时执行就可以了。
 
-3������ת�Ű�װ
-    ����ת��û�������ˣ����ڿ�ʼ����ת��~~~~~~~~
-    �ȿ���http://cn-bbs.org��faq,����������Ҫ���ȫ��ʮ��ӵ����bbs�ϣ��ٿ� ��
-    ���ǲ���������6�����ϵ�ת�Ű棬�����������ˣ��Ϳ��Լ�����
-     ��һ����Ȼ�������롣�����ת������ҳ�ϣ�����ʾ�����뱻��ת�ŵġ���һ�£� 
-     ok��������ǵȴ���������CZZ����������һ�㻹�Ǻܿ�ģ���
-     ��������������ǲ����гɹ����ż���û��Ҳ���и�ʧ�ܵģ�����͵����������� 
-     ���ˣ�������ɹ��Ļ��������Ȩ���ˡ����ڿ������ת��������ʾ�У��Ǽ����ļ��� 
-     �����Ѿ����ˡ���Ҫ��nodelist.bbs�ı仯�������innd�е������ļ�������������һ �¡�
-     ������ͣ������ת�ŵĳ���bbsnnrp�����ˣ�cnnews.activeҲ�����ˣ���cron.bb 
-     s��ֻ����bbslink�����ˣ����ú�����ת��һ���������վ�е�cntest�淢�����£�
-     �� ���bbslink�Զ�ִ�й��ˣ���cn-bbs.org��bbs�Ͽ�����û�У����Ķ�Ҳ��һ����
-     �ȼ� ���ӣ�����������İ�����û�С���ô���������˰ɣ���������ˣ��Ǿ�һ�и�
-     ����ͬ ϲͬϲ����
+3。被动转信安装
+    主动转信没有问题了？现在开始被动转信~~~~~~~~
+    先看看http://cn-bbs.org的faq,跟着做，把要求的全国十大加到你的bbs上，再看 看
+    你是不是申请了6个以上的转信版，两个都满足了，就可以继续。
+     第一步当然还是申请。在你的转信申请页上，会提示你申请被动转信的。点一下，
+     ok，下面就是等待。（不过CZZ的审批动作一般还是很快的）。
+     看看你的信湘里是不是有成功的信件？没有也该有个失败的，那你就得想想哪里做
+     错了：）如果成功的话，你就有权限了。现在看看你的转信配置提示中，那几个文件的
+     内容已经变了。主要是nodelist.bbs的变化。把你的innd中的配置文件的内容照样改一 下。
+     现在先停了主动转信的程序。bbsnnrp不用了，cnnews.active也不用了，在cron.bb
+     s中只留下bbslink就行了，配置和主动转信一样。在你的站中的cntest版发个文章，
+     等 你的bbslink自动执行过了，到cn-bbs.org的bbs上看看有没有，在哪儿也发一个，
+     等几 秒钟，回来看看你的版上有没有。怎么样，可以了吧？如果看到了，那就一切搞
+     定，同 喜同喜！！
 
-    ���Ľ����ο������ִ��󣬸Ų�����
-    ������������Բο�innd��readme��cn-bbs.org��faq��
--------------------------------------------------��  �����ʵ fallnight
-�� ��Դ:�������ʵ bbs.tju.edu.cn��[FROM: fallnight]
+    本文仅供参考。出现错误，概不负责。
+    有其他问题可以参看innd的readme和cn-bbs.org的faq。
+-------------------------------------------------完  天大求实 fallnight
+※ 来源:·天大求实 bbs.tju.edu.cn·[FROM: fallnight]
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

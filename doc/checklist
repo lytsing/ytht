@@ -1,76 +1,76 @@
 
 Check List
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-  << ¸Õ²Å·¢ÁËºÃ¼¸´ÎÌû£¬±¾À´´òÁËºÃ¶à×Ö£¬¿ÉÊÇÒ»·¢±í£¬Ê²Ã´¶¼Ã»ÓÐÁË¡£±ðÈËµÄÌû×Ó£¬Ò²
-  ÓÐºÃÐ©ÊÇ¿ÕµÄ,ÊÇ²»ÊÇBBSÓÖÒª¹ÒÁË? >>
-  1£¬ÏµÍ³´ÅÅÌ¿Õ¼äÂúÁË
-  2£¬
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+  << åˆšæ‰å‘äº†å¥½å‡ æ¬¡å¸–ï¼Œæœ¬æ¥æ‰“äº†å¥½å¤šå­—ï¼Œå¯æ˜¯ä¸€å‘è¡¨ï¼Œä»€ä¹ˆéƒ½æ²¡æœ‰äº†ã€‚åˆ«äººçš„å¸–å­ï¼Œä¹Ÿ
+  æœ‰å¥½äº›æ˜¯ç©ºçš„,æ˜¯ä¸æ˜¯BBSåˆè¦æŒ‚äº†? >>
+  1ï¼Œç³»ç»Ÿç£ç›˜ç©ºé—´æ»¡äº†
+  2ï¼Œ
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-  << ÎÒÖ±½ÓÓÃbbsÓÃ»§Æô¶¯²»ÁËapache°¢¡­¡­  ¾ßÌå¸ÃÔõÃ´×ö°¡¡­¡­ >>
-  ÔÚhttpd.confÎÄ¼þÖÐ°Ñ user apache ºÍ group apache ¸Ä³É user bbs 
-  group bbs  , È»ºóÓÃ root Æô¶¯
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+  << æˆ‘ç›´æŽ¥ç”¨bbsç”¨æˆ·å¯åŠ¨ä¸äº†apacheé˜¿â€¦â€¦  å…·ä½“è¯¥æ€Žä¹ˆåšå•Šâ€¦â€¦ >>
+  åœ¨httpd.confæ–‡ä»¶ä¸­æŠŠ user apache å’Œ group apache æ”¹æˆ user bbs
+  group bbs  , ç„¶åŽç”¨ root å¯åŠ¨
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-  << Çë½ÌÒ»ÏÂYTHT»òSMTHµÄ±¸·Ý·½·¨ >>
-  Ò»ËúºýÍ¿ÏµÍ³ÓÃµÄÊÇ local_utl/backup.sh £¬ÒªÊ¹ÓÃ£¬µÃÍêÈ«Ã÷°×½Å±¾µÄÖ´ÐÐ¹ý³Ì¡£
-  ·ñÔò£¬»á³ö´óÎÊÌâ¡£
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+  << è¯·æ•™ä¸€ä¸‹YTHTæˆ–SMTHçš„å¤‡ä»½æ–¹æ³• >>
+  ä¸€å¡Œç³Šæ¶‚ç³»ç»Ÿç”¨çš„æ˜¯ local_utl/backup.sh ï¼Œè¦ä½¿ç”¨ï¼Œå¾—å®Œå…¨æ˜Žç™½è„šæœ¬çš„æ‰§è¡Œè¿‡ç¨‹ã€‚
+  å¦åˆ™ï¼Œä¼šå‡ºå¤§é—®é¢˜ã€‚
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << ytht src/local_util/newtop10.cÓÃµ½µÄlibghthash ÊÇÄÄ¸ö°æ±¾£¿
-   ÊÔÁË¼¸¸ö£¬ÓÐµÄ²ÎÊý¸öÊý²»¶Ô£¬ÓÐµÄÒ»ÔËÐÐ¾Ísegmentation fault >>
-   ÁýÍ³µÄËµ£¬ÓÃ×îÐÂ°æ¡£
-   ¾ßÌåµÄ¿ÉÒÔµ½ bbssrc/software Ä¿Â¼ÏÂ¿´¿´
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << ytht src/local_util/newtop10.cç”¨åˆ°çš„libghthash æ˜¯å“ªä¸ªç‰ˆæœ¬ï¼Ÿ
+   è¯•äº†å‡ ä¸ªï¼Œæœ‰çš„å‚æ•°ä¸ªæ•°ä¸å¯¹ï¼Œæœ‰çš„ä¸€è¿è¡Œå°±segmentation fault >>
+   ç¬¼ç»Ÿçš„è¯´ï¼Œç”¨æœ€æ–°ç‰ˆã€‚
+   å…·ä½“çš„å¯ä»¥åˆ° bbssrc/software ç›®å½•ä¸‹çœ‹çœ‹
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << wwwµÄBBS,Ò»ÓÃµ½cgi¾Í»áÏÔÊ¾uid error >>
-   chmod +s whereplacayourcgifile 
-   ×¢£º¿ÉÄÜ²»ÊÇÕâÃ´½â¾ö£¬ÔÝÊ±ÎÞ·¨Ìá¹©È·ÇÐµÄ½âÊÍ
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << wwwçš„BBS,ä¸€ç”¨åˆ°cgiå°±ä¼šæ˜¾ç¤ºuid error >>
+   chmod +s whereplacayourcgifile
+   æ³¨ï¼šå¯èƒ½ä¸æ˜¯è¿™ä¹ˆè§£å†³ï¼Œæš‚æ—¶æ— æ³•æä¾›ç¡®åˆ‡çš„è§£é‡Š
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << ÓÐÄÇÐ©Ô­Òòµ¼ÖÂÎÞ·¨·ÃÎÊ¾«»ªÇø£¬¾«»ªÇø¶ªÊ§ÄØ£¿ >>
-   1. ²é¿´ 0Announce/.Search ÎÄ¼þ£¬¼ì²éÂ·¾¶ÊÇ·ñÕýÈ·
-   2. ¿´ 0Announce/.Names ÎÄ¼þ£¬ÊÇ·ñÓÐÎó
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << æœ‰é‚£äº›åŽŸå› å¯¼è‡´æ— æ³•è®¿é—®ç²¾åŽåŒºï¼Œç²¾åŽåŒºä¸¢å¤±å‘¢ï¼Ÿ >>
+   1. æŸ¥çœ‹ 0Announce/.Search æ–‡ä»¶ï¼Œæ£€æŸ¥è·¯å¾„æ˜¯å¦æ­£ç¡®
+   2. çœ‹ 0Announce/.Names æ–‡ä»¶ï¼Œæ˜¯å¦æœ‰è¯¯
 
-£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << Í¨¹ýÑéÖ¤Ê±³öÏÖ:ÆäËû SYSOP ÕýÔÚ²é¿´×¢²áÉêÇëµ¥, Çë¼ì²éÊ¹ÓÃÕß×´Ì¬.
-      Ó¦¸ÃÔõÃ´×ö? >>
-   1. È·ÈÏÃ»ÓÐÆäËû ÓÐsysop È¨ÏÞ£¨²»Ò»¶¨ÊÇsysopÕËºÅ£©µÄÓÃ»§ÔÚÉóÅúÕËºÅ
-   2. È·ÈÏÊÇ·ñÓÐÉóÅúÕËºÅÊ±£¬²»Õý³£ÍËÈ¥£¬Èç¶ÏµçµôÏß¡£
-   3. °Ñ /home/bbs/new_register.tmp ÎÄ¼þ¸Ä³É new_registerÎÄ¼þ°É£¬Èç¹û´æÔÚ
-      new_registerÎÄ¼þ£¬¾ÍÓÃ cat new_register.tmp >> new_register£¬È»ºó
-      É¾³ýnew_register.tmpÎÄ¼þ¡£
-   ×¢£ºÔÚlocal_utl ÏÂÓÐ¸ö¹¤¾ß£ºback_reg£¬¿ÉÒÔÍê³ÉÉÏÊö¹¤×÷¡£
- 
- £½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   ÔÚÔËÐÐ/home/bbs/bin/bbsd ºó³öÏÖÎÊÌâ£º
+ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << é€šè¿‡éªŒè¯æ—¶å‡ºçŽ°:å…¶ä»– SYSOP æ­£åœ¨æŸ¥çœ‹æ³¨å†Œç”³è¯·å•, è¯·æ£€æŸ¥ä½¿ç”¨è€…çŠ¶æ€.
+      åº”è¯¥æ€Žä¹ˆåš? >>
+   1. ç¡®è®¤æ²¡æœ‰å…¶ä»– æœ‰sysop æƒé™ï¼ˆä¸ä¸€å®šæ˜¯sysopè´¦å·ï¼‰çš„ç”¨æˆ·åœ¨å®¡æ‰¹è´¦å·
+   2. ç¡®è®¤æ˜¯å¦æœ‰å®¡æ‰¹è´¦å·æ—¶ï¼Œä¸æ­£å¸¸é€€åŽ»ï¼Œå¦‚æ–­ç”µæŽ‰çº¿ã€‚
+   3. æŠŠ /home/bbs/new_register.tmp æ–‡ä»¶æ”¹æˆ new_registeræ–‡ä»¶å§ï¼Œå¦‚æžœå­˜åœ¨
+      new_registeræ–‡ä»¶ï¼Œå°±ç”¨ cat new_register.tmp >> new_registerï¼Œç„¶åŽ
+      åˆ é™¤new_register.tmpæ–‡ä»¶ã€‚
+   æ³¨ï¼šåœ¨local_utl ä¸‹æœ‰ä¸ªå·¥å…·ï¼šback_regï¼Œå¯ä»¥å®Œæˆä¸Šè¿°å·¥ä½œã€‚
+
+ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   åœ¨è¿è¡Œ/home/bbs/bin/bbsd åŽå‡ºçŽ°é—®é¢˜ï¼š
        Error! shmat error! key = ec9.
-   ÕâÊÇÎªÊ²Ã´£¿
-   ÒÔÇ°µÄbbsµÄshmÃ»ÓÐÇéÀí¸É¾»
+   è¿™æ˜¯ä¸ºä»€ä¹ˆï¼Ÿ
+   ä»¥å‰çš„bbsçš„shmæ²¡æœ‰æƒ…ç†å¹²å‡€
 
- £½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << ÈçºÎÇå¿Õ¹²ÏíÄÚ´æ shm >>
+ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << å¦‚ä½•æ¸…ç©ºå…±äº«å†…å­˜ shm >>
    1. ipcs -m | awk '$0~/bbs/ {system(sprintf("ipcrm shm %s",$2));}'
-   2. Èç¹û²»ÐÐ£¬ÄÇÃ´°ÑËùÒÔºÍ bbs Ïà¹ØµÄ½ø³Ì¶¼É±µô£¬±ÈÈç£º 
-	killall -9 httpd 
+   2. å¦‚æžœä¸è¡Œï¼Œé‚£ä¹ˆæŠŠæ‰€ä»¥å’Œ bbs ç›¸å…³çš„è¿›ç¨‹éƒ½æ€æŽ‰ï¼Œæ¯”å¦‚ï¼š
+	killall -9 httpd
 	killall -9 bbs
 	killall -9 bbsd
 	killall -9 bbslod
-	µÈµÈ......
-   3. Èç¹û»¹²»ÐÐ£¬ÓÃ¾øÕÐ£ºÖØÆô£¡
+	ç­‰ç­‰......
+   3. å¦‚æžœè¿˜ä¸è¡Œï¼Œç”¨ç»æ‹›ï¼šé‡å¯ï¼
 
- £½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½
-   << ÄÇÎ»ÄÜ¸æËßÎÒ BBS ´úÂëºÍÎÄµµÔÚÄÄÄÜÏÂÔØ¡£? >>
+ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << é‚£ä½èƒ½å‘Šè¯‰æˆ‘ BBS ä»£ç å’Œæ–‡æ¡£åœ¨å“ªèƒ½ä¸‹è½½ã€‚? >>
    ytht: bbsdev.ytht.net
    smth: dev.smth.org/
    fb2000:
 
- £½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½   
-   << ±àÒëlocal_utlÄ¿Â¼ÏÂµÄ³ÌÐòÊ±£¬³öÏÖÏÂÁÐÎÊÌâ£º >>
-      bbsevad.c:6:20: usesql.h: Ã»ÓÐÄÇ¸öÎÄ¼þ»òÄ¿Â¼
-      È¥nju09Ä¿Â¼ make usesql.h
- 
-      bbslogd.c:4:28: ght_hash_table.h: Ã»ÓÐÄÇ¸öÎÄ¼þ»òÄ¿Â¼
-      È¥ software Ä¿Â¼ÏÂ 	make installghthash
+ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+   << ç¼–è¯‘local_utlç›®å½•ä¸‹çš„ç¨‹åºæ—¶ï¼Œå‡ºçŽ°ä¸‹åˆ—é—®é¢˜ï¼š >>
+      bbsevad.c:6:20: usesql.h: æ²¡æœ‰é‚£ä¸ªæ–‡ä»¶æˆ–ç›®å½•
+      åŽ»nju09ç›®å½• make usesql.h
+
+      bbslogd.c:4:28: ght_hash_table.h: æ²¡æœ‰é‚£ä¸ªæ–‡ä»¶æˆ–ç›®å½•
+      åŽ» software ç›®å½•ä¸‹ 	make installghthash
 

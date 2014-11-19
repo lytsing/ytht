@@ -2,110 +2,110 @@
 
 <article>
 
-<title>YTHT BBS��Cygwin������װ�ֲ�
-<author><htmlurl url="mailto:bbsbug@ytht.net" name="YTHT BBS ϵͳά����">
+<title>YTHT BBS在Cygwin环境安装手册
+<author><htmlurl url="mailto:bbsbug@ytht.net" name="YTHT BBS 系统维护组">
 <date>v0.1, 11 May 2004
 
 
 <abstract>
-���ĵ���Ҫ���������MS Windowsƽ̨�ϵ�Cygwin�������氲װYTHT BBS����
+本文档主要描述如何在MS Windows平台上的Cygwin环境里面安装YTHT BBS软件
 </abstract>
 
 <toc>
 
-<sect>����
+<sect>概述
 <p>
 
-<sect1>һЩԼ��
+<sect1>一些约定
 <p>
 
-Ϊ�������㣬���ֲ�������Լ����
+为叙述方便，本手册作如下约定：
 <itemize>
-<item>$         : ������ʾ��
-<item>/home/bbs : BBS��װĿ¼��Ĭ��Ϊ /home/bbs ����װʱ���Ϊ�Լ�ѡ���Ŀ¼
+<item>$         : 命令提示符
+<item>/home/bbs : BBS安装目录，默认为 /home/bbs ，安装时请改为自己选择的目录
 </itemize>
 
-<sect1>ϵͳ����
+<sect1>系统环境
 <p>
 
 <itemize>
 <item>Microsoft Windows 2000 or XP
-<item>Cygwin 1.5.7 �����ϰ汾
-<item>UltraEdit (���鰲װ ���ڸ�дUnix��ʽ���ı��ļ�)
+<item>Cygwin 1.5.7 或以上版本
+<item>UltraEdit (建议安装 用于改写Unix格式的文本文件)
 </itemize>
 
-<sect1>YTHT BBS�������
+<sect1>YTHT BBS代码概述
 <p>
 
-YTHT BBS�����У�Cygwin�����°�װ�漰������Ҫ�����¼������֣�
+YTHT BBS代码中，Cygwin环境下安装涉及到的主要有如下几个部分：
 
-<sect2>softwareĿ¼�������
+<sect2>software目录代码概述
 <p>
 
-��Ҫ����ghthash ��fastcgi ������
-��������ϵ
+主要包括ghthash 、fastcgi 两个库
+无依赖关系
 
-<sect2>ythtlibĿ¼�������
+<sect2>ythtlib目录代码概述
 <p>    
 
-��������YTHT BBS��һ����̬�� /home/bbs/bin/libytht.a
-��������ϵ
+用于生成YTHT BBS的一个静态库 /home/bbs/bin/libytht.a
+无依赖关系
 
-<sect2>libythtbbsĿ¼�������
+<sect2>libythtbbs目录代码概述
 <p>
 
-��������YTHT BBS��һ����̬�� /home/bbs/bin/libythtbbs.a
-��������ϵ
+用于生成YTHT BBS的一个静态库 /home/bbs/bin/libythtbbs.a
+无依赖关系
 
-<sect2>srcĿ¼�������
+<sect2>src目录代码概述
 <p>
 
-BBS ��Telnet��½����
-������ ythtlib �� libythtbbs
+BBS 的Telnet登陆部分
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>local_utlĿ¼�������
+<sect2>local_utl目录代码概述
 <p>
 
-BBS �ı���ʵ�ù��߳���
-������ ythtlib �� libythtbbs
+BBS 的本地实用工具程序
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>nju09Ŀ¼�������
+<sect2>nju09目录代码概述
 <p>
 
-BBS ��Web ��½����
-������ ythtlib �� libythtbbs
+BBS 的Web 登陆部分
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>innbbsdĿ¼�������
+<sect2>innbbsd目录代码概述
 <p>
 
-BBS ��ת�Ų���
-������ ythtlib �� libythtbbs
+BBS 的转信部分
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>yftpdĿ¼�������
+<sect2>yftpd目录代码概述
 <p>
 
-BBS ��Ftp ����������
-������ ythtlib �� libythtbbs
+BBS 的Ftp 服务器部分
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>atthttpdĿ¼�������
+<sect2>atthttpd目录代码概述
 <p>
 
-BBS ��Web ��������������
-������ ythtlib �� libythtbbs
+BBS 的Web 附件服务器部分
+依赖于 ythtlib 和 libythtbbs
 
-<sect2>smth_sshbbsdĿ¼�������
+<sect2>smth_sshbbsd目录代码概述
 <p>
 
-BBS ��ssh ��½����
-������ ythtlib ��libythtbbs �� src Ŀ¼
+BBS 的ssh 登陆部分
+依赖于 ythtlib ，libythtbbs 和 src 目录
 
-<sect1>��������
+<sect1>关于提问
 <p>
 
-�����ڰ�װ�����г����޷����������ʱ����ȷ�����Ѿ���ϸ�Ķ����ֲᲢ
-�����������ķ�����װ�ģ�����������޷��������������cnbbs.fbnt.dev��
-cn.bbs.admin.installbbs �����������ʡ�����ʱ���ṩ������ϸ�Ĳ��������
-������ʾ��Ϣ���Ա㷢�ִ���ԭ�򣬲��븽��cygcheck�������Ϣ�����磺
+当您在安装过程中出现无法解决的问题时，请确定您已经详细阅读本手册并
+按其中叙述的方法安装的，如果问题仍无法解决，您可以在cnbbs.fbnt.dev或
+cn.bbs.admin.installbbs 新闻组上提问。提问时请提供尽量详细的操作步骤和
+错误提示信息，以便发现错误原因，并请附上cygcheck的输出信息，例如：
 
 <tscreen>
 <verb>
@@ -113,20 +113,20 @@ $ cygcheck -svr > /tmp/check
 </verb>
 </tscreen>
 
-��Cygwinϵͳ��Ϣ�����/tmp/check�ļ���(�Ḳ�Ǹ��ļ�)
+将Cygwin系统信息输出至/tmp/check文件。(会覆盖该文件)
 
 
-<sect>���ΰ�װ
+<sect>初次安装
 <p>
 
-<sect1>��װ������Cygwin
+<sect1>安装及配置Cygwin
 <p>
 
-�밲װcygwin 1.5.7 �����ϰ汾��ʹ�õͰ汾cygwin���ܻ�����鷳��
+请安装cygwin 1.5.7 或以上版本，使用低版本cygwin可能会带来麻烦。
 
-������ http://www.cygwin.com/ λ�����ذ�װ����setup.exe ���˰�װ��
-����������ɺ����Cygwin��װ���̡�����CygwinĬ�ϰ�װ�İ����⣬������
-��װ�����г��İ���
+首先在 http://www.cygwin.com/ 位置下载安装程序setup.exe ，此安装程
+序将引导您完成后面的Cygwin安装过程。除了Cygwin默认安装的包以外，请至少
+安装以下列出的包：
 <itemize> 
 <item>apache
 <item>autoconf
@@ -153,8 +153,8 @@ $ cygcheck -svr > /tmp/check
 <item>zlib
 </itemize>
 
-��������������bbs������û�����Windows�����¾�����Cygwin�Ѿ���װ��
-�ɣ���������Cygwin����̨��
+以您将用来启动bbs服务的用户登入Windows。以下均假设Cygwin已经安装完
+成，并已启动Cygwin控制台。
 
 <tscreen>
 <verb>
@@ -163,7 +163,7 @@ $ ln -s /usr/include/sys/wait.h /usr/include/wait.h
 </verb>
 </tscreen>
 
-<sect1>���BBS ����
+<sect1>获得BBS 代码
 <p>
 
 <tscreen>
@@ -175,7 +175,7 @@ $ export CVSROOT=:pserver:bbsdev@ytht.net:/home/cvs
 $ cvs login
 </verb>
 </tscreen>
-(�����ǣ�bbsdev)
+(密码是：bbsdev)
 <tscreen>
 <verb>
 $ cvs -z 9 co bbs
@@ -183,20 +183,20 @@ $ mv bbs bbssrc
 </verb>
 </tscreen>
 
-<sect1>�޸�BBS ����
+<sect1>修改BBS 代码
 <p>
 
-��������մ��룬����Ӧλ�ý����޸ġ���ΪYTHT BBS�Ĵ�����ʱ���ܷ���
-�仯���޸�ǰ����޸����ݵĺ�������˽⡣
+以下请对照代码，在相应位置进行修改。因为YTHT BBS的代码随时可能发生
+变化，修改前请对修改内容的含义进行了解。
 
-<sect2>�������ģʽbug ���޸�
+<sect2>版面回收模式bug 的修改
 <p>
 
-Ŀ�ģ���ΪWindows�������ļ��������ִ�Сд����ɰ�װ��
-/home/bbs/boards/boardnameĿ¼�µ��ļ� .DELETED .deleted .deleteD
-��ͻ���޸�Ŀ���� .deleted ��Ϊ .del��.deleteD ��Ϊ .deD
+目的：因为Windows环境下文件名不区分大小写，造成安装后
+/home/bbs/boards/boardname目录下的文件 .DELETED .deleted .deleteD
+冲突，修改目标是 .deleted 改为 .del，.deleteD 改为 .deD
 <p>
-��������������ķ���
+方法：参照下面的方法
 
 <tscreen>
 <verb>
@@ -267,7 +267,7 @@ diff -u -r1.535 bbs.c
 </verb>
 </tscreen>
 
-<sect1>Ŀ¼software�İ�װ
+<sect1>目录software的安装
 <p>
 
 <tscreen>
@@ -278,7 +278,7 @@ $ make installghthash
 </verb>
 </tscreen>
 
-<sect1>����BBS ����
+<sect1>更改BBS 配置
 <p>
 
 <tscreen>
@@ -289,18 +289,18 @@ $ cp seclist.txt.sample seclist.txt.mybbs
 </verb>
 </tscreen>
 
-ʹ��UltraEdit�༭ /home/bbs/bbssrc/site/bbsconfig.mybbs �ļ���
-/home/bbs/bbssrc/site/seclist.txt.mybbs�ļ����޸�����ʹ���Ϲ�վ��Ҫ��
+使用UltraEdit编辑 /home/bbs/bbssrc/site/bbsconfig.mybbs 文件和
+/home/bbs/bbssrc/site/seclist.txt.mybbs文件，修改设置使符合贵站需要。
 
-ע��bbsconfig�ļ��У�LAST_BBS_UID��LAST_BBS_GID��LAST_BBS_USER���
-ѯ/etc/passwd �ļ���ã����뵱ǰ����Windows���û���Ҳ����������������
-bbs������û�����Ϣ��
+注意bbsconfig文件中，LAST_BBS_UID、LAST_BBS_GID和LAST_BBS_USER请查
+询/etc/passwd 文件获得，填入当前登入Windows的用户、也就是您将用来启动
+bbs服务的用户的信息。
 
-bbsconfig�ļ��У�LAST_MAXUSERS��LAST_MAXBOARD��LAST_MAXACTIVE��
-LAST_MAXACTIVERUN ������Դ�����͵����ݣ�����ݹ�վʵ����Ҫ��д��������
-�������/home/bbs/bbssrc/bbsconfig�ļ���ytht.net�����Ͻ����޸ġ�
+bbsconfig文件中，LAST_MAXUSERS、LAST_MAXBOARD、LAST_MAXACTIVE、
+LAST_MAXACTIVERUN 属于资源敏感型的数据，请根据贵站实际需要填写，其它内
+容请参照/home/bbs/bbssrc/bbsconfig文件中ytht.net的资料进行修改。
 
-<sect1>Telnet���ֵİ�װ
+<sect1>Telnet部分的安装
 <p>
 
 <tscreen>
@@ -310,15 +310,15 @@ $ ./makedist.sh
 $ ./configure --with-site=mybbs
 </verb>
 </tscreen>
-(�����Ҫ�������µĹ��ܣ���ʹ��
-    ./configure --with-site=mybbs --with-mysql��mysql��Ҫ���ⰲװ)
+(如果需要评价文章的功能，请使用
+    ./configure --with-site=mybbs --with-mysql，mysql需要另外安装)
 <tscreen>
 <verb>
 $ make
 $ make install
 </verb>
 </tscreen>
-����������������г��ִ��������������ִ�������������±��밲װ��
+如果本步骤编译过程中出现错误，请修正错误后执行如下命令重新编译安装：
 <tscreen>
 <verb>
 $ cd /home/bbs/bbssrc
@@ -328,7 +328,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>Telnet���ֲ������м�����
+<sect1>Telnet部分测试运行及配置
 <p>
 
 <tscreen>
@@ -337,43 +337,43 @@ $ ipc-daemon2&
 $ /home/bbs/bin/shminit
 </verb>
 </tscreen>
-(����ɹ�����ʾ everything is just fine)
+(如果成功会提示 everything is just fine)
 <tscreen>
 <verb>
 $ /home/bbs/bin/bbsd
 </verb>
 </tscreen>
 
-Ȼ��Telnet��½�������ԣ�������ӳɹ���������ע��SYSOP (��Сд����)
-�˺ţ���ע��guest�˺š�(Ҫ��֤guest�˺��ǵ�2��ע��)
+然后Telnet登陆本机测试，如果连接成功，请首先注册SYSOP (大小写敏感)
+账号，再注册guest账号。(要保证guest账号是第2个注册)
 
-���һ��˳�����밴������ʾ����bbs ����������Ŀ��
+如果一切顺利，请按如下所示建立bbs 运行所需项目：
 
 <itemize>
-<item>IDScanRecord��                 ���˺�ʱ������
-<item>Board��                        ��������ʱ������
-<item>hell��                         ����(����PERM_SPECIAL3 ������ר��Ȩ��)
-<item>prison��                       ����(����PERM_SPECIAL3 ������ר��Ȩ��)
-<item>millionaire��                  MoneyCenter���
-<item>/home/bbs/etc/moneyCenterĿ¼  MoneyCenter���
-<item>RobUnion���ֲ�                 MoneyCenter���
-<item>deleterequest���ֲ�            �������
-<item>allarticle��                   ��������
-<item>/home/bbs/2ndĿ¼              �����г����
+<item>IDScanRecord版                 批账号时发信用
+<item>Board版                        任命斑竹时发信用
+<item>hell版                         地狱(赋予PERM_SPECIAL3 讨论区专用权限)
+<item>prison版                       监狱(赋予PERM_SPECIAL3 讨论区专用权限)
+<item>millionaire版                  MoneyCenter相关
+<item>/home/bbs/etc/moneyCenter目录  MoneyCenter相关
+<item>RobUnion俱乐部                 MoneyCenter相关
+<item>deleterequest俱乐部            文章审查
+<item>allarticle版                   所有文章
+<item>/home/bbs/2nd目录              跳蚤市场相关
 </itemize>
 
-<sect1>Web ���ֵİ�װ
+<sect1>Web 部分的安装
 <p>
 
-�����ְ�װ����ʾ����������``����BBS ����''һ���ж���LAST_CGIPATH��
-LAST_HTMPATH��������ȡֵ��
+本部分安装步骤示例假设您在``更改BBS 配置''一节中对于LAST_CGIPATH和
+LAST_HTMPATH采用如下取值：
 
 <itemize>
 <item>LAST_CGIPATH=/home/httpd/cgi-bin
 <item>LAST_HTMPATH=/home/httpd/html/2001
 </itemize>
 
-���������������������Ϊ����Ŀ¼�������и�������Ĳ��衣
+如果您更改了这两项设置为其它目录，请自行更改下面的步骤。
 
 <tscreen>
 <verb>
@@ -386,7 +386,7 @@ $ make install
 </verb>
 </tscreen>
 
-�޸�/etc/apache/httpd.conf�ļ�������������޸ķ�����
+修改/etc/apache/httpd.conf文件，请参照如下修改方法：
 
 <tscreen>
 <verb>
@@ -447,17 +447,17 @@ $ make install
 </verb>
 </tscreen>
 
-����Web ����֮ǰ����ȷ��Telnet�����������������Ѿ����û���½��ȥ����
-``Telnet���ֲ������м�����''һ�ڡ�Ȼ������httpd��
+测试Web 部分之前，请确保Telnet部分已启动，并且已经有用户登陆上去，见
+``Telnet部分测试运行及配置''一节。然后启动httpd：
 <tscreen>
 <verb>
 $ /usr/sbin/httpd
 </verb>
 </tscreen>
 
-���û���쳣��������������� http://localhost/�����Կ����߲�ͼ��
+如果没有异常，请用浏览器访问 http://localhost/，可以看到蔬菜图。
 
-<sect1>ת�Ų��ֵİ�װ
+<sect1>转信部分的安装
 <p>
 
 <tscreen>
@@ -468,9 +468,9 @@ $ make install
 </verb>
 </tscreen>
 
-����������ο�<htmlurl url="http://cn-bbs.org/" name="http://cn-bbs.org/">��˵����
+其它配置请参考<htmlurl url="http://cn-bbs.org/" name="http://cn-bbs.org/">的说明。
 
-<sect1>Ftp ���ֵİ�װ
+<sect1>Ftp 部分的安装
 <p>
 
 <tscreen>
@@ -481,7 +481,7 @@ $ make install
 </verb>
 </tscreen>
 
-����Ftp ���֣�
+测试Ftp 部分：
 
 <tscreen>
 <verb>
@@ -489,7 +489,7 @@ $ /home/bbs/ftphome/yftpd
 </verb>
 </tscreen>
 
-<sect1>atthttpd���ֵİ�װ
+<sect1>atthttpd部分的安装
 <p>
 
 <tscreen>
@@ -500,7 +500,7 @@ $ cp *.exe /home/bbs/bin
 </verb>
 </tscreen>
 
-����atthttpd���֣�
+测试atthttpd部分：
 
 <tscreen>
 <verb>
@@ -508,12 +508,12 @@ $ /home/bbs/bin/atthttpd
 </verb>
 </tscreen>
 
-<sect1>sshbbsd���ֵİ�װ
+<sect1>sshbbsd部分的安装
 <p>
 
-�����趨����������ѡ��װsshbbsd ʱʹ�õ�autotools �汾�����ϣ������
-�����´�����cygwin����̨ʱ��Ȼ��Ч�����԰���д��~/.bash_profile ������
-��������������cygwin����̨��
+首先设定环境变量，选择安装sshbbsd 时使用的autotools 版本，如果希望此设
+定在下次启动cygwin控制台时仍然有效，可以把它写入~/.bash_profile 配置文
+件，并重新启动cygwin控制台。
 
 <tscreen>
 <verb>
@@ -522,8 +522,8 @@ $ export WANT_AUTOMAKE_VER=1.7.9
 </verb>
 </tscreen>
 
-��װcygwin��gmp 4.1.2�Ķ����ư�����Դ������������²������±���gmp��
-�����޸�/usr/src/gmp-4.1.2-1.sh
+安装cygwin的gmp 4.1.2的二进制包及其源码包，并按以下步骤重新编译gmp：
+首先修改/usr/src/gmp-4.1.2-1.sh
 
 <tscreen>
 <verb>
@@ -541,7 +541,7 @@ $ export WANT_AUTOMAKE_VER=1.7.9
 </verb>
 </tscreen>
 
-ִ�������������gmp��
+执行如下命令编译gmp：
 
 <tscreen>
 <verb>
@@ -550,14 +550,14 @@ $ ./gmp-4.1.2-1.sh all
 </verb>
 </tscreen>
 
-��ɺ󣬰���/usr/srcĿ¼���ɵ�gmp-4.1.2-1.tar.bz2 ѹ�����е��ļ�
-usr/bin/cyggmp-3.dll���Ƶ�/binĿ¼��������ԭ�ļ���
+完成后，把在/usr/src目录生成的gmp-4.1.2-1.tar.bz2 压缩包中的文件
+usr/bin/cyggmp-3.dll复制到/bin目录，并覆盖原文件。
 <p>
 
-�����ǰʹ�õ�windows �û���cygwin��Ŀ¼��bbs ��װĿ¼��ͬ���뽫bbs ��
-װĿ¼�µ�bin Ŀ¼�������ӵ���Ŀ¼�С����磬��ǰwindows�û�Administrator
-��Ŀ¼Ϊ/home/Administrator�����bbs��װ��/home/bbs Ŀ¼���������·�
-�����ӣ�
+如果当前使用的windows 用户的cygwin家目录与bbs 安装目录不同，请将bbs 安
+装目录下的bin 目录符号链接到家目录中。例如，当前windows用户Administrator
+家目录为/home/Administrator，如果bbs安装在/home/bbs 目录，则建立如下符
+号链接：
 
 <tscreen>
 <verb>
@@ -565,7 +565,7 @@ $ ln -s /home/bbs/bin /home/Administrator
 </verb>
 </tscreen>
 
-���濪ʼsshbbsd�ı��밲װ��
+下面开始sshbbsd的编译安装：
 
 <tscreen>
 <verb>
@@ -578,7 +578,7 @@ $ make update
 </verb>
 </tscreen>
 
-����sshbbsd���֣�
+测试sshbbsd部分：
 
 <tscreen>
 <verb>
@@ -586,10 +586,10 @@ $ /home/bbs/bin/sshbbsd
 </verb>
 </tscreen>
 
-<sect1>Cron������
+<sect1>Cron的配置
 <p>
 
-���Ȱ�װʾ�����ļ���
+首先安装示例的文件：
 
 <tscreen>
 <verb>
@@ -597,7 +597,7 @@ $ crontab /home/bbs/bbssrc/site/crontab.sample
 </verb>
 </tscreen>
 
-Ȼ�����չ�վ����������и�д��
+然后依照贵站具体情况进行改写：
 
 <tscreen>
 <verb>
@@ -605,7 +605,7 @@ $ crontab -e
 </verb>
 </tscreen>
 
-���ԣ�
+测试：
 
 <tscreen>
 <verb>
@@ -613,11 +613,11 @@ $ /usr/sbin/cron
 </verb>
 </tscreen>
 
-<sect1>����BBS ����
+<sect1>启动BBS 服务
 <p>
 
-�������``���ΰ�װ''���ֲ�����bbs �����Ѿ������ˡ��Ժ�Ҫ����bbs ��
-���밴���²��������
+如果按照``初次安装''部分操作，bbs 服务已经启动了。以后要启动bbs 服
+务，请按如下步骤操作：
 
 <tscreen>
 <verb>
@@ -632,7 +632,7 @@ $ /home/bbs/ftphome/yftpd
 </verb>
 </tscreen>
 
-ʹ������������Բ쿴��ǰ���������
+使用如下命令可以察看当前进程情况：
 
 <tscreen>
 <verb>
@@ -641,24 +641,24 @@ $ ps
 </tscreen>
 
 
-<sect>�޸Ĵ�������°�װ
+<sect>修改代码后重新安装
 <p>
 
-<sect1>�޸Ĵ����ע������
+<sect1>修改代码的注意事项
 <p>
 
-���κ��޸�ǰ����ر��ݹؼ����ݡ�
+做任何修改前请务必备份关键数据。
 
-�޸�ĳĿ¼�������Ҫ�ڸ�Ŀ¼���±��밲װ������޸���ythtlib Ŀ¼
-��libythtbbsĿ¼�Ĵ��룬��Ҫ������Ŀ¼���±��밲װ������޸���src Ŀ¼
-�Ĵ��룬����Ҫ��smth_sshbbsdĿ¼���±��밲װ�������װ��sshbbsd���񣩡�
+修改某目录代码后，需要在该目录重新编译安装。如果修改了ythtlib 目录
+或libythtbbs目录的代码，需要在所有目录重新编译安装；如果修改了src 目录
+的代码，还需要在smth_sshbbsd目录重新编译安装（如果安装了sshbbsd服务）。
 
-����޸��˹����ڴ���ص����ݽṹ����Ҫ������������bbs����
+如果修改了共享内存相关的数据结构，需要重新启动所有bbs服务。
 
-��Ҫ��/home/bbs/bbssrcĿ¼make install��
-���ƻ��������ݡ�
+不要在/home/bbs/bbssrc目录make install，
+会破坏现有数据。
 
-<sect1>ythtlibĿ¼���޸�
+<sect1>ythtlib目录的修改
 <p>
 
 <tscreen>
@@ -670,7 +670,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>libythtbbsĿ¼���޸�
+<sect1>libythtbbs目录的修改
 <p>
 
 <tscreen>
@@ -682,7 +682,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>srcĿ¼���޸�
+<sect1>src目录的修改
 <p>
 
 <tscreen>
@@ -694,7 +694,7 @@ $ install --backup=t *.exe /home/bbs/bin
 </verb>
 </tscreen>
 
-<sect1>local_utlĿ¼���޸�
+<sect1>local_utl目录的修改
 <p>
 
 <tscreen>
@@ -707,7 +707,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>nju09Ŀ¼���޸�
+<sect1>nju09目录的修改
 <p>
 
 <tscreen>
@@ -720,7 +720,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>innbbsdĿ¼���޸�
+<sect1>innbbsd目录的修改
 <p>
 
 <tscreen>
@@ -732,7 +732,7 @@ $ make install
 </verb>
 </tscreen>
 
-<sect1>yftpdĿ¼���޸�
+<sect1>yftpd目录的修改
 <p>
 
 <tscreen>
@@ -744,7 +744,7 @@ $ install --backup=t *.exe /home/bbs/ftphome
 </verb>
 </tscreen>
 
-<sect1>atthttpdĿ¼���޸�
+<sect1>atthttpd目录的修改
 <p>
 
 <tscreen>
@@ -756,7 +756,7 @@ $ install --backup=t *.exe /home/bbs/bin
 </verb>
 </tscreen>
 
-<sect1>smth_sshbbsdĿ¼���޸�
+<sect1>smth_sshbbsd目录的修改
 <p>
 
 <tscreen>
