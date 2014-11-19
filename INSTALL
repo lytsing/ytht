@@ -1,0 +1,60 @@
+Quick Install Guide
+------
+
+This the quick installation guide for Firebird BBS ytht version
+
+The installation document and administration guide is in
+doc
+
+This BBS has been tested on x86 machine running debian woody.
+It should run on any linux system.
+It perhaps will run on other Unix system.
+
+For impatient users,
+
+1. Add a user for running bbs service on your system
+   You can name this user as "bbs" traditionaly.But you can name this user anything else.
+   On redhat like linux and debian linux, just run a command like this:
+   	adduser bbs
+
+   Don't forget set a password for bbs user.
+
+2.
+   Edit site/bbsconfig.sample and site/seclist.txt.
+   If you don't know what these mean,you can just leave them as they are.
+   Make sure values of LAST_CGIPATH and LAST_HTMPATH is right if you would like
+   to have a web interface.
+   The default value for LAST_CGIPATH should work on RedHat 9.
+   In Debian woody, LAST_CGIPATH should be /usr/lib/cgi-bin.
+
+3.
+   If you get souce code from our svn, you should run ./makedist.sh.
+   If it complain for someting, please try upgrade your autoconf and automake.
+   autoconf2.59 and automake1.70 should be a good choice.
+
+4. Run the following commands to install bbs
+
+   ./configure --with-site=sample
+   make
+   make install
+   /home/bbs/bin/shminit
+
+5. Make sure that you have stopped telnet service of your server. Run the
+   standlone bbs daemon as root
+
+   /home/bbs/bin/bbsd
+
+6. try it
+
+   telnet localhost
+
+7. It is hoped that you could see the BBS 'welcome' message then. Login as
+   'new' and create the 'SYSOP' account (case sensitive). This account will
+   acquire full permissions in your BBS.
+
+
+8. Login as 'new' and  Create the 'guest' account. Or if you want to disable 'guest', add
+   'guest' to the list of ~bbs/.badname
+
+
+9. See INSTALL.web for web interface.

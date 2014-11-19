@@ -3,9 +3,9 @@
 
 #LIBTOOLIZE=${LIBTOOLIZE:-libtoolize}
 #LIBTOOLIZE_FLAGS="--copy --force"
-ACLOCAL=${ACLOCAL:-aclocal-1.10}
+ACLOCAL=${ACLOCAL:-aclocal-1.14}
 AUTOHEADER=${AUTOHEADER:-autoheader}
-AUTOMAKE=${AUTOMAKE:-automake-1.10}
+AUTOMAKE=${AUTOMAKE:-automake-1.14}
 AUTOMAKE_FLAGS="--add-missing --copy"
 AUTOCONF=${AUTOCONF:-autoconf}
 
