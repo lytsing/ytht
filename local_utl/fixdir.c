@@ -53,7 +53,7 @@ main(int argc, char **argv)
 		sprintf(buf1, "chmod 744 %s", name);
 		system(buf1);
 	}
-	file = open(".tmpfile", O_CREAT | O_TRUNC | O_WRONLY);
+	file = open(".tmpfile", O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (file == 0) {
 		perror("open .tmpfile error!\n");
 		closedir(pdir);
