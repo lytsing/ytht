@@ -1,6 +1,9 @@
 #include <dirent.h>
-int versionsort(const void *a, const void *b);
 #include "bbslib.h"
+
+#ifndef HAVE_VERSIONSORT
+extern int versionsort(const void *a, const void *b);
+#endif
 
 const static char *field[] =
     { "usernum", "userid", "realname", "dept", "addr", "phone", "assoc",

@@ -4,7 +4,10 @@
 #include <netinet/in.h>
 #include <stdio.h>
 #include "ythtbbs.h"
-int versionsort(const void *a, const void *b);
+
+#ifndef HAVE_VERSIONSORT
+extern int versionsort(const void *a, const void *b);
+#endif
 
 static int
 appendonebinaryattach(char *filename, char *attachname, char *attachfname)
