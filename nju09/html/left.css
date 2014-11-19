@@ -1,0 +1,9 @@
+*{ font-family:ËÎÌו,arial,sans-serif;}
+a {color: #000000;text-decoration: none;}
+a:link  {text-decoration: none;}
+a:hover {color: #ff0000;text-decoration: underline;background:#dddddd}
+body {font-size: 9pt; background-color: #b3b7e6;
+	background-image: url(/lbgSN.jpg)}
+table, th, td, p, input, textarea, select {font-size: 8.5pt;}
+body.foot{font-size:12px;background-color:#b3b7e6;background-image: none}
+

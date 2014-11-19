@@ -1,0 +1,37 @@
+以下安装说明只适用于apache 1.3 版本
+redhat 7.3 debian 3.0 带的apache 是 1.3 版本
+redhat 9.0 带的apache 是 2.0 版本
+
+1.确认安装了apache web服务器
+  另外比较重要的是,确认是否安装了apache的开发环境
+
+  redhat 类系统:
+  rpm -qa apache-devel 可以查询是否安装了apache-devel包
+  如果没有 请下载相应的rpm自行安装
+
+  debian 系统:
+  dpkg -l apache-dev 可以查询是否安装了apache-dev包
+  如果没有 请使用apt-get install apache-dev自行安装
+
+2.确认bbs telnet 部分安装完毕,可以正常运行.
+  在这个步骤,会询问www的安装路径之类的问题,请根据自己的
+  apache安装的实际情形回答.
+
+3.以root身份运行
+  make -C software/apache_modules 
+
+  然后修改自己的httpd.conf,加上一句
+  FastRWEngine On
+  
+  如果你打算用某个虚拟主机作为bbs的web服务器,那么就只用在
+  那个虚拟主机的配置里面加上这句
+
+  同时把httpd.conf里面的User和Group修改为bbs的用户和组
+
+  然后重新启动apache服务器
+
+4.以root身份运行
+  make -C nju09 install
+
+5.好了 现在可以访问你的BBS的Web界面了
+

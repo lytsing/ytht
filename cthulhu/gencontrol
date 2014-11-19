@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. ./localconf
+
+echo "Generating control files..."
+
+for i in control/*
+  do
+	[ -f $BASEDIR/$i ] && [ "$1" = "-f" ] || [ -f $i ] && sed -e "s,<basedir>,$BASEDIR," -e "s/<uid>/$XUSER/" -e "s/<gid>/$XGROUP/"< $i > $BASEDIR/$i
+  done

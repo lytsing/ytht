@@ -1,0 +1,46 @@
+.TH CTRLHULHU 8 "Feb. 2003" "Thomas M. Ogrisegg" "cthulhu webserver"
+
+.\"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+.\"Copyright (C) 2002, 2003 Thomas M. Ogrisegg. All rights reserved
+.\"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+.SH NAME
+ctrlhulhu -- control cthulhu and it's coprocesses
+.SH SYNOPSIS
+ctrlhulhu [start|reinit|killconn|restart|status|stop]
+.SH DESCRIPTION
+ctrlhulhu is a simple shell script which should ease the use of cthulhu
+and it's coprocesses, especially in conjunction with ipinit(8).
+.SH OPTIONS
+.TP 12
+.B start
+start the cthulhu daemon. If control files for other daemons (cgi-exec,
+ctauth, http-ssl) are existing it will start these daemons as well (over
+ipinit)
+.TP 12
+.B reinit
+send the cthulhu process a SIGHUP. This will cause cthulhu to check whether
+any of filelist-*, pathconf-*, mimetypes changed or if new domains were
+added, and then (re)read these files.
+.TP 12
+.B killconn
+kills all active connections. Currently unimplemented as it's currently
+impossible to implement this without a race condition.
+.TP 12
+.B restart
+equivalent to calling ctrlhulhu with 'killconn', 'stop' and 'start'.
+.TP 12
+.B status
+Just prints the last line of the error log file.
+.TP 12
+.B stop
+Stop the Cthulhu server (with a SIGQUIT). Please note that the other daemons
+will not be stopped. Kill them manually, if you have to.
+.SH BUGS
+None known.
+.SH AUTHOR
+ctrlhulhu was written by Thomas M. Ogrisegg
+.B <tom-cthulhu@fnord.at>
+.SH SEE ALSO
+.BR ipinit (8),
+.BR cthulhu (8)

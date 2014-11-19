@@ -1,0 +1,9 @@
+*{ font-family:ß∫≈È,arial,sans-serif;}
+A {color:#000000;text-decoration: none;}
+A:LINK {text-decoration: none;}
+A:HOVER {COLOR: #ff0000;text-decoration: underline;background:#dddddd}
+BODY {FONT-SIZE: 9.5pt; BACKGROUND-COLOR: #b3b7e6; background-image: url(/lbgSN.jpg)}
+TABLE,TH,TD,P {FONT-SIZE: 9.5pt}
+INPUT,TEXTAREA,SELECT {FONT-SIZE: 9pt;}
+body.foot{font-size:12px;background-color:#b3b7e6;background-image: none}
+

@@ -1,0 +1,13 @@
+OBJS = httpssl.o
+TARGET = http-ssl
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	 $(LD) $(LDFLAGS) $(OBJS) -lssl -lcrypto -o $(TARGET)
+
+install:
+	install $(TARGET) $(BASEDIR)/bin
+
+clean:
+	rm -f $(OBJS) $(TARGET)

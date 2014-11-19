@@ -1,0 +1,79 @@
+# 本文档为范例文档，适用于现行站规
+# 如果站规改变可以随时更换
+
+# 此项用于控制考勤是否关闭	(0开启  1关闭)	勿去掉#
+#[onVacation]   0
+
+# 目前支持的操作为：
+# m,um,g,ug,del,post,enter,stay,pop,deny,range,digest,move,same
+# m: 标记文章的数量
+# um: 去掉m标记的次数
+# g: 收入文摘的次数
+# ug: 从文摘中去掉的次数
+# del: 版内删文的次数
+# post: 版内发文的次数
+# enter: 进版次数
+# stay: 版内停留时间
+# pop: 人气
+# deny: 封禁次数
+# range: 区段次数
+# digest: 整理精华区次数
+# move: 移动精华区次数
+# same: 同主题次数
+
+# 文档格式：
+# [组名:是否必要]  （1：必要；0：不必要）
+# 有条件规则：人气条件:条件表达式
+# 无条件规则：条件表达式
+# 条件表达式：操作1+操作2+……+操作N > 限制
+# 其中操作i为上面定义的操作描述，限制为这些操作次数累加的最小值限制
+# 一个组可以包含若干（<=15)条规则
+
+# $分区=目标版面
+# 设定将某个分区的统计结果的post到某个特定版面
+# $default=目标版面，将设定默认的post目标
+# 如果都未设置，则默认目标为BM_Club版
+
+# 下面为正文
+
+[Time:1]
+3000 : stay > 600
+1000 : stay > 300
+0 : stay > 180
+
+[Operate:1]
+m + um + g + ug + del + deny + range + same > 1
+enter > 1
+
+[Digest:0]
+digest + move > 1
+
+[Week:1]
+3000 : stay > 600
+1000 : stay > 300
+0 : stay > 180
+m + um + g + ug + del + deny + range + same > 1
+enter > 1
+
+[Score:1]
+enter > 1
+
+$default=BM_Club
+$1=1admin
+$2=2admin
+$3=3admin
+$4=4admin
+$5=5admin
+$6=6admin
+$7=7admin
+$8=8admin
+$9=9admin
+$T=T_admin
+$Y=Y_admin
+$L=L_admin
+$S=S_admin
+$X=X_admin
+$H=H_admin
+$C=C_admin
+
+# End

@@ -1,0 +1,68 @@
+<HTML><HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<TITLE>各版自定义 WWW 界面的说明</TITLE>
+<link rel=stylesheet type=text/css href='/bbslg.css'>
+</HEAD>
+<H2><A NAME="t0"></A>各版自定义 WWW 界面的说明</B></H2><pre>
+<i>ylsdd</i>
+
+@BBS_CNAME@开放了各版自定义 WWW 界面的功能, 下面是该功能的描述.
+如果有什么疑问或者建议, 请向系统维护提出. 
+
+
+<A HREF="#t1">一、版主自定义WWW页面的方法</A> 
+<A HREF="#t2">二、用户是如何浏览到自定义WWW页面的</A> 
+<A HREF="#t3">三、WWW页面中连接的写法</A>
+<A HREF="#t4">四、写WWW页面时的其它注意事项</A>
+<A NAME="t1"></A>
+一、版主自定义WWW页面的方法
+      每个版的板主可以通过ftp服务来设计相应版面的www主页. 方法是, 在 
+      ftp的本版目录中建立一个html目录, 即/boards/boardname/html/. 在
+      本地将主页设计好之后, 上传到html目录下, 并将入口文件命名为
+      index.htm就可以了.
+<A HREF="#t0">返回顶部</A><A NAME="t2"></A>
+
+二、用户是如何浏览到自定义WWW页面的
+      当用户从WWW的分类讨论区进入版面时, 调用cgi程序bbshome, bbshome检
+      查ftp的相应html目录中是否存在index.htm文件. 如果没有, 就按照原来
+      的方式显示文章列表; 如果有该文件, 就给出一个frameset, 在顶部的
+      frame中显示版面的各个连接, 在底部的frame中显示index.htm. 
+<A HREF="#t0">返回顶部</A><A NAME="t3"></A>
+
+三、WWW页面中连接的写法
+      在WWW页面中提供各种连接时, 要尽量使用相对地址, 而尽量不要直接
+      使用域名ytht.net. 因为用户使用的不一定是这个域名, 有的用户使用
+      代理登录, 而且有时DNS不稳定, 所以的连接也就不大好用. 而且有时
+      用户用页面提供的绝对地址连接连进版面后, 会出现不能发文章的情况.
+      所以尽量尽量不要用绝对连接!
+
+      下面举例说明连接的写法. 
+
+      到本版ftp目录其它文件的连接, 比如index.htm里面连接到/boards/
+      boardname/html/index2.htm, 可以写为
+           &lt;a href=index2.htm&gt;index2.htm&lt;/a&gt; 
+      又比如index.htm里面连接到/boards/boardname/html/something/
+      something.htm, 可以写为
+           &lt;a href=something/something.htm&gt;something&lt;/a&gt; 
+      又比如(从html目录里的)index.htm文件连接到/boards/thisboard/
+      photo/p1.jpg, 可以写为
+           &lt;a href=../photo/p1.jpg&gt;p1.jpg&lt;/a&gt;
+
+      可以在页面上放上进入版面讨论区的连接,
+           &lt;a href=../../../../bbsdoc?board=sysop <font color=red>target=_parent</font>&gt;进入版面&lt;/a&gt;
+      这里用了target=_parent, 保证用户点击连过去后顶上不会出现两个版面横
+      条, 类似地也可以写进入精华区/文摘区/过刊区的连接.
+
+      到其它版面的连接可以写为
+           &lt;a href=../../../../bbshome?board=sysop target=_parent&gt;到sysop版&lt;/a&gt;
+<A HREF="#t0">返回顶部</A><A NAME="t4"></A>
+
+四、写WWW页面时的其它注意事项
+      在设计WWW版面时, 注意不要使index.htm(以及它包括的图形等)体积太大, 
+      否则会造成用户进入版面困难. 也要考虑到用户的屏幕大小有限, 如果您 
+      正在使用1024*768分辨率, 记着切换到800*600分辨率观察一下效果. 
+
+<A HREF="#t0">返回顶部</A>
+
+<I>更新时间: Tue May  3 17:10:38 EDT 2005</I>
+</PRE></BODY></HTML>

@@ -1,0 +1,6 @@
+Listenaddress 0.0.0.0
+Port 2222
+StrictModes yes
+RSAAuthentication no
+PasswordAuthentication yes
+PermitEmptyPasswords no

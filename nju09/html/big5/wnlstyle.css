@@ -1,0 +1,265 @@
+/* vim: set expandtab tabstop=4 shiftwidth=4:
+// +----------------------------------------------------------------------+
+// | PHP version 4                                                        |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 1997-2003 The PHP Group                                |
+// +----------------------------------------------------------------------+
+// | This source file is subject to version 2.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available through the world-wide-web at                              |
+// | http://www.php.net/license/2_02.txt.                                 |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
+// +----------------------------------------------------------------------+
+// | Authors: Original Author php_PP <php_pp@yahoo.com>                   |
+// |                          php_PP <php_pp@yahoo.com>                   |
+// +----------------------------------------------------------------------+
+//
+// $Id$
+*/
+body {
+    background: #f0f0f0;
+    color: #000000;
+    font-family: Verdana, Arial, sans-serif, Verdana;
+    font-size: 10pt;
+    margin: 0px;
+    padding: 0px;
+    text-align : center;
+}
+
+img{
+	border: 0;
+}
+
+hr {
+    color: #ffffff;
+    height: 1px;
+    border: dashed #D1D7DC 0px;
+    border-top-width: 1px;
+    text-align: center;
+}
+
+table {
+    font-size: 9pt;
+    border: 0px;
+    FLOAT: CENTER;
+    TEXT-ALIGN: CENTER;
+}
+
+form {
+	margin: 0px;
+}
+
+a:link,a:visited {
+    color : #000000;
+    text-decoration : none;
+}
+
+a:active,a:hover {
+    color : red;
+    text-decoration : none;
+}
+
+.copyright {
+	width: 75%;
+    color: #c0c0c0;
+    font-size: 7pt;
+    text-align : right;
+}
+
+hr.copyright{
+    color: #c0c0c0;
+}
+
+a.copyright:link, a.copyright:visited {
+    color: #c0c0c0;
+}
+
+a.copyright:hover {
+    color : red;
+}
+
+
+.todyaColor {
+	PADDING: 1px;
+	MARGIN: 1px;
+	COLOR: WHITE;
+	BACKGROUND: #669933;
+}
+
+span.title{
+	width: 80%;
+	letter-spacing: 5pt;
+    font-family: 黑體, Impact, Times New Roman;
+    font-size: 36pt;
+    font-weight: bold;
+    text-align : center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+span.title hr{
+    color: #c0c0c0;
+}
+
+span.title a:link, a:visited {
+    color: #CC0000;
+}
+
+#detail {
+	Z-INDEX: 3;
+	FILTER: shadow(color=#333333,direction=135);
+	WIDTH: 140px;
+	HEIGHT: 120px;
+	POSITION: absolute;
+	margin: 0px auto;
+}
+
+td#WordClock {
+	vertical-align: top;
+	text-align: center;
+	width: 240px;
+	margin-right: 5px;
+}
+
+span#LocalTime{
+	COLOR: #000080;
+}
+
+span#City{
+	FONT-SIZE: 9pt;
+	WIDTH: 150px;
+}
+
+span#GlobeTime{
+	COLOR: #000080;
+}
+
+
+#mapSelect {
+	FONT-SIZE: 10pt;
+	TEXT-ALIGN: CENTER;
+	FONT-FAMILY: Webdings;
+}
+
+#map{
+	FILTER: Light;
+	OVERFLOW: hidden;
+	WIDTH: 240px;
+	HEIGHT: 120px;
+	BACKGROUND-COLOR: mediumblue;
+}
+
+span#world{
+	FONT-SIZE: 185px;
+	COLOR: green;
+	POSITION: relative;
+	margin-LEFT: 0px;
+	margin-TOP: -26px;
+}
+
+td#WordClock select{
+	WIDTH: 240px;
+	BACKGROUND-COLOR: #bcc496;
+	FONT-FAMILY:宋體;
+}
+
+td#Calendar{
+	text-align: center;
+	height: 360px;
+	width: 450px;
+	vertical-align: top;
+	margin-left: 5px;
+}
+
+td#Calendar TR.HEADER1{
+	FONT-FAMILY: Georgia, 黑體;
+	BACKGROUND: #800080;
+	COLOR: #FFFFFF;
+	FONT-SIZE: 12PT;
+}
+
+td#Calendar TR.HEADER1 TD{
+	white-space: nowrap;
+}
+
+td#Calendar SPAN#GZ{
+	FONT-FAMILY: Georgia, 黑體;
+	TEXT-ALIGN: LEFT;
+	color: #ffff00;
+	FONT-SIZE: 14PT;
+}
+
+td#Calendar TR.HEADER2{
+	TEXT-ALIGN: CENTER;
+	BACKGROUND: #ccccff;
+}
+
+td#Calendar TR.HEADER2 TD.WEEKDAY{
+	WIDTH: 65px;
+}
+
+td#Calendar TR.CONTENT{
+	TEXT-ALIGN: CENTER;
+}
+
+td#Calendar TR.CONTENT EM{
+	FONT-SIZE: 16PT;
+	FONT-FAMILY: Arial Black;
+	FONT-STYLE: NORMAL;
+}
+
+td#Calendar TR.CONTENT TD.SUNDAY EM{
+	COLOR: RED;
+}
+
+td#Calendar TR.CONTENT TD.SATURDAY EM{
+	COLOR: GREEN;
+}
+
+td#Calendar TR.CONTENT SPAN.CAPTION{
+	FONT-SIZE: 8PT;
+}
+
+td#button{
+	vertical-align: top;
+	text-align: center;
+	width: 40px;
+	margin-top: 100px;
+}
+
+DIV.FESTIVAL{
+	BACKGROUND: #CCFFCC;
+	COLOR: #000000;
+	font-size: 9pt;
+}
+
+#popDETAIL{
+	BACKGROUND: #000066;
+	WIDTH: 130px;
+	padding: 2px;
+	FONT-SIZE: 9pt;
+	TEXT-ALIGN: right;
+	MozOpacity: .8;
+	opacity: .8;
+	filter:Alpha(opacity=80);
+}
+
+DIV.SOLAR{
+	TEXT-ALIGN: right;
+	COLOR: #ffffff;
+}
+
+DIV.LUNAR{
+	COLOR: violet;
+}
+
+DIV.GANZHI{
+	COLOR: yellow;
+}
+
+SPAN.BUTTON{
+	FONT-WEIGHT: BOLD;
+	COLOR: BLACK;
+}

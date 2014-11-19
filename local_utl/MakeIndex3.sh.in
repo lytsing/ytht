@@ -1,0 +1,9 @@
+#!/bin/sh
+BBSHOME=@BBS_HOME@
+for i in $BBSHOME/0Announce/groups/GROUP_?/*;do
+	if [ -L $i ]; then
+		:
+	else
+		$BBSHOME/bin/MakeIndex3 $i
+	fi
+done

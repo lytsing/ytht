@@ -1,0 +1,12 @@
+diff -ur mod_fastcgi-2.2.12/mod_fastcgi.h mod_fastcgi-2.2.12-p/mod_fastcgi.h
+--- mod_fastcgi-2.2.12/mod_fastcgi.h	Fri Nov 30 00:37:20 2001
++++ mod_fastcgi-2.2.12-p/mod_fastcgi.h	Sat Nov  1 12:04:40 2003
+@@ -34,7 +34,7 @@
+ /* size of the buffer the PM uses to read records from the request handlers */
+ #define FCGI_MSGS_BUFSIZE  32 * 512
+ 
+-#define SERVER_BUFSIZE 8192
++#define SERVER_BUFSIZE 64 * 1024
+ 
+ /* Dynamic FastCGI applications */
+ #define FCGI_DEFAULT_MAX_PROCS  50         /* maximum number of processes that

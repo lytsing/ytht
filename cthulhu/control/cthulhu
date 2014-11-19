@@ -1,0 +1,8 @@
+server <basedir>bin/cthulhu
+cwd <basedir>
+bind 3:tcp:0.0.0.0:80
+fork
+uid <uid>
+gid <gid>
+pidfile <basedir>log/cthulhu.pid
+open 2>><basedir>/log/errors.log

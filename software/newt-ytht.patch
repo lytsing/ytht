@@ -1,0 +1,49 @@
+diff -u -r -b -B newt-0.50.33/form.c newt-0.50.33-yuhuan/form.c
+--- newt-0.50.33/form.c	Wed Apr  4 05:53:14 2001
++++ newt-0.50.33-yuhuan/form.c	Fri Jun 20 09:14:06 2003
+@@ -593,6 +593,8 @@
+ 
+     for (i = 0, el = form->elements; i < form->numComps; i++, el++) {
+ 	/* the scrollbar *always* fits somewhere */
++	if (NULL == el->co)
++	    continue;
+ 	if (el->co == form->vertBar) {
+ 	    el->co->ops->mapped(el->co, 1);
+ 	    el->co->ops->draw(el->co);
+diff -u -r -b -B newt-0.50.33/newt.c newt-0.50.33-yuhuan/newt.c
+--- newt-0.50.33/newt.c	Wed Apr  4 03:33:10 2001
++++ newt-0.50.33-yuhuan/newt.c	Thu Jun 19 13:11:08 2003
+@@ -301,9 +301,9 @@
+     } while (key == NEWT_KEY_SUSPEND);
+ 
+     switch (key) {
+-      case 'v' | 0x80:
+-      case 'V' | 0x80:
+-	return NEWT_KEY_PGUP;
++//      case 'v' | 0x80:
++//      case 'V' | 0x80:
++//	return NEWT_KEY_PGUP; 会造成某些汉字 比如 "置" 不能输入 by ylsdd
+ 
+       case 22:
+ 	return NEWT_KEY_PGDN;
+@@ -331,6 +331,8 @@
+ 	}
+ 
+ 	*chptr++ = key;
++	if(chptr-buf>8)
++		break;  //嘿嘿 buffer overflow by lepton
+ 
+ 	/* this search should use bsearch(), but when we only look through
+ 	   a list of 20 (or so) keymappings, it's probably faster just to
+diff -u -r -b -B newt-0.50.33/newt.spec newt-0.50.33-yuhuan/newt.spec
+--- newt-0.50.33/newt.spec	Thu Aug 30 07:21:01 2001
++++ newt-0.50.33-yuhuan/newt.spec	Fri Jun 20 09:15:00 2003
+@@ -2,7 +2,7 @@
+ Name: newt
+ %define version 0.50.33
+ Version: %{version}
+-Release: 1
++Release: 6 
+ License: LGPL
+ Group: System Environment/Libraries
+ Source: ftp://ftp.redhat.com/pub/redhat/code/newt/newt-%{version}.tar.gz

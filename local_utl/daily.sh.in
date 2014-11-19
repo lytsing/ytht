@@ -1,0 +1,8 @@
+#!/bin/sh
+BBSHOME=@BBS_HOME@
+cp -af $BBSHOME/0Announce/bbslist/countusr $BBSHOME/0Announce/bbslist/countusr.last
+cp -af $BBSHOME/0Announce/bbslist/newacct.today $BBSHOME/0Announce/bbslist/newacct.last
+cp -af $BBSHOME/etc/posts/day $BBSHOME/etc/posts/day.last
+$BBSHOME/bin/bbstop
+$BBSHOME/bin/autoundeny
+$BBSHOME/bin/autounprison

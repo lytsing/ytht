@@ -1,0 +1,105 @@
+#!/usr/bin/perl
+use Getopt::Std;
+my %opts;
+getopts('b:',\%opts);
+my ($boardname) = ($opts{"b"});
+my ($title, $input);
+open INDEX, "< index.html" or die "Cannot read index.html!";
+while(<INDEX>) {
+	if (/<TITLE>(.*?)\s*<\/TITLE>/) {
+		$title = $1;
+	}
+}
+
+open HHP, "> $boardname".".hhp" or die "Cannot create hhp file";
+print HHP "[OPTIONS]\n";
+print HHP "Binary Index=Yes\n";
+print HHP "Binary TOC=Yes\n";
+print HHP "Compatibility=1.1 or later\n";
+print HHP "Compiled file=$boardname.chm\n";
+print HHP "Contents file=$boardname.hhc\n";
+print HHP "Default Window=main\n";
+print HHP "Default topic=index.html\n";
+print HHP "Display compile progress=Yes\n";
+print HHP "Enhanced decompilation=Yes\n";
+print HHP "Index file=\n";
+print HHP "Full-text search=Yes\n";
+print HHP "Language=0x804 中文(中国)\n";
+print HHP "Title=$title\n\n";
+print HHP "[WINDOWS]\n";
+print HHP "main=,\"$boardname.hhc\",,\"index.html\",,,,,,0x3520,,0x387e,,,,,,,,0\n\n";
+print HHP "[FILES]\n";
+print HHP "index.html\n";
+print HHP "$boardname.hhp\n";
+print HHP "$boardname.hhc\n\n";
+print HHP "[INFOTYPES]\n";
+close(HHP);
+
+open HHC, "> $boardname".".hhc" or die "Cannot create hhc file";
+print HHC "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n";
+print HHC "<HTML>\n";
+print HHC "<HEAD>\n";
+print HHC "<meta name=\"GENERATOR\" content=\"Microsoft&reg; HTML Help Workshop 4.1\">\n";
+print HHC "<!-- Sitemap 1.0 -->\n";
+print HHC "</HEAD><BODY>\n";
+print HHC "<OBJECT type=\"text/site properties\">\n";
+print HHC "        <param name=\"ImageType\" value=\"Folder\">\n";
+print HHC "</OBJECT>\n";
+print HHC "<UL>\n";
+print HHC "       <LI> <OBJECT type=\"text/sitemap\">\n";
+print HHC "                <param name=\"Name\" value=\"$title\">\n";
+print HHC "                <param name=\"Local\" value=\"index.html\">\n";
+print HHC "                </OBJECT></LI>\n";
+$input = "fh00";
+MakeFolderContent(".");
+print HHC "</UL>\n";
+print HHC "</BODY></HTML>\n";
+close HHC;
+
+
+sub MakeFolderContent
+{ 
+	my ($dir) = @_;
+	my $newfn;
+	my $newtitle;
+	my $newdir;
+	my $myinput;
+	my ($classtype, $filename);
+	$input++;
+	$myinput = $input;
+	$filename = $dir."/index.html";
+	open $myinput, "< $filename" or return;
+	print HHC "<UL>\n";
+	while (<$myinput>) {
+		if (/\s*\d*\s*\[目录\]\s*<a href='(.*?)\/index.html'>(.*?)\s*<\/a>.*?/ig) {
+			$classtype = 1;
+			$newfn = $1;
+			$newtitle = $2;
+		}
+		elsif (/\s*\d*\s*\[文件\]\s*<a href='(.*?)'>(.*?)\s*<\/a>.*?/ig) {
+			$classtype = 2;
+			$newfn = $1;
+			$newtitle = $2;
+		}
+		else {
+			next;	
+		}
+		$newtitle =~ s/&nbsp;/ /g;
+		$newtitle =~ s/(.*?)\s*$/$1/;
+        	print HHC "<LI> <OBJECT type=\"text/sitemap\">\n";
+		print HHC "<param name=\"Name\" value=\"$newtitle\">\n";
+		if ($classtype == 1) {
+        		print HHC "        <param name=\"Local\" value=\"$dir/$newfn/index.html\">\n";
+		} else {
+        		print HHC "        <param name=\"Local\" value=\"$dir/$newfn\">\n";
+		}
+       		print HHC "        </OBJECT></LI>\n";
+		if ($classtype == 1) {
+			$newdir = $dir."/".$newfn;
+			&MakeFolderContent($newdir);
+		}
+	}
+	print HHC "</UL>\n";
+	close($myinput);
+}
+

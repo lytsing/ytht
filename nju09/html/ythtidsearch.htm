@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>一塌糊涂BBS文章搜索</title>
+<style type="text/css">
+BODY {
+	FONT-FAMILY: "??�?", "·???_GB2312", "o?"; FONT-SIZE: 12px
+}
+TD {
+	FONT-SIZE: 12px
+}
+.FormText {
+	BACKGROUND-COLOR: #f8f8f8; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; FONT-SIZE: 12px; HEIGHT: 20px; PADDING-BOTTOM: 0px; PADDING-LEFT: 2px; PADDING-RIGHT: 2px; PADDING-TOP: 0px; F: "Verdana","Tahoma","??","Arial", "Helvetica", "sans-serif"; font-color: #999999
+}
+.btn {
+	BACKGROUND-COLOR: #ebebeb;
+	BORDER-BOTTOM: #666666 1px solid;
+	BORDER-LEFT: #666666 1px solid;
+	BORDER-RIGHT: #666666 1px solid;
+	BORDER-TOP: #666666 1px solid;
+	CURSOR: hand;
+	FONT-FAMILY: "Verdana", "Tahoma", "??", "Arial", "Helvetica", "sans-serif";
+	FONT-SIZE: 12px;
+	HEIGHT: 20px;
+	PADDING-BOTTOM: 0px;
+	PADDING-LEFT: 1px;
+	PADDING-RIGHT: 0px;
+	PADDING-TOP: 1px;
+	width: 110px;
+}
+A {
+	COLOR: #3333ff; FONT-FAMILY: "Verdana", "Tahoma", "??", "Arial", "Helvetica", "sans-serif"; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #0033ff
+}
+A:hover {
+	BACKGROUND-COLOR: #cccccc; COLOR: #0033ff
+}
+
+A.a02:visited {
+	COLOR: #5c5f36; BACKGROUND-COLOR: #ffffff;TEXT-DECORATION: none
+}
+A.a02:link {
+	COLOR: #5c5f36;BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.a02:hover {
+	COLOR: #000000;BACKGROUND-COLOR: #ffffff; TEXT-DECORATION: none
+}
+</style>
+<style type="text/css">
+.title {
+	font-size: 24px;
+	font-weight: bold;
+}
+.style1 {
+	color: #0000ff;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<center>
+  一塌糊涂 BBS -- 文章搜索<br>
+  <br>
+  <span class="title">一塌糊涂 BBS -- 精华区搜索</span> <br>
+  <br>
+  <hr>
+</center>
+<p>　</p>
+<TABLE width=700 border=0 align=center cellpadding="0" cellspacing="0" id="table1">
+  <TBODY>
+    <TR> 
+      <TD height=7 colspan="6"></TD>
+    </TR>
+    <TR>
+      <TD height=6 colspan="6"></TD>
+    </TR>
+    <TR>
+      <TD width="135">　</TD>
+      <TD width="221" align="center" valign="middle" bgcolor="#eeeeee"><a href="ythtsearch.htm" class="a02">BBS精华文章</a></TD>
+      <TD width="191" align="center" valign="middle" bgcolor="#eeeeee" class="style1">ID作者查询</TD>
+    </TR>
+    <TR>
+      <TD height=6 colspan="6"></TD>
+    </TR>
+    <TR> 
+      <TD align=center>&nbsp; </TD>
+      <TD align=left>作者ID：</TD>
+      <TD align=left>关键词：</TD>
+      <TD align=center width="4">　</TD>
+      <TD align=center width="67">　</TD>
+      <TD align=center width="82">　</TD>
+    </TR>
+    <TR>
+      <TD colspan="6" align=center><form action="http://bbs.souke.net/cgi-bin/SearchAuthor" method=post name=form1>
+        <input name=Author class=FormText id="UserID" size=15 maxlength="255">
+        <input name=KeyWord class=FormText id="KeyWord" size=30 maxlength="255">
+        <select class=FormText name=Site>
+            <option value="1">一塌糊涂</option>
+            <option value="2">水木清华</option>
+            <option value="3">南大百合</option>
+            <option value="4">日月光华</option>
+            <option value="5">北大未名</option>
+            <option value="6">白云黄鹤</option>
+            <option value="7">我爱南开</option>
+            <option value="8">饮水思源</option>
+            <option value="9">兵马俑</option>
+            <option value="10">五色土</option>
+            <option value="11">天大求实</option>
+            <option value="12">天地人大</option>
+            <option value="13">紫丁香</option>
+            <option value="14">牡丹园</option>
+            <option value="15">逸仙时空</option>
+            <option value="16">翰海星云</option>
+            <option value="17">雁塔晨钟</option>
+            <option value="18">一网深情</option>
+            <option value="19">泉韵心声</option>
+            <option value="20">真情流露</option>
+            <option value="21">未来花园</option>
+            <option value="22">白山黑水</option>
+            <option value="23">郁金香</option>
+	    <option value="24">集美学村</option>
+          </select>
+        <select class=FormText name=Region>
+          <option selected value=0>所有类别</option>
+          <option value=1>院校信息</option>
+          <option value=2>学术科技</option>
+          <option value=3>休闲娱乐</option>
+          <option 
+        value=4>人文艺术</option>
+          <option value=5>社会信息</option>
+          <option 
+        value=6>情感生活</option>
+          <option value=7>体育健身</option>
+          <option 
+        value=8>电脑技术</option>
+        </select>
+        <br>
+          <input class=btn name=submit2 type=submit value=SouKe(搜客)搜索 width="80">
+          <input class=btn name=button type=button value='海外通道' 
+onClick='this.form.action="http://proxy.souke.net/cgi/SearchAuthor.php";
+this.form.submit();' width="80" >
+          <a href="http://www.souke.net/idadvance.htm">ID高级检索</a>&nbsp; <a href="http://www.souke.net/help.htm">使用帮助</a> 
+          <a href="http://www.souke.net/noduty.htm">免责声明</a><br>
+      </form></TD>
+    </TR>
+    <TR> 
+      <TD colspan="6" align=center></TD>
+    </TR>
+    <TR>
+      <TD colspan="6" align=center>&nbsp; </TD>
+    </TR>
+    <TR> 
+      <TD colspan="6" align=center>搜索全国教育网BBS站精华区，共约 <FONT color=#0000ff><B>19,676,000</B></FONT>篇文章。 
+      </TD>
+    </TR>
+    <TR> 
+      <TD colspan="6" align=center>感谢<b><font color="#0000FF"><a href="http://bbs.souke.net/">souke.net</a></font></b>友情提供 
+      </TD>
+    </TR>
+    <TR> 
+      <TD colspan="6" align=right><A href="http://www.souke.net/"><BR>
+        <BR>
+        <BR>
+        <BR>
+        　</A></TD>
+    </TR>
+  </TBODY>
+</TABLE>
+</body>
+</html>
+

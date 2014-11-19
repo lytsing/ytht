@@ -1,0 +1,26 @@
+#!/usr/bin/perl
+$bbsuid=@BBS_UID@;
+$bbsgid=@BBS_GID@;
+$bbshome="@BBS_HOME@";
+$)=$bbsgid;
+$(=$bbsgid;
+$<=$bbsuid;
+$>=$bbsuid;
+chdir $bbshome;
+if ($#ARGV!=1){
+	die "Error argument!\n";
+}
+$normaluser = $ARGV[0];
+if ($normaluser =~ /\n|\'/){
+	die "Strange username!\n";
+}
+$realfrom = $ARGV[1];
+if ($realfrom =~ /\n|\'/){
+	die "Strange username!\n";
+}
+@content = <STDIN>;
+open MAILER, "|tee /home/bbs/mylog1|/usr/local/bin/bogofilter -d /home/bbs/.bogofilter -M -p|tee /home/bbs/mylog2|".$bbshome."/bin/bakmail \'$normaluser\' \'$realfrom\'|tee /home/bbs/mylog3|".$bbshome."/bin/bbsmail_wrap2 \'$normaluser\' \'$realfrom\'";
+#open MAILER, "|/usr/local/bin/bogofilter -d /home/bbs/.bogofilter -M -p|".$bbshome."/bin/bakmail \'$normaluser\' \'$realfrom\'|".$bbshome."/bin/bbsmail_wrap2 \'$normaluser\' \'$realfrom\'";
+foreach (@content) {
+	print MAILER $_;
+}

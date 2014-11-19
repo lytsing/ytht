@@ -1,0 +1,41 @@
+&nbsp;<br><center>
+<table width=100%>
+<tr>
+<td width=33%>
+#showfile wwwtmp/newboards.txt
+</td>
+<td width=33%>
+<img src=/ytht.gif>
+</td>
+<td width=33% align=center>
+</td></tr>
+</table>
+
+#showsechead
+
+<table width=100%>
+<td valign=top width=50%>
+<center>
+#showsecnav
+</td>
+<td valign=top width=50%>
+<table width=100%>
+#showstarline 焦点·热点
+<tr><td>
+#showfile 0Announce/focus
+</td></tr>
+</table>
+</td></table>
+
+<hr><br>
+<FONT class=f3><b>--== 讨论区导读 ==--</b></FONT>
+#showhotboard 20
+#showsecintro
+
+<table width=100%>
+#showstarline 推荐链接
+<tr><td>
+#showfile 0Announce/links2
+</td></tr></table>
+<br><br>
+</center>

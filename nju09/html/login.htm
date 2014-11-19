@@ -1,0 +1,28 @@
+<html>
+<meta http-equiv='Content-Type' content='text/html; charset=gb2312'>
+<link rel=stylesheet type=text/css href='/bbs.css'>
+<style type=text/css>
+A {color: #000080} 
+BODY {BACKGROUND-COLOR: #b0e0b0; FONT-SIZE: 12px;}
+</style>
+<script src=/function.js></script>
+<title>登录本站</title> 
+<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<center>
+               	<form action=bbslogin?url=1 method=post>
+		<table width=100% border=0 cellspacing=1 cellpadding=3>
+		<tr align=center bgcolor=blue>
+		<td valign=center><font color=#f8f0f0 style='font:9pt'>用 户 登 录</font></td>
+		</tr>
+		<tr align=center bgcolor=#f0f4f0><td>
+		<font style='font:9pt'>帐号:</font><input style='height:24;BACKGROUND-COLOR:e0f0e0;font:9pt;' type=text name=id maxlength=12 size=10><br>
+		<font style='font:9pt'>密码:</font><input style='height:24;BACKGROUND-COLOR:e0f0e0;font:9pt;' type=password name=pw maxlength=32 size=10><br>
+               	<input style='font:9pt;height:22; BACKGROUND-COLOR:b0e0b0' type=submit value=登录>&nbsp;<input style='height:22;BACKGROUND-COLOR:b0e0b0;font:9pt;' type=button value=注册 onclick="{openreg();}"></td></tr>
+		<tr align=center bgcolor=#f0f4f0>
+		<td><font style='font:9pt'>验证IP范围</font><select name=ipmask><option value=0 selected>单IP</option><option value=1>2 IP</option><option value=2>4 IP</option><option value=3>8 IP</option><option value=4>16 IP</option><option value=5>32 IP</option><option value=6>64 IP</option><option value=7>128 IP</option><option value=8>256 IP</option></select>
+		<br><a href=/ipmask.html target=_blank><font style='font:9pt'>这是什么?</font></a></td></tr>
+
+</table></form>
+</center>
+</body>
+</html>

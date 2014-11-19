@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>YTHT BBS: Anonymous read-only CVS access</title>
+</head>
+
+<body>
+<h1>YTHT BBS: Anonymous read-only CVS access</h1>
+
+<p>你可以在线浏览我们的 CVS 仓库<a href="/cgi-bin/bbscvs/bbs/">YTHT BBS</a></p>
+
+<h2>使用 CVS 仓库</h2>
+
+<p>假设你已经安装了 CVS 软件,那么你可以用如下命令check out出 YTHT BBS sources.</p>
+
+<p>设置 CVSROOT 环境变量为
+<code>:pserver:bbsdev@162.105.31.222:/home/cvs</code>.</p>
+<p>或者给<code>cvs</code>命令加上如下参数 
+<code>-d :pserver:bbsdev@162.105.31.222:/home/cvs</code></p>
+
+<p>执行命令<code>cvs login</code>,  输入口令bbsdev.</p>
+
+<p>执行命令</p>
+<blockquote><p><code>cvs -z 9 co bbs</code></p></blockquote>
+可以 check out YTHT BBS sources.</p>
+
+<p>一旦你check out出来代码之后, <code>cvs update</code>
+命令将更新你的本地拷贝以和一塌糊涂 BBS 的最新代码一致.请阅读 CVS 的手册 得到关于
+如何使用 CVS 的更多信息.</p>
+
+</body>
+</html>

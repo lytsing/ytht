@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title>Text Color</title>
+	<script language="JavaScript" type="text/javascript">
+	<!--
+	function selectColor(color) {
+		self.parent.setColor(color);
+	}
+	
+	function InitColorPalette() {
+		if (document.getElementsByTagName)
+			var x = document.getElementsByTagName('TD');
+		else if (document.all)
+			var x = document.all.tags('TD');
+		for (var i=0;i<x.length;i++) {
+			x[i].onmouseover = over;
+			x[i].onmouseout = out;
+			x[i].onclick = click;
+		}
+	}
+	
+	function over() {
+		this.style.border='1px dotted white';
+	}
+	
+	function out() {
+		this.style.border='1px solid gray';
+	}
+	
+	function click() {
+		selectColor(this.id);
+	}
+	//-->
+	</script>
+</head>
+<body bgcolor="white" onLoad="InitColorPalette()" leftmargin="0" rightmargin="0" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0">
+<table width="150" height="28" cellpadding="0" cellspacing="1" border="1" align="center">
+	<tr>
+		<td id="black" bgcolor="black" width="10" height="10"><img width="1" height="1"></td>
+		<td id="blue"  bgcolor="blue" width="10" height="10"><img width="1" height="1"></td>
+		<td id="green" bgcolor="green" width="10" height="10"><img width="1" height="1"></td>
+		<td id="cyan"  bgcolor="cyan" width="10" height="10"><img width="1" height="1"></td>
+		<td id="red" bgcolor="red" width="10" height="10"><img width="1" height="1"></td>
+		<td id="magenta" bgcolor="magenta" width="10" height="10"><img width="1" height="1"></td>
+		<td id="brown" bgcolor="brown" width="10" height="10"><img width="1" height="1"></td>
+		<td id="gray" bgcolor="gray" width="10" height="10"><img width="1" height="1"></td>
+		<td id="yellow" bgcolor="yellow" width="10" height="10"><img width="1" height="1"></td>
+		<td id="white" bgcolor="white" width="10" height="10"><img width="1" height="1"></td>
+	</tr>
+</table>
+</body>
+</html>

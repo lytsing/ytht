@@ -1,0 +1,79 @@
+.TH CTHULHU 8 "Feb. 2003" "Thomas M. Ogrisegg" "Cthulhu webserver"
+
+.\"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+.\"Copyright (C) 2002, 2003 Thomas M. Ogrisegg. All rights reserved
+.\"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+.SH NAME
+cthulhu -- a high performance HTTP Daemon
+.SH SYNOPSIS
+cthulhu [-i] [-p port] [-l loglevel] [-f filename]
+.SH DESCRIPTION
+cthulhu is a standalone HTTP daemon designed to be fast, secure, reliable
+and modular.
+
+It supports CGI (Common Gateway Interface) via
+.B cgi-exec(8),
+SSL via
+.B http-ssl(8),
+Basic HTTP Authentification via
+.B ctauth(8)
+or via FastCGI Authentification Daemons. Other Technologies like PHP,
+ASP etc. can be used via CGI or FastCGI. See the HOWTOs for more information.
+
+.SH OPTIONS
+.TP 12
+.B \-p port
+Bind to the local port `port'. Only for debugging purposes. Use an ipinit
+script instead
+.TP 12
+.B \-f logfile
+Write error messages to the specified logfile. Obsolete. Use ipinit instead.
+.TP 12
+.B \-l loglevel
+Set the loglevel for HTTP client request logging.
+
+.br
+0: do not log at all
+.br
+1: log only request-type and url
+.br
+2: log request type, url, user-agent
+.br
+3: log request type, url, user-agent, ip-address:port
+.br
+4: log all -- the whole request is beeing logged. Not recommended except for testing purposes
+
+.SH CONFIGURATION
+
+To add a domain/virtual host to be served create a directory under the
+cthulhu base directory with the name of the domain.
+
+For each domain/virtual host there are two configuration files:
+filelist-<domain> and pathconf-<domain>.
+
+The filelist-* files contain a filelist of files which should be cached
+by the webserver (thus, files which will probably be often used). This
+file should be created with the add_domain script, shipped with cthulhu.
+
+The pathconf-* files contain the actual configuration of the domain.
+It allows to configure CGI, FastCGI, Authentification and redirection
+behaviour of the domain. Refer to pathconf(5) for more information.
+
+.SH BUGS
+
+Refer to "BUGS" in the source base directory.
+
+.SH REMARKS
+
+cthulhu might have problem if the webdirectorys are on an NFS mounted
+filesystem. However it is generally not recommended to store files for
+a webserver on an NFS volume.
+
+.SH AUTHOR
+cthulhu was developed by Thomas M. Ogrisegg. Mail comments, bug reports,
+suggestions and feature requests to
+.B <tom-cthulhu@fnord.at>
+
+.SH SEE ALSO
+ipinit(8), cgi-exec(8), ctauth(8), http-ssl(8), pathconf(5)

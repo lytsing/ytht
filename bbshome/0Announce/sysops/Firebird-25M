@@ -1,0 +1,1549 @@
+
+注： 以下文件乃编改自中正资工 Firebird BBS 2.5 版之使用手册。
+
+————————————————————————————————————
+                           目       录
+————————————————————————————————————
+  
+                     (零) 前言
+
+                     (一) 架站前的考量
+
+                          [1] 硬体的准备
+                          [2] 网路流量的考量
+                          [3] 系统安全的考量
+                          [4] 身份确认的重要性
+                          
+                     (二) 安装 BBS 程式
+         
+                          [1] 建立 BBS 的相关帐号
+                          [2] 取得 BBS 程式
+                          [3] 设定及安装 BBS 程式
+                          [4] 测试 BBS 程式及错误的排除
+                          [5] 其他版本 BBS 升级须知
+
+                     (三) 设定 BBS 的相关档案  
+
+                          [1] 修改系统设定档
+                          [2] 修改 BBS 的选单
+                          [3] 开版及建立精华区
+                          [4] BBS 目录下档案说明
+
+                     (四) 外部工具程式使用
+ 
+                          [1] 简介自动程序
+                          [2] 上站人数统计
+                          [3] 上站人次统计
+                          [4] 上站次数, 发表文章次数, 使用时间排名
+                          [5] 十大热门话题统计
+                          [6] 讨论区使用率统计
+                          [7] 观看 .PASSWDS 的程式 -- showuser.c
+                          [8] 自动 login BBS 帐号安装
+                          [9] BBSnet, Lynx, Archie client ,IRC..etc安装
+
+                     (五) 寄信给 BBS 站内使用者及 E-mail Post 安装
+
+                          [1] 身份确认信处理的流程
+                          [2] 如何修改系统使 BBS 站内 User 能收到 Intermail
+                          [3] E-mail post 安装及使用    
+
+                     (六) 转信程式 INNBBSD 的安装 
+                        
+                          [1] 安装转信程式
+                          [2] 设定转信所需的设定档
+                          [3] 申请转信的方法
+                          [4] 参考文件 [已知 News Server 列表]
+                          [5] 参考文件 [tw.bbs.* 列表]                  
+                                        
+————————————————————————————————————
+                      第 零 章  前言  
+————————————————————————————————————
+
+    本版乃中正资工 Firebird BBS 的一个 variant, 由马来西亚旅台同学会之
+    工作站管理小组成员所编改, 为秉持 GNU 软体开发精神而开放给大家自由
+    拷贝使用。
+
+    本版作者的风格与习性也许跟原版 Firebird BBS 的作者略有不同, 固一些原
+    Firebird BBS 所拥有的小功能并没有被纳入, 且又增加了一些原版 Firebird
+    BBS 所没有的功能。 比较重要的一点是, 我们尝试修正了一些存在于原版
+    Firebird BBS 上的小错误。
+
+    本版开放让大家抓取, 其目的在于希望能让各 Firebird 系列的站台互相交流, 
+    集思广益, 一齐来参与发展, 使 Firebird BBS 在研发方面做得更加的尽善尽美。
+
+    本版在 GNU Public Licence 下发行, 各位可任意拷贝及修改。但是我们有个
+    小小的要求, 就是若您对它作了一些修改, 或修正错误, 或添加功能, 请在
+    firebird 连线版上 post 出您改过的地方, 好让大家也能分享您的成果。 与
+    您分享的快乐, 胜过独自拥有, 这是本版发行的目的。
+
+————————————————————————————————————
+                      第 一 章  架站前的考量  
+————————————————————————————————————
+ 
+ [1] 硬体的准备
+     
+     足够的记忆体及 SWAP 是影响上站人数上限的关键, 硬碟的大小则影响到
+     各版文章能保留篇数的多少, 在架站前需衡量所需配备。 据观察, 一台
+     具有32MB 记忆体的 Linux station 在 BBS 人数达 50 人左右时开始会
+     用 SWAP。 (Linux 作业系统在记忆体不足的状况下才会用 SWAP)
+     
+     因为 BBS 的档案多以信件, 讨论区文章为多, 这些都是 1k ~ 2k 的小档
+     案, 所以系统的档案结构每个 inode 以 1k 或 2k 为佳 , 您可以下 df -i 
+     指令观察目前 inode 的使用状况。 inode 的大小通常是在 fdisk 时选择
+     的。
+
+ [2] 网路流量的考量
+ 
+     当您的 BBS站公开给外界使用以后，通常会遇到以下麻烦：
+      
+     如果有大量使用者透过网路连接您的 BBS，会对您们当地的网路造成「有
+     点大，又不会太大」的网路交通量。
+   
+     ==> 对策：统计网路交通流量，了解 BBS系统对网路的影响程度，以调整
+               BBS的管理策略。
+   
+ [3] 系统安全的考量
+
+     由于 BBS站是一般 cracker觊觎的对象之一，因此设立 BBS站之后，容易
+     让您的工作站成为显著的入侵目标。
+   
+     ==> 对策：请更加注意您的系统安全，尤其当执行外部程式(gopher,lynx
+               tin,....etc)务必确定程式是否有执行上的漏洞, 或者寻找修
+               改过专为 BBS 用的版本,并请勤于修补作业系统的漏洞。
+   
+ [4] 身份确认的重要性
+
+     除非您的 BBS站是封闭式的 BBS（也就是使用者必须经过严格的申请程序
+     才能拥有帐号），否则请注意匿名使用者的问题。匿名使用者的言责问题
+     一直是网路上争议的论点之一，因此请您在开站之前考虑您的做法。
+   
+     ==> 对策：确认使用者身份以后才给予发表文章的权利，而且规定使用者
+               身份只能透过系统管理员查询。如此即可适度保障使用者隐私
+               权、又可在发生问题时追查责任的归属。
+
+
+————————————————————————————————————
+                      第 二 章  安装 BBS 程式  
+————————————————————————————————————
+
+ [1] 建立 BBS 的相关帐号
+     
+     在安装 BBS 之前，请您先在系统中加入以下三位使用者，在 /etc/passwd
+     内应该如下所示：（新建帐号的步骤会因系统不同而有所差异，请您在建
+     立帐号之前参考您的系统管理手册。采用 UID=9999 与9990的原因是为了
+     避免与一般使用者的 UID 产生冲突）
+
+     一般建立新帐号的步骤是在 /etc/passwd 中加入下三行，然后再为 bbsadm 和
+     bbsuser 这两个帐号设好密码, 而 bbs 这个帐号一般上是不设任何密码的: 
+
+       bbsadm::9990:99:BBS admin and developer:/home/bbsroot:/bin/csh
+       bbs::9999:99:BBS user:/home/bbs:/home/bbs/bin/bbsrf
+       bbsuser::9999:99:BBS user:/home/bbs:/bin/csh
+
+     其中 bbsadm  是用来修改 /home/bbsadm/bbs_src 下的 BBS 程式。
+          bbsuser 跟 bbs 拥有相同的 UID，但它的 shell 是一般的 shell，
+                  而 bbs 的 shell 则是 bbsrf。 当系统需要 bbs 以一般的
+                  shell 来作处理时, 便需要有这个帐号了。
+
+     此外, 在 /etc/group 内设定 bbs 的 group，如下所示：
+
+     bbs:*:99:bbs,bbsuser,bbsadm
+
+     以方便您管理目录的读写权限。
+  
+     并在 /etc/shells 中加入 /home/bbs/bin/bbsrf 。
+   
+     以上都设定完成后,在 /home 建立 bbsadm 和 bbs 两个目录, 并 
+     chown bbsadm.bbs bbsadm ; chown bbs.bbs bbs
+     再分别替 bbsroot bbsuser 设定密码。
+
+ [2] 取得 BBS 程式
+     
+     请以 bbsadm login ,再抓取 BBS source , 本版的 BBS source 
+     可由以下位址取得
+
+     ftp://MSIA.pine.ncu.edu.tw/pub/bbs/FirebirdBBS2.5M.tar.gz
+ 
+     取回后,解开 FirebirdBBS 2.5M 的原始程式，以进行安装程序。
+     解开 FirebirdBBS2.5M.tar.gz 的方法:
+
+     tar zxvf FirebirdBBS2.5M.tar.gz
+
+     程式解开之后，会在你所在目录底下造出 bbs_src 目录，内含 BBS的原始
+     程式。
+      
+     (注）如果您的 tar 不认得 zxvf，请利用 anonymous ftp 至
+          ftp.csie.nctu.edu.tw 取回 /pub/GNU/gzip-1.2.4.tar与 
+          /pub/GNU/tar-1.11.2.tar.gz，并且安装至您的系统上。
+
+ [3] 设定及安装 BBS 
+
+     1.自动设定系统环境及填写主要 BBS 资料
+   
+     同样以 bbsroot login , 到 bbs_src/ 目录底下执行以下指令
+      
+      ( cd CONFIG ; ./configure )
+      
+     执行的过程应类似以下画面：
+
+ ..................................
+   Please fill data for your BBS
+ ..................................
+Home directory of BBS --> [/home/bbs]                   ==> bbs 目录所在
+UID of BBS --> [9999]					==> bbs 的系统 User ID
+GID of BBS --> [99]					==> bbs 的系统 GID
+UID of BBS admin --> [9990]				==> bbsadm 的系统 UID
+The ID of your site --> [NoName]                        ==> 贵站的英文代号
+The name of your site --> [Hibiscus Realm BBS]          ==> 贵站名称 (中文可)
+The domain name of your site --> [some.where.on.earth]  ==> 贵站 domain name
+The ip address of your site --> [127.0.0.1]		==> 贵站 ip address
+Maximum number of users --> [20236]			==> 最大使用人数
+Maximum number of boards --> [256]			==> 开板最大数目
+Maximum number of on-line users --> [256]		==> 最大同时上线人数
+Show idle time of BBS users ? --> [Y]			==> 显示 idle 时间
+........................................
+updating cache ./config.cache
+creating ./config.status
+creating Makefile
+creating config.h
+creating Install.sh
+
+........................................................................
+You may review the Makefile now. Then, type 'make' to build your system.
+........................................................................
+
+     在设定一些数值时请确切考虑您的硬体设备是否足够。 特别是最大同时上线
+     人数，它是与记忆体的大小非常有关的。
+
+     程式会自动判断您所用的系统，并且询问您所架设的 BBS之基本资料，以
+     造出必要的 Makefile 。 顺利的话，您应该可以在 bbs_src/ 目录底下找
+     到刚造出来的 Makefile。 您可以观看此档的设定，若有必要，可手动修改
+     之。
+
+     在 bbs_src/ 下亦可找到 config.h 这个档，在编译程式之前您亦可对它作
+     一些手动的修改。
+
+     同一个目录下可找到 chat.h 这个档, 您可以在此更改 chat room 的 port
+     number 和名字。
+
+     2.编译 BBS 程式
+     
+     在 bbs_src/ 下执行如下指令  
+
+      make
+
+     进行编译动作。如果编译过程无错误的话，bbs_src/ 目录底下应该已经产
+     生 bbs, bbsrf, chatd 以及 thread 这四个执行档。如果这四个档案都已
+     产生的话，代表 BBS 程式的编译已经完成。
+
+     如果因为任何 error导致 BBS 程式无法产生的话, 请检查安装程序是否有误。
+     若无法解决, 可将完整编译过程产生的讯息张贴至各大站 firebird 版或 
+     installbbs 版求助。  
+     
+     3.安装 BBS 程式
+
+     以 root login , 在 /home/bbsroot/bbs_src 目录底下执行
+
+      make install
+      make installchatd
+      make installthread
+
+     即可大功告成。请继续测试您刚架设完成的 ＢＢＳ站。
+
+ [4] 测试 BBS 程式及错误的排除
+     
+     1.测试ＢＢＳ并取得 SYSOP 权利
+
+     Telnet 到您的 BBS 主机，然后以 bbs 当 username 来 login , 应可见
+     到 BBS 的 login 画面。此时，当 BBS程式要求您输入代号时，  请输入 
+     new，以便注册一个新使用者。由于名称为 SYSOP 的使用者拥有一切权利
+     ，因此您必须先注册为 SYSOP，并且设定密码。请注意：SYSOP 必需完全
+     大写。
+
+     接下来，请再替  guest 登记帐号，此帐号为 BBS的参观帐号，不须输入
+     密码即可进入 BBS(注册时随便打个密码即可)。如果您不想提供 guest帐
+     号，可以略过此步骤，并记得把 guest 加入 "不可注册之ID" 的名单内。
+     如果您提供了 guest  帐号，请参考稍后的文件说明替 guest  设定
+    「恰到好处」的权限。通常guest 帐号是只能参观不可发言的，因此通常
+     不具有发表文章或聊天的功能。
+   
+     2.错误的排除
+   
+     如果天不从人愿，程式一声不响地就结束了，请您先以 bbsuser login，
+     在/home/bbs 的目录底下执行「 bin/bbs h localhost」，看看能不能执
+     行。如果 bbs可以执行的话，那应该是  ~bbs/bin/bbsrf  出了问题，请
+     检查bbsrf 程式之 owner与 mode ，如果您自行使用 chroot 安装选项的
+     话，请确定 owner为 root 且 mode 为 4755。
+   
+     如果不是这个情形，请执行 ipcs 指令，查看 shared memory的使用情形
+     与 owner是否正确，正常的 owner应该是 bbs，如果不是的话，请利用
+     ipcrm 清除之，然后重新执行 bbs。
+     通常以上错误会有 Error! shmat error! key = xxx. 的讯息.
+   
+     再不行的话，请检查 ~bbs/etc/menu.ini  与 ~bbs/etc/sysconf.ini 是
+     否存在，以及档案内容是否完整。如果完整的话，请试著删除
+      ~bbs/sysconf.img 档案，再重新进入 BBS测试。
+   
+     如果还是不行的话，请试著清除整个 BBS系统，重新开机后再安装几次试
+     试。如果真的没有办法，请到 tw.bbs.admin.installbbs  讨论区求助，
+     或 email 给本系统的发展小组 SYSOP.bbs@MSIA.pine.ncu.edu.tw 。在此
+     特别推荐第一种做法，因为这样子可以在网路上遇到较多使用 FirebirdBBS
+     系统的管理者，得到立即回应的机会较大。当然啦，在求助之前请详述您的
+     系统平台、所用的编译器，以及出现错误的状况等资讯，这样子大家才能
+     容易帮您找出可能发生问题的地方。
+
+ [5] 其他版本 BBS 升级须知
+    
+     以下说明从各版本升级所须步骤, 详细 BBS 相关设定档请见第三章说明。
+
+ ☆  从 Phoenix  BBS 4.0 版升级
+ ———————————————————————————————————
+ 1. 在 /home/bbs/etc 建立目录 notepad_tmp 的目录(注意 owner 为 bbs)
+
+ 2. 在 /home/bbs/etc 建立档案 junkboards  (是记录哪些版不列入计算 Posts)
+
+ 3. 在 /home/bbs/etc 建立档案 autopost    (每日自动 Post 文章)
+
+ 4. 以 bbsroot login , 参考 [3] 重新编译 BBS 程式,
+    然后执行
+              make installbbsrf
+              make installbbs
+              make installchatd
+              make installthread 
+
+   以安装 BBS 程式
+
+ 5.以 root login, 至 bbs_src/local_utl  下执行 PH4.sh , 会自动进行使用
+   者目录, 好友名单, 使用者资料档的转换。使用前请先检查 repass.c rehome.c 
+    refriend.c renotepad.c 程式中的目录对不对.
+   (BBS 架在 /home/bbs 可免)
+
+ 6.有关转信程式, FirebirdBBS 的转信改采记录在一个档后送出,所以 bbslink.c 
+   要重新 make (附在 bbs_src/innbbsd 下) 另外 E-mail post 也有所修正, 所
+   以务必重新 make bbspost (附在 bbs_src/innbbsd/innd 下), 并把 
+   bbs_src/innbbsd/innd/mailpost 拷到 ~bbs/innd 
+
+ 7.参考 ~bbroot/bbs_src/bbshome/etc 下的档案, 修改 BBS 的设定。
+   详细档案说明请见第三章。
+
+ ☆  从 FireBird BBS 1.0 - 1.54 版升级
+ ———————————————————————————————————
+
+ 1.同 Phoenix BBS 4.0 的方法。见前面 1-7
+
+ ☆  从 FireBird BBS 1.7- 2.0 版升级
+ ———————————————————————————————————
+ 
+ 1.前面的 4
+ 2.以 root login, 至 bbs_src/local_utl  下执行 FB2.0.sh ,会自动进行使用
+   者目录, 好友名单, 使用者资料档的转换。     使用前请先检查 rehome.c 
+   refriend.c renotepad.c 程式中的目录对不对.(BBS 架在 /home/bbs 可免)
+ 3.前面的 6-7
+
+ ☆  从 FireBird BBS 2.3  版升级
+———————————————————————————————————
+ 1.前面的 4
+ 2.以 root login, 至 bbs_src/local_utl  下执行 FB2.3.sh ,会自动进行使用
+   者目录, 使用者资料档的转换。 使用前请先检查 rehome.c renotepad.c 
+   程式中的目录对不对.(BBS 架在 /home/bbs 可免)
+ 3.前面的 6-7
+
+ ☆  从 FireBird BBS 2.5beta 版升级
+———————————————————————————————————
+ 1.前面的 4
+ 2.以 root login, 至 bbs_src/local_utl  下执行 FB2.5b1.sh ,会自动进行使
+   用者资料档的转换。 使用前请先检查 renotepad.c 程式中的目录对不对.
+   (BBS 架在 /home/bbs 可免)
+ 3.前面的 6-7
+
+ ☆  从 FireBird BBS 2.5fb 版升级
+———————————————————————————————————
+ 1.前面的 4
+
+————————————————————————————————————
+                      第 三 章  设定 BBS 的相关档案  
+————————————————————————————————————
+     
+     以下介绍主要的设定档, 以便使用者架出一个符合自己要求的 BBS
+
+ [1] 修改系统设定档
+     
+     修改 ~bbs/etc/sysconf.ini
+     
+     以下分别说明 sysconf.ini 中选项的意义
+
+# comment
+
+BBSHOME         = "/home/bbs"        <--设定 BBS 的 home directory
+BBSID           = "MSIA"             <--设定 BBS 的 ID (最好不要与别人重覆)
+BBSNAME         = "大红花的国度"     <--设定 BBS 的中文站名
+BBSDOMAIN       = "MSIA.pine.ncu.edu.tw"    <--设定 BBS 的 Domain Name
+BBSIP		= "140.115.210.77"          <--设定 BBS 的 IP Address
+
+#SHOW_IDLE_TIME         = 1
+KEEP_DELETED_HEADER     = 0         <--设定讨论区被砍文章是否保留被砍标题
+
+BCACHE_SHMKEY   = 7813              <--这些是 BBS 共用记忆体的 shared memory
+UCACHE_SHMKEY   = 7912                 key. 如果您在同一台机器架两个或以上的
+UTMP_SHMKEY     = 3785                 BBS 的话, 请务必确定它们所用的 key 
+ACBOARD_SHMKEY  = 9013                 不能重覆!
+ISSUE_SHMKEY    = 5002
+GOODBYE_SHMKEY  = 5003
+
+EMAILFILE       = "etc/mailcheck"  <--如果把这行前面加上 # 就不寄身份确认信
+#NEWREGFILE     = "etc/newregister" <--如果把这行前面 # 拿掉就有新手三天限制
+
+PERM_BASIC      = 0x00001       <-- 以下为一些权限的定义, 将在 menu.ini 
+PERM_CHAT       = 0x00002           中使用
+PERM_PAGE       = 0x00004
+........          ........
+
+PERM_SPECIAL6   = 0x8000000
+PERM_SPECIAL7   = 0x10000000
+PERM_SPECIAL8   = 0x20000000
+
+PERM_ESYSFILE  =  PERM_SYSOP,PERM_WELCOME,PERM_ACBOARD
+^^^^^^^^^^^^^^ 拥有修改部份/全部系统档的权限
+PERM_ADMENU    =  PERM_ACCOUNTS,PERM_OVOTE,PERM_SYSOP,PERM_OBOARDS,PERM_WELCOME,PERM_ACBOARD
+^^^^^^^^^^^^^^ 可看到并使用管理者选单
+PERM_BLEVELS   =  PERM_SYSOP,PERM_OBOARDS
+PERM_UCLEAN    =  PERM_SYSOP,PERM_ACCOUNTS
+
+AUTOSET_PERM    = PERM_CHAT, PERM_PAGE, PERM_POST, PERM_LOGINOK
+^^^^^^^^^^^^^^ 设定身份确认通过的使用者可得到的权限
+
+#include "etc/menu.ini"
+  
+     注意!! 修改完 sysconf.ini 后, 请至 BBS 主选单按 shift + '~' 
+     或者砍掉 ~bbs/sysconf.img , 以便更新系统设定
+
+ [2] 修改 BBS 的选单
+
+     1. 加入背景: 在每个选单背后都有一个背景,以主选单为例,它的背景
+        就是由 screen 这行所指定的 S1_MAIN 所决定  
+              
+#---------------------------------------------------------------------
+%S1_MAIN
+                
+                   这里是背景    
+                   我是可爱的哲哲!!
+                   我好帅喔!!
+
+%
+#---------------------------------------------------------------------
+
+        在 %S1_MAIN 与 % 中的文字都会被当成背景印出.
+   
+     2. menu.ini 内各设定的意义 (以主选单为例)
+                   
+
+%menu TOPMENU
+screen       3, 0, S1_MAIN
+                   ^^^^^^^指定用那个背景
+
+title        0, 0, "欢迎光临靠边站(Coba BBS)       "
+             ^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^这是每个选单都
+             欲印出的座标                           有的标题  
+
+!M_EGROUP    3, 0, 0,          "EGroup",    "E) 分类讨论区"
+             ^^^^  ^^不限权限皆可用
+             从 (3,0) 开始印
+                                    
+
+!M_MAIL      0, 0, PERM_BASIC, "Mail",      "M) 私人信件服务"
+^^^^^^^            ^^^^^^^^^^要有 BASIC 权限才看的到这个选项
+跳到 M_MAIL 选单
+
+!M_TALK      0, 0, PERM_BASIC, "Talk",      "T) 进入聊天选单"
+             ^^^^(0,0)表接著上行印
+
+#!M_INFO      0, 0, PERM_BASIC, "Info",     "I) 设定个人资料"       
+^^^^^^^^这行前加了个 # , 代表拿掉这行
+
+     以上只简介了大致上的设定方法, 详细可使用的功能请参考
+     ~bbsroot/bbs_src/bbshome/etc/menu.ini 的档案, 对照修改您
+     现在使用的 menu.ini  
+     
+     注意!! 修改完 menu.ini 后, 请至 BBS 主选单按 shift + '~' 
+     或者砍掉 ~bbs/sysconf.img , 以便更新系统设定
+ 
+ [3] 开版及建立精华区
+
+     1. 开版及分类讨论区
+     
+     刚建好的 BBS 什么讨论区也没有, 站长可以视使用者需要开启足够的
+     讨论区, 同时为了 BBS user 找寻讨论区方便起见,必需将相关的讨论
+     区分类在同一讨论区群组中(Group),讨论区群组的设定请见 
+     ~bbs/etc/menu.ini , 以下是参考的设定
+
+title        0, 0, "分类讨论区选单"
+screen       3, 0, S_EGROUP
+@BoardsNew   11,25,0,   "New",          "N) 阅读新文章  New"
+@EGroups     0, 0, 0,   "0BBS",         "0) BBS 系统 -- [站内]"
+..(略)..     ..(略)..   ..(略)...       .......(略)...............
+@EGroups     0, 0, 0,   "6Sports",      "6) 体育健身 -- [运动] [职棒]"
+@EGroups     0, 0, 0,   "7Talk",        "7) 物理专业 -- [中国物理协会]"
+@BoardsAll   0, 0, 0,   "Boards",       "B) 所有讨论区"
+!..          0, 0, 0,   "Exit",         "E) 回到主选单"
+%
+EGROUP0 = "0"
+.......   .....
+EGROUP6 = "rs"  <-- r s 为分类码, 开版时会用到, r 与 s 皆定义为 EGROUP6 
+EGROUP7 = "xf"
+EGROUPT = "*"
+
+     
+     请特别注意分类选单的 0) 将会分到 EGROUP0 , 6) 将会分到 EGROUP6... 
+     
+     开启新版的方式是到主选单下选 A)系统管理功能表 的 N)开启新的讨论区,
+     第一个建立的版必需为 sysop , 请如下输入:
+
+     讨论区名称: sysop         <-- 填入讨论区的英文版名
+     
+     讨论区说明: 0[站内] ○ 站务管理区
+                ^^讨论区说明的第一个字为分类码(定义于 menu.ini), 以此 0
+                  为例, 将会分至 EGROUP0 ,也就是 0) BBS 系统 -- [站内]     
+                  其馀部份的讨论区说明请按此形式填写, 以免到时版面排的
+                  不好看.
+
+     讨论区管理员: SYSOP        <-- 指定讨论区的 BM
+     是否限制存取权利 (Y/N) ? [N]: n  <--指定只有某些权限者才能存取此版
+     是否加入匿名版 (Y/N) ? [N]: n  <--是否为匿名板
+
+            1. 本站系统            system.faq
+            2. .......             ..........
+     
+           14.其他                other.faq
+
+     请输入你的选择: 1       <-- 选择精华区要放那 ? 以后可再调整位置
+     已经置入精华区.....
+
+     新讨论区成立
+
+     2. 建立精华区
+     
+     使用者在讨论区按下 "x" 键便会跳至该讨论区的精华区, 要达成此功能
+     必须要正确设定 ~bbs/0Announce/.Search 档案内容, 可能的内容如下:
+     
+        linux:        Linux
+        installbbs:   Linux/bbs
+        sysop:        sysop
+        ....          .......
+
+     其中冒号前代表 board name, 后面的代表对映的目录名
+     例如: 在 installbbs 版按下 x 时, FirebirdBBS 就会去找 
+     ~bbs/0Announce/Linux/bbs 下的精华区.... 
+       
+     正常开版时即会自动写入此档,平常无需自加, 但如果精华区目录有更动
+     时, 请记得修改此档
+
+ [4] BBS 目录下档案说明
+
+     以下说明在 ~bbs/ 目录下各档案的功能, 请详加阅读以便能更掌控贵站
+     的正常运作:
+
+     Part I.☆主要资料档案☆
+  ———————————————
+  1. BBS_HOME/.PASSWDS
+     存放每位使用者的基本资料，宣告 struct userec。
+     欲观看此档内容, 请参考第四章 [7] 的说明。
+  
+  2. BBS_HOME/.BOARDS
+     存放各个讨论区的基本资料，宣告 struct boardheader，里面有一
+     个 element .flag 是用来存放讨论区的状况，目前仅仅使用在投票
+     的标示上，应把匿名板、不可以 Zap 的板记录其中较佳。
+  
+  3. BBS_HOME/Welcome Welcome.rec
+     进站后的欢迎画面，和记录读取情况。可直接用编辑器修改 Welcome
+     的内容, 注意!!只有当 Welcome有更新过时, 使用者才会看到。
+  
+  4. Welcome2
+     与 Welcome 类似, 但每次进站都会看到, 且允许有多重画面, 以 @login@
+     彼此隔开。
+
+  5. BBS_HOME/home/A-Z
+     存有各个使用者的目录。并依照使用者 ID 的第一个字来分类排放: 
+     例如: SmallPig 使用者的目录就放在 BBS_HOME/home/S/SmallPig, 
+           wildwolf 使用者的目录就放在 BBS_HOME/home/W/wildwolf。 
+
+  6. BBS_HOME/boards
+     里面存有各讨论区的 directory。
+  
+  7. BBS_HOME/vote
+     里面记录各讨论区的投票控制档，以及讨论区简介。
+
+  8. BBS_HOME/0Announce
+     里面记录精华区资料。
+  
+  9. BBS_HOME/etc
+     系统控制档案。
+  
+  10.BBS_HOME/help
+     各控制键说明文件档案。
+
+   Part II.☆使用者目录☆
+  ——————————————
+  BBS_HOME/home/A-Z/USERID/*
+
+  1.friends      记录好友名单，宣告 struct friend 。
+  2.logout       使用者自订离站画面。
+  3.maillist     寄信给一群人列表。（目前已删除）
+  4.notes        个人备忘录。
+  5.plans        个人说明档。
+  6.signatures   签名档。
+  7.mailcheck    身份确认暂存档。
+  8.register     身份确认记录档。
+  
+  Part III.☆投票目录☆
+  ——————————————
+  BBS_HOME/vote/BOARDNAME/*
+
+  1.notes        讨论区介绍(备忘录)。
+  2.noterec      记录讨论区读取情况。
+  3.control      投票控制档。
+  4.desc.?????   投票描述。
+  5.flag.?????   使用者投票记录。
+  6.results      投票结果。
+  7.secnotes     秘密备忘录。
+  
+  Part IV.☆系统控制档案☆
+  ——————————————
+  BBS_HOME/etc/*
+
+  1. anonymous    匿名版名单
+  2. autopost     每日系统自动 Post 列表。
+ 
+ (使用法如下: 在 autopost 档中填入以下内容
+
+  /home/bbs/0Announce/bbslists/board1 bbslists 讨论区使用率(图)
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^ ^^^^^^^^^^^^^^^^
+       欲自动张贴的档案名             张贴至何版  张贴时用的标题
+
+  ps. 需特别说明, 自动张贴的原理是当有使用者上站时, 去检查 
+      ~bbs/etc/checknotepad 内存的时间, 是否距离上次自动张
+      贴已经过 24 小时, 是便自动张贴, 否则不动作。                     
+  )
+
+ 3. boardref     站长开版时所用的参考文件。
+ 4. checknotepad 记录留言板与自动 Post 的时间记录。
+ 5. f_fill       填写注册单失败的 mail 内容。
+ 6. s_fill       填写注册单成功的 mail 内容。
+ 7. firstlogin   新手上路将阅读的文件。
+ 8. fmail        身份确认失败的 mail 内容。
+ 9. smail        身份确认成功的 mail 内容。
+10. goodbye      login 三次错误的画面。
+11. issue        进站前的画面。
+12. junkboards   不记文章数的板。
+
+ (注意!! 只要版名列入此档中, BBS 使用者在此版发表的文章均不列入个人
+  张贴文章数统计,  适合用于灌水板或匿名版等。)  
+
+13. mailcheck    身份确认寄出信件的内容。
+
+ (注意!! 请务必修改此档内容, 以免使用者收到确认信还莫名其妙)
+
+14. menu.ini     选单控制档。
+
+ (一些需要使用外部程式的选项在一开始是被 # 符号 mark 起来的。 倘若您已安装
+  好相关外部程式, 可将其在 menu.ini 前面的 # 去掉, 存档后把 ~/bbs/sysconf.img
+  砍除, 则该选项随后就会在选单中出现了。)
+
+15. sysconf.ini  系统控制档。
+16. newregister  注册说明档。
+17. movie        活动看板。
+
+ (活动看版内定为 5 行一个画面, 1-5 行为活动看版第 1 画面, 6-10 为第 2 ..
+  依此类推。注意!! 请务必将未满 5 行的画面补足 5 行,以免发生错误。)
+
+18. notepad_tmp  使用者留言暂存处。
+19. notepad      留言板。
+20. sysops       站长列表。
+
+ ( 请在此档中加入站长的 ID 及职称, 例如:
+
+   wildwolf      系统管理
+   aci           站务管理
+ 
+   当使用者有建议时,便可在离站时选择适当职务的管理者, 留信给他。)
+
+21. user_full    注册人数已满。
+22. loginfull    上站人数已满。
+23. register     新使用者注册帐号之辅助画面。
+24. logout       离站画面。
+
+ (离站画面可使用多种, 只要以 @logout@ 隔开即可, 可参考 bbs_src/bbshome/etc
+  logout  的范例。)
+
+  Part V.☆讨论区目录☆
+  ——————————————
+  BBS_HOME/boards/BOARDNAME/*
+
+  .DIR         文章资料档。
+  .DIGEST      文摘资料档。
+  .THREAD      同标题模式文章资料档。
+  M.??????.A   文章。
+
+
+————————————————————————————————————
+                      第 四 章  外部工具程式使用  
+————————————————————————————————————
+ 
+ 本章主要是介绍在 ~bbsadm/bbs_src/local_utl 下的程式, 这些程式在安装
+ BBS 程式时并未安装, 贵站可以视需要参考以下章节的说明安装这些外部程式。
+
+
+ [1] 简介自动程序
+ 
+     在完成基本的 BBS 架设之后,就要开始安装 BBS 程式以外的一些应用程式, 
+     而这些应用程式有些可能 5 分钟就要跑一次, 有些可能是定时每天的 xx时
+     xx分要执行, 这些动作当然不可能每次都由我们自己来做, 所以才需要由电
+     脑定时的为我们执行. 以下便是简单的介绍执行自动程序的方法。
+
+     一个描述自动程序的档内容可能是这样的:
+
+0,30 8,9,10,11 * * * (/home/bbs/bin/account )
+^^^^ ^^^^^^^^^        ^^^^^^^^^^^^^^^^^^^^^
+xx分
+        xx 时           
+                         执行 ?
+
+     我们先把他写在一个档里,叫 cron.bbs , 然后执行
+          
+     crontab cron.bbs
+
+     此时 User 指定的自动程序就会被加入系统中。如果我们想要更改自动程序
+     时,可以再去修改 cron.bbs 然后再执行一次 crontab cron.bbs 即可。 你
+     可以执行 crontab -l 确认一下自动程序是否已加入? 但值得注意的是, 谁
+     执行 crontab cron.bbs,自动程序就会加入谁的自动程序中, 以后电脑自动
+     执行程式时, 也会以那个人的身份来执行。所以像以下我们所介绍的应用程
+     式都要用 bbs 的身份来执行时, 在下 crontab cron.bbs时, 就必需要确认
+     此时是以 bbsuser 的身份来执行。请特别注意这点。
+
+ [2] 上站人数统计
+
+     请先确定先前安装 BBS 程式时, 已经修改过 bbs_src/Makefile 把 
+     -DINVISIBLE 拿掉了, 如果无, 请修改 Makefile 后重新 make bbsrf。
+     接下来请至 ~bbsadm/bbs_src/local_utl 下,修改 averun.c 的 106 行, 
+     将其改为贵站的中文站名, 再下如下指令
+     
+      gcc -o averun averun.c
+     
+     把 averun 拷到 ~bbs/bin 下并在 ~bbs/ 下建立 cron.bbs ,加入以下内容: 
+
+0,5,10,15,20,25,30,35,45,50,55 * * * * (/usr/bin/uptime >> /home/bbs/reclog/uptime.log)
+57 * * * * (/home/bbs/bin/averun /home/bbs/reclog/uptime.log;/bin/rm  /home/bbs/reclog/uptime.log)
+56 0 * * * (/bin/mv /home/bbs/0Announce/bbslist/today /home/bbs/0Announce/bbslist/yesterday; /bin/rm /home/bbs/reclog/ave.src)
+     
+     再来用 bbsuser 的身份 login , 建 /home/bbs/reclog 的目录,这个目录
+     是用来存放累计用的资料,之后再进入 BBS 的精华区,在精华区主目录开一
+     个目录叫 bbslists (用 g 功能),在 bbslists 的目录之下建两个档案,一
+     个叫 today(今日上站人数统计), 另一个叫 yesterday(昨日上站人数统计),
+     然后离开 BBS, 在 ~bbs/ 目录下,用 bbsuser 身份下 
+    
+      crontab cron.bbs
+    
+     以后电脑就会自动更新这两个档的内容
+ 
+ [3] 上站人次统计
+     
+     请至 ~bbsadm/bbs_src/local_utl 下,修改 account.c 107  行有关站名的
+     中文部份,然后下 
+     
+      gcc -o account account.c
+     
+     再把 account copy 到 ~bbs/bin 下 ,再进入 BBS , 在 bbslists 目录下开
+     两个档, 一个叫 countusr (今日上站人次统计), 一个叫 countusr.last (昨日
+     上站人次统计),内容先空白 .然后修改 ~bbs/cron.bbs 的档,加入如下内容:
+
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * (/home/bbs/bin/account )
+0 0 * * * (/bin/mv /home/bbs/0Announce/bbslists/countusr /home/bbs/0Announce/bbslists/countusr.last)
+     
+     之后在 ~bbs/ 目录下, 以 bbsuser 身份下 crontab cron.bbs 就做完上站
+     人数的统计了。
+ 
+ [4] 上站次数, 发表文章次数, 使用时间排名
+   
+     请至 ~bbsadm/bbs_src/local_utl 下,执行
+
+      gcc -o bbstop bbstop.c
+     
+     再把 bbstop copy 到 ~bbs/bin 下,再进入 BBS ,至精华区 bbslists 目录下
+     开四个档,分别是 toplogin (上站次数排行) ,toppost (post次数排行)
+     ,topstay (使用时间排行),topall ( 总积分排行 ),然后修改 ~bbs/cron.bbs 的
+     内容,加入如下叙述:
+           
+0 0 * * * (/home/bbs/bin/bbstop /home/bbs 50 1 > /home/bbs/0Announce/bbslists/toplogin)
+0 0 * * * (/home/bbs/bin/bbstop /home/bbs 50 2 > /home/bbs/0Announce/bbslists/toppost)
+0 0 * * * (/home/bbs/bin/bbstop /home/bbs 50 3 > /home/bbs/0Announce/bbslists/topstay)
+0 0 * * * (/home/bbs/bin/bbstop /home/bbs 50 4 > /home/bbs/0Announce/bbslists/topall)
+     
+     在 ~bbs/ 目录下, 以 bbsuser 身份下 crontab cron.bbs 以后电脑就会自动
+     更新这四个档的内容。
+
+ [5] 十大热门话题统计
+
+     请至 ~bbsadm/bbs_src/local_utl 下 
+     
+      gcc -o poststat poststat.c 
+     
+     再把 poststat 拷至 ~bbs/bin ,建立 ~bbs/etc/posts 目录(owner 为bbs)
+     进入 BBS , 在 bbslists 目录下开四个新档 day , week , month , year 
+     分别是本日十大热门话题, 本周十大热门话题....然后用 bbsuser 的身份
+     把 ~bbs/etc/posts 下的对映档 link至这 (即在 ~bbs/etc/posts 下指令
+   
+     rm ~bbs/0Announce/bbslists/day;ln -s day ~bbs/0Announce/bbslists/day
+
+     其馀依此类推。再修改 ~bbs/cron.bbs 加入如下叙述: 
+
+      10 * * * * (/home/bbs/bin/poststat /home/bbs)
+
+     在 ~bbs/ 目录以 bbsuser 身份下 crontab cron.bbs,之后每小时会做一次
+     统计。注意 !! 只要某版有设 Read or Post 限制, 那个版便不列入统计, 
+     所以一般版请勿设 Read or Post 限制。  
+ 
+ [6] 讨论区使用率统计
+
+     请至 ~bbsadm/bbs_src/local_utl 目录下
+       
+     make usage
+            
+     把 usage 拷至 ~bbs/bin 下, 再进入 BBS , 在精华区 bbslists 目录下建
+     两个档 board1(图表式的讨论区使用率统计), board2(文字式的讨论区使用
+     率统计) ,再修改 ~bbs/cron.bbs 加入 
+             
+     15 * * * * (/home/bbs/bin/usage 0 ; /home/bbs/bin/usage 1)
+
+     在 ~bbs/ 目录以 bbsuser 身份下 crontab cron.bbs 即可。
+ 
+ [7] 观看 .PASSWDS 的程式 -- showuser.c
+
+     showuser.c 这支程式, 可以把 .PASSWDS 的资料列出来, 
+     先至 ~bbsadm/bbs_src  下如下指令:
+
+     gcc -o local_utl/showuser local_utl/showuser.c
+
+     再将 showuser 拷至 ~bbs/bin 下, 只要下如下指令
+    
+     showuser ~bbs/.PASSWDS i8 n12 r12 m30 u8
+    
+     即可列出使用者的各项资料, 详细参数执行 showuser 便有说明。
+ 
+ [8] 自动 login BBS 帐号安装
+       
+     如何让 user 一 telnet 过来就自动 login bbs 呢 ?首先你必需安装 
+     standalone-telnetd ->>这个 telnetd Daemon , 这个 Daemon 取代原先的 
+     in.telnetd 管理 的 port 23 (telnet 所用的 port), 当有人 telnet过来
+     时, 便自动fork 一个 child, 然后自动 login: bbs ,那我们要怎么安装这
+     项功能呢? 首先如果你是用 linux 的, 请至以下的位址取回给 linux , 
+     complie 好的 telnetd.
+     
+     ftp://140.113.124.125/pub/bbs/telnetd_stmo.tgz
+    
+     如果是 freebsd 
+    
+     ftp://ftp.ee.nctu.edu.tw/pub/BBS/telnetd-standalone-freebsd.tgz
+
+     如果是其他的 OS 请至 ~bbsadm/bbs_src/local_utl 解开 telnetd.tar.gz
+     
+     抓回来后,随便找个目录解开, 如果是 freebsd 要自己 make telnetd
+     , 非 linux 的使用者请略过 step1    
+
+     step1: Linux 的使用者解开 telnetd_stmo.tgz 后, 把 OS.list 拷至
+            /usr/local/etc 下, 这个档案内容是一堆 OS 的名称, 以后会
+            乱数取其中内容, 当别人 telnet  过来时便显示其中一种 OS ,
+            别人就搞不懂你这台倒底是什么了 ^_^
+
+     step2: 把 telnetd 拷至 /usr/sbin 下
+
+     step3: 修改 /etc/inetd.conf 寻找以下的字串: 
+ 
+telnet  stream tcp nowait root /usr/sbin/tcpd  /usr/sbin/in.telnetd
+
+            改成
+
+telnet1  stream tcp nowait root /usr/sbin/tcpd  /usr/sbin/in.telnetd
+
+     step4:  修改 /etc/services 在最后加上
+
+telnet1      2000/tcp          # previous in.telnetd daemon 
+
+     step5:  ps aux |grep "inetd",找出 inetd 的 PID
+             然后 kill -HUP (PID) 就可重新起动 inetd (或重开机也可)
+
+     step6:  执行 telnetd 23 bbs 10
+                                 ^^ load 上限
+             以后 user telnet 到你的 server 便会自动 login: bbs
+
+     此外, 使用者 telnet xxx.xxx.xxx.xxx 2000 便会出现原先的 login 画面
+     就可 login bbs 以外的帐号。
+ 
+ [9] BBSnet, Lynx, Gopher client ,MJ..etc安装
+
+     1. BBSnet 安装
+     BBSnet 功能定义于系统功能选单的 @ExecBBSNet , 这个功能选项内定会去
+     执行 ~bbs/bin/bbsnet.sh ,所以如果你想让你的 BBS 有能提供其他网路连线
+     的功能的话,首先你必需有一个能提供选单式连出的程式,目前常用的 BBSnet
+     程式可以从下面的位址得到
+    
+     ftp://140.113.124.125/pub/bbs/bbs-v1.8.tar.gz
+
+     抓回来后, 随便找个目录解开,参照内附说明 make bbs 再设好设定, 把 bbs 
+     拷成 /bin/bbsnet.sh 即可完成 BBSNet 安装。不过请注意, 连线 BBS 尽量
+     不要有连至其他 BBS 的功能,以便追查信件来源 , 所以安装此功能前请务必
+     仔细考虑, 并只开放此功能给身份确认通过的使用者。
+   
+     2. Lynx 的安装
+     Lynx 功能定义于网路功能选单的 @WWW , 这个功能选项内定会去执行 
+     ~bbs/bin/www.sh, 只要在 www.sh 中执行 lynx 即可。
+     (lynx 是一种只有文字介面的 WWW Browser)
+     (请特别注意, lynx 必需先经修改, 不能让使用者有改编辑器设定的选项,
+      也不能让使用者可以进入 shell,以免系统被侵入, 如果你对这方面不熟,
+      请先至转信 installbbs 版询问清楚再安装此功能。)     
+
+     3. Archie Client 的安装
+     Gopher 功能定义于网路功能选单的 @ExecArchie, 这个功能选项内定会去执
+     行 ~bbs/bin/archie.sh, 只要在 archie.sh 中执行 archie 即可。
+     archie client 程式可以 ftp://ftp.csie.nctu.edu.tw
+     /packages/networking/archie/archie-1.4.1.tar.gz
+     
+     4. IRC Client 的安装
+     IRC 功能定义于网路功能选单的 @ExecIRC, 这个功能选项内定会去执行 
+     ~bbs/bin/irc.sh, 只要在 irc.sh 中执行 irc 即可。
+     irc 程式可以ftp://MSIA.pine.ncu.edu.tw/pub/bbs/add-ons/ircii-2.8.tar.gz
+     请自行阅读内附说明安装至贵站系统中。
+
+     5. POP3D 的安装
+     POP3D 可以让 BBS 使用者通过 POP3 Client (如 Microsoft Exchange,
+     Netscape Mail, Eudora 等等) 离线阅读他们在 BBS 信箱内的信件。
+     请到 ~bbsadm/local_utl 执行 gcc -o bbspop3d bbspop3d.c , 把编出来
+     的 bbspop3d 放在适当地方 (如 /usr/local/bin) 再以 root 执行之。
+     这个程式是一个 daemon, 必需以 root 来执行, 一旦执行后便会常驻了,
+     可考虑把它设成开机时自动执行。
+
+————————————————————————————————————
+           第 五 章  寄信给 BBS 站内使用者及 E-mail Post 安装  
+————————————————————————————————————
+  
+  这章所要安装的是最难处理的 sendmail 的设定修改, 因为各 OS 及 sendmail
+  的版本都会有所差异, 所以本章只能大略的说明一般性的安装流程, 如果安装有
+  问题, 请将完整退信内容, 及 ~bbs/bbslog 档案内的讯息张贴至转信installbbs
+  版求助。
+ 
+ [1] 身份确认信处理的流程
+ 
+     本版 FB 2.5M 在使用者注册后, 便会以 SYSOP.bbs 的身份发身份确认信给使
+     用者的 E-mail 位址处, 当使用者收到信件后, 直接 reply 信件, 将确认信
+     回寄给原发信者 SYSOP.bbs ,便可通过身份确认。 如果我们详细的解说其流
+     程则是如下所示:
+
+     send:
+     =====
+     SYSOP.bbs mail to user -> sendmail (bbs) -> sendmail (user) -> user
+     
+     receive:
+     ========
+     user mail to SYSOP.bbs -> sendmail (user) -> sendmail (bbs) -> 
+     mail to SYSOP -> bbsmail -> mail2bbs -> SYSOP.bbs 
+    
+     一般未修改过的 sendmail.cf 并不接受收信者为 xxx.bbs 的型式, 所以主
+     要要更改的就是这个部份。以下 [2] 便说明如何修改, 请特别注意!! 修改
+     sendmail.cf 时, 空白与 TAB 是不同的东西(虽然看起来好像一样),  请仔
+     细参阅说明更改。
+ 
+ [2] 如何修改系统使 BBS 站内 User 能收到 Intermail                 
+
+     1.请先确定你所用的 perl 版本 ( 打 perl -v 就知道了 ^_^)如果你用的是 
+       5.001 以上, 请修改 ~bbsadm/bbs_src/mail2bbs/mailgate.pl 的 102 , 
+       104 , 154 , 157 行 , 把 
+       
+       xxx.bbs@sexboy.Dorm12.nctu.edu.tw        
+       
+       这种domain @ 前加上 \ 变成如 
+       
+       xxx.bbs\@sexboy.Dorm12.nctu.edu.tw
+       
+       这是因为 5.0 版 perl 把 @ 视为特殊字元,所以要如此修改。
+
+     2.请至 ~bbsadm/bbs_src/mail2bbs ,先修改 mail2bbs.c 内有关 Domain Name 
+       的设定,和一些相关路径再重新 complie mail2bbs.c , 再修改 mailgate.pl 
+       中的 $from="?",$hostname="?", 等跟 domain 有关的部份.之后把 mail2bbs 
+       , bbsmail , mailgate.pl ,rfc931.pl , copy 至 ~bbs/bin 下。另外,请修改 
+       ~bbs/bin/bbsmail 第一行 perl 的路径(改成系统 perl 的路径) , 
+       再 chmod 775 bbsmail . 此外 *.pl 的第一行 perl 路径也请记得修改。 
+     
+     3.修改 /etc/sendmail.cf , 
+       注意!!不要偷懒...乖乖的用 keyin 的,不要用 copy 的要不然原先是 TAB 键
+       的部份会变成 space , 会造成 unrecover error , mail2bbs 就装不起来了。
+
+       找寻下面的段落
+##################################################
+###   Local and Program Mailer specification   ###
+##################################################
+
+      其后加入: 
+
+Mbbsmail, P=/usr/local/sendmail/bbs/bbsmail, F=lsSDFMuhP, S=10, R=20, 
+          A=bbsmail -d $u $s
+
+      找寻下面的段落      
+######################################
+###   Ruleset 0 -- Parse Address   ###
+######################################
+
+      其后加入:
+
+S0
+R$+.bbs<@>$*    $#bbsmail $:$1  bbs mail gateway
+...
+# short circuit local delivery so forwarded email works
+R$+ < @ $=w . >         $: $1 < @ $2 @ $H >             first try hub
+R$+.bbs< $+ @ $+ >$*    $#bbsmail $: $1 bbs mail gateway
+R$+.bbs< $+ @ >$*       $#bbsmail $: $1 bbs mail gateway
+....
+......
+# everything else is a local name
+R$+.bbs                 $#bbsmail $:$1  bbs mail gateway
+        ^^^^^^^^^^^^^^^^              ^^
+      注意: rule 两端以 TAB 间隔.也就是说,一行有三个栏位,用两个 tab 分隔,
+      并不是用 space 来分隔。
+      
+     4.测试改好的 sendmal.cf 
+        
+     执行 sendmail -C/etc/sendmail.cf -bt  
+       > 0 xxx.bbs
+       rewrite: ruleset  0   input: xxx . bbs
+       rewrite: ruleset 98   input: xxx . bbs
+       rewrite: ruleset 98 returns: xxx . bbs
+       rewrite: ruleset  0 returns: $# bbsmail $: xxx
+           
+     若不会 refer 到 bbsmail, 捡查是否如上所示加入所属 rule,并确实以 TAB
+     区隔栏位。 
+ 
+     5.重跑 sendmail.
+   
+     修改完 /etc/sendmail.cf 后, kill -9 (sendmail's pid)然后执行 
+     sendmail -C/etc/sendmail -bd -q10m 。请 ps -ax 看看,如果有看
+     到 sendmail:accepting connections 就代表你 mail2bbs 已经装好
+     了!!赶快寄一封信给 xxx.bbs@xxx.xxx.xxx.xxx 看看吧 ^_^
+ 
+ [3] E-mail post 安装及使用    
+
+     E-mail post 的安装只是利用原先 sendmail 就提供的 forward 信件功能,
+     将寄给 bbs 这个帐号的信件, 经程式处理后转贴至 BBS 站上。 安装的方
+     法如下:
+     
+     1.先至 ~bbsadm/bbs_src/innbbsd/innd/ 下, 修改 bbspost.c 251 行的
+     中文站名部份, 及第 19 行的 "bbs.h" 改成 "/home/bbsadm/bbs_src/bbs.h",
+     第 20 行的 "innbbsdconf.h" 改成 "../innbbsdconf.h" , 然后下
+
+      gcc -o bbspost bbspost.c ~bbsadm/bbs_src/record.c
+     
+     2.将 bbspost 及目录下的 mailpost copy 到 ~bbs/innd 下, 并修改 mailpost
+     的第一行的 perl path , 改成系统 perl 的路径,并 chmod 755 mailpost
+
+     3.在 ~bbs/ 下编辑 .forward 档内容, 加入如下内容:
+
+       "| /home/bbs/innd/mailpost /home/bbs"
+     
+     请注意!!双引号的部份也要写入档案中
+   
+    4. 确定已在 /etc/shells 中加上 /home/bbs/bin/bbsrf
+
+    5. 写一篇测试用的 mail 叫 email_test, 档头一开始是
+
+       #name: user-id
+       #password: user-password
+       #board: board-name
+       #title: article-tile
+       #localpost:           <---如果有加这行此篇文章便不转信出去
+       (空一行)
+       ...............
+       ...............
+
+       然后 mail bbs@your-domain-name < email_test 看看 E-mail post 是否正常
+   
+    6. 检查 ~bbs/bbslog , 看看是否内容像 
+
+       post to /home/bbs/boards/board-name/M.820143515.A 
+       ...........................................   
+       
+       就完成 E-mail Post 安装了 !!          
+
+
+    (注: 在 ~bbsadm/samples 目录下有修改好的 sendmail.cf 档供参考喔!!)
+
+————————————————————————————————————
+                      第 六 章  转信程式 INNBBSD 的安装   
+————————————————————————————————————
+
+ 转信程式的设定会随贵站所需的转信方式而有所不同, 在此章只简介如何安装
+ INNBBSD 这套转信程式, 并只介绍 client 读取抓信方式的转信设定, 其馀的
+ 设定请参考 ~bbsadm/bbs_src/innbbsd/README  的说明。
+
+ [1] 安装转信程式
+     
+     1.请至 ~bbsadm/bbs_src/innbbsd 下, 修改 Makefile 中的 
+
+     ADMINUSER=SYSOP.bbs@sexboy.Dorm12.nctu.edu.tw <-- 管理者的 E-mail
+     BBSHOME= /home/bbs/
+     BBS_SRC= /home/bbsadm/bbs_src
+
+     2.将 ~bbsadm/bbs_src/innbbsd/innd 下所有的 .o 档砍掉
+     
+     3.在 ~bbsadm/bbs_src/innbbsd 下 make 指令, 再依出现讯息指示继续
+   
+     4.将编译好的 ctlinnbbsd , innbbsd , bbsnnrp , bbslink 拷到
+     ~bbs/innd 下,即完成程式部份的安装。
+ 
+ [2] 设定转信所需的设定档
+
+     1.在 ~bbs/innd 建立如下的几个档案 (最好使用 vi 来做)
+
+[ bbsname.bbs ]
+
+JCPP  <--- 与你在 BBS_HOME/etc/sysconf.ini 中写的 BBSID 同 
+
+[ nodelist.bbs  ]
+
+csie            news.csie.nctu.edu.tw         POST(119)  Csie
+JCPP            sexboy.Dorm12.nctu.edu.tw     IHAVE(7777) Coba BBS
+^^^^            ^^^^^^^^^^^^^^^^^^^^^^^^^
+ 转信用的 ID,不要跟别人重覆   你的 BBS domain
+    
+     这个档案描述了 News Server 的 Domain 与 News Server 的代号的对映表,
+     例如: news.csie.nctu.edu.tw -> csie 
+     而 POST(119)   代表使用 nnrp access 的方式(跟 tin 很像)
+        IHAVE(7777) 则代表贵站使用 port 7777 的 innbbsd 来收信
+     其中 BBSID 请不要跟别站相同, 以免会有信件回流的误判。
+
+[ newsfeeds.bbs ]
+
+tw.bbs.test             test               csie 
+
+     请按照 [5] 的参考文件, 将你想转的 News group 写在第一栏,而第二栏
+     写的是要转进贵站的那个版名(请先建立好), 而第三栏则是写明这个 News
+     group 是从那个 News Server 转进, 以后送信时便会送到那。
+
+[ csie.active ]
+
+tw.bbs.test                           0000000000 0000000001 y
+
+     而 csie.active  则是定义要从那个 News Server 抓那些 groups, 对于每
+     个 News Server  都要建立一个对映的 active File (例如: 以上只有从
+     csie 抓, 所以只需有一个 active file , 档名则自定)。 
+     后面两个 0000000000 则是 active number , 以后会随著每次抓信动作而
+     更新。也就是记录抓信抓到那了 !!
+
+     2. 写好这些档案后,以 bbsuser 身份在 ~bbs/innd 下执行 innbbsd , 
+     再执行 ctlinnbbsd reload (重读设定档)
+
+     3.现在测试抓信, 以 bbsuser 身份在 ~bbs/innd 下打
+     
+     bbsnnrp news.csie.nctu.edu.tw csie.active
+             ^^^^^^^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^
+            到那个 News Server 抓  对映的 active File
+     
+     再进入 BBS 观看信件是否转入。
+
+     4.现在测试送信, 以 bbsuser 身份在 ~bbs/innd 下打
+     
+     bbslink -v /home/bbs
+     
+     观看送信过程是否有 error , 再 setenv NNTPSERVER=news.cise.nctu.edu.tw
+     用 tin -r 连至 News Server 的 tw.bbs.test 讨论区, 检查信件是否送出 !! 
+ 
+     5.转信程式非常敏感,请勿用 bbsuser 以外的身份来跑 innbbsd , bbsnnrp ,
+     bbslink ...,etc 之类的程式, 会造成 BBS 系统无法正常运作。
+
+     6.本板(FB 2.5) 程式, 将所有欲送出的信件先统一放入一记录档, 当执行
+     bbslink 时, 便可免除逐步搜寻讨论区寻找新信件的麻烦,所以如果贵站之
+     前已有装过 innbbsd ,请务必改用 FB 2.5 packages 中附的 innbbsd 程式。  
+
+     7.转信送信均正常后, 可将 bbsnnrp & bbslink 的动作加入自动程序中
+
+ [3] 申请转信的方法
+
+     不论是用主动抓信或是由上游 News Server 喂信, 皆以离贵站最近的 News
+     Server  为佳. 以上的转信范例皆以交大资工的 News Server 为例, 不过因
+     为这台 load 很重, 建议另寻别台。当贵站所要转进的 News groups 很多时,
+     建议改采 server  feed 的方式, 不要用 bbsnnrp 抓信。申请转信可以参考 
+     [4] ,  直接 mail 给管理者申请。
+ 
+ [4] 参考文件 [已知 News Server 列表]
+
+     News server 参考表
+     —————————
+
+    下表是 TANet 上常见的 News 伺服器，如果要加入连线转信的话，
+    可以就近与之联络。
+
+        [台北]
+          台大计中 News Server    ckhuang@netnews.ntu.edu.tw
+          政大计中 News Server    andrew@news.nccu.edu.tw
+          大同资工 News Server    秘密情人资讯站 Gary
+
+        [桃园]
+          中央资管 News Server    wolfy@im.mgt.ncu.edu.tw
+          中正理工 News Server    yuan@cs.ccit.edu.tw
+
+        [新竹]
+          交大资工 News Server    mfchen@csie.nctu.edu.tw
+          交大资科 News Server    gis83504@cis.nctu.edu.tw
+          交大电子 News Server    pcyu@alab.ee.nctu.edu.tw
+          交大电子 News Server    ljh@phillies.EE.NCTU.edu.tw
+          清大电机 News Server    gamin@news.ee.nthu.edu.tw
+          清大数学 News Server    @mathnet.math.nthu.edu.tw
+          清大资科 News Server    news@news.cs.nthu.edu.tw
+
+        [台中]
+          中兴大学 News Server    cslee@netcentral.nchu.edu.tw
+
+        [台南]
+          成大资讯所 News Server  成大资讯所_BBS juru
+
+ [5] 参考文件 [tw.bbs.* 列表]                  
+     
+     常见 News group 列表
+    ——————————
+
+    □集一般 BBS 常见的网路论坛讨论区 tw.bbs.* / tw.* / cna.*  整理如下，
+    如果将来有新的 News group 成立，您可以用 rtin 连到 News Server 看看，
+    随时更新资料。
+
+    ■  tw.bbs.*
+
+tw.bbs.admin                   tw.bbs.* 的管理及发展的事务
+tw.bbs.admin.installbbs        BBS安装过程讨论区
+tw.bbs.aiesec                  经济商管会
+tw.bbs.alumni                  校友联谊
+tw.bbs.alumni.chengkung        成功中学校友会
+tw.bbs.alumni.chien-kuo-hs     沙漠驼客
+tw.bbs.alumni.chingmei         景美女中校友会
+tw.bbs.alumni.chungli          中坜高中校友会
+tw.bbs.alumni.cy               大专青年联谊会
+tw.bbs.alumni.hchs             新竹高中校友会
+tw.bbs.alumni.hsntnu           国立台湾师大附中校友会
+tw.bbs.alumni.kavalan          兰友会板
+tw.bbs.alumni.keeshs           翠岗烟雨 -- 基中基女的讨论天地
+tw.bbs.alumni.kshs             松涛轩客--高雄中学校友讨论区
+tw.bbs.alumni.stdm             道明中学
+tw.bbs.alumni.sungshan         松山高中
+tw.bbs.alumni.tfg              北一女中校友会
+tw.bbs.alumni.tfhs             竹园游子--台南一中校友讨论区
+tw.bbs.alumni.tfshs            台中一中校友版
+tw.bbs.alumni.tssh-ccgsh       台南二中及家齐女中校友板 
+tw.bbs.alumni.viator           传说中的古堡--卫道中学
+tw.bbs.alumni.wuling           武陵高中校友会
+tw.bbs.announce                TANet BBS 重要公告 [Moderated]
+tw.bbs.answers                 常见问题解答汇整 [Moderated]
+tw.bbs.campus                  校际资讯交流
+tw.bbs.campus.activity         活动预告与报导
+tw.bbs.campus.advancededu      深造, 留学及各种进修管道交流
+tw.bbs.campus.education        教育 -- 百年大计
+tw.bbs.campus.graduate         研究生活
+tw.bbs.campus.job              各行各业(打工与职业)
+tw.bbs.campus.ltc              岭东商专
+tw.bbs.campus.nccu             政大校园讨论区
+tw.bbs.campus.nchu             中兴大学校园论坛
+tw.bbs.campus.ncku             成功大学校园资讯
+tw.bbs.campus.nctu             交大校园讨论区
+tw.bbs.campus.ncu              中央大学校园资讯
+tw.bbs.campus.nthu             清大校园讨论区
+tw.bbs.campus.ntu              台大校园讨论区
+tw.bbs.campus.pu               静宜大学校版
+tw.bbs.comp.386bsd             386BSD/NetBSD/BSDI 技术交流
+tw.bbs.comp.cad                CAD 电脑辅助设计
+tw.bbs.comp.chinese            中文资讯标准及技术
+tw.bbs.comp.database           资料库设计与应用
+tw.bbs.comp.dos                DOS 讨论区
+tw.bbs.comp.graphics           电脑图学与虚拟实境
+tw.bbs.comp.hacker             软体破解技术讨论
+tw.bbs.comp.hardware           硬体安装、使用
+tw.bbs.comp.hardware.cdrom     计算机硬体: CD-ROM
+tw.bbs.comp.hardware.comm      计算机硬体: 电脑通讯硬体讨论
+tw.bbs.comp.hardware.cpu       计算机硬体: CPU  (& FPU)
+tw.bbs.comp.hardware.misc      计算机硬体: 其他电脑硬体话题
+tw.bbs.comp.hardware.network   计算机硬体: 电脑网路硬体讨论
+tw.bbs.comp.hardware.storage   计算机硬体: 储存装置
+tw.bbs.comp.hardware.systems   计算机硬体: 一般电脑硬体讨论
+tw.bbs.comp.irc                IRC 频道 -- 空中网路交流
+tw.bbs.comp.lang.fortran       FORTRAN 使用者园地
+tw.bbs.comp.language           电脑语言、程式讨论
+tw.bbs.comp.linux              Linux 技术交流
+tw.bbs.comp.mac                麦金塔讨论区
+tw.bbs.comp.midi               MIDI 讨论
+tw.bbs.comp.modem              数据机的通讯世界
+tw.bbs.comp.mswindows          MS Windows 视窗系统
+tw.bbs.comp.mswindows.nt       MS Windows NT 讨论区
+tw.bbs.comp.mswindows.win95    Win95 讨论区
+tw.bbs.comp.multimedia         多媒体新趋势
+tw.bbs.comp.network            网路技术交流
+tw.bbs.comp.novell             Novell 技术交流
+tw.bbs.comp.oop                物件导向程式撰写讨论
+tw.bbs.comp.os.nextstep        NextSTEP 讨论区
+tw.bbs.comp.os2                OS/2 技术交流
+tw.bbs.comp.security           系统与程式保全心得交流
+tw.bbs.comp.shareware          公用软体资讯交流
+tw.bbs.comp.software           软体安装、使用
+tw.bbs.comp.sources            分享您的程式
+tw.bbs.comp.tex                TeX/LaTeX/CTeX 使用
+tw.bbs.comp.unix               Unix 技术交流
+tw.bbs.comp.virus              电脑杀手 -- 电脑界的大敌
+tw.bbs.comp.winsock            Winsock讨论区
+tw.bbs.comp.www                全球资讯网(WWW) 讨论区
+tw.bbs.comp.xwindow            X-Windows 技术交流
+tw.bbs.config                  Configuration of the TANet BBS Board hierarchy
+tw.bbs.csbbs                   Client/Server BBS
+tw.bbs.csbbs.pbbs              PowerBBS 讨论区
+tw.bbs.edu.computer-science    电脑人的辛酸与苦水
+tw.bbs.edu.normal              师范教育资讯交流及讨论
+tw.bbs.forsale                 跳蚤市场
+tw.bbs.forsale.computer        电脑设备跳蚤市场
+tw.bbs.forsale.house           房地产资讯
+tw.bbs.general                 一般事项
+tw.bbs.help                    新手求助
+tw.bbs.lang.chinese            中文教室
+tw.bbs.lang.english            英文教室
+tw.bbs.lang.japanese           日文讨论区
+tw.bbs.lang.spanish            热情拉丁族
+tw.bbs.lists                   TANet BBS 相关统计及列表 [Moderated]
+tw.bbs.literal.article         短文、歌词
+tw.bbs.literal.asciiart        ASCII code 图案
+tw.bbs.literal.book            好书介绍．读书心得
+tw.bbs.literal.emprisenovel    武侠小说
+tw.bbs.literal.lyrics          歌歌词词
+tw.bbs.literal.mystery         推理文学
+tw.bbs.literal.poem            诗词歌赋
+tw.bbs.literal.story           创作发表、短文歌词摘录
+tw.bbs.music.chinese           国乐板
+tw.bbs.music.classical         古典音乐讨论区
+tw.bbs.music.heavy_metal       重金属 俱乐部
+tw.bbs.music.japan             日本流行音乐
+tw.bbs.music.pop               流行音乐讨论区
+tw.bbs.music.rocknroll         摇滚音乐讨论区
+tw.bbs.netnews                 ”Usenet News应用及技术面讨论″
+tw.bbs.newgroups               新信区讨论
+tw.bbs.org.cie                 中工会
+tw.bbs.rec.art                 人文艺术 -- 真善美的追求
+tw.bbs.rec.audiophile          音响论坛
+tw.bbs.rec.beautysalon         美容保养讨论区
+tw.bbs.rec.bridge              桥牌征战心得
+tw.bbs.rec.car                 爱车族的天堂
+tw.bbs.rec.chess               棋艺交流区
+tw.bbs.rec.comic               漫画．动画．卡通．模型
+tw.bbs.rec.cuteness            可爱之窝
+tw.bbs.rec.dance               舞蹈天地
+tw.bbs.rec.drama               戏剧 戏曲
+tw.bbs.rec.entertainment       休闲娱乐
+tw.bbs.rec.flower              花卉园艺．花语
+tw.bbs.rec.foodstuff           天下美味 尽在其中
+tw.bbs.rec.guitar              吉他讨论区
+tw.bbs.rec.harmonica           口琴讨论区
+tw.bbs.rec.instrument          乐器演奏
+tw.bbs.rec.japan-idol          偶像の宅急便
+tw.bbs.rec.marvel              鬼话连篇
+tw.bbs.rec.mj                  中国国粹 -- 麻将
+tw.bbs.rec.model               模型艺术
+tw.bbs.rec.motorcycle          风火轮
+tw.bbs.rec.movie               电影世界
+tw.bbs.rec.mud                 网路地下城文字冒险游戏
+tw.bbs.rec.palmardrama         掌中乾坤－布袋戏
+tw.bbs.rec.pcgame              电脑游戏
+tw.bbs.rec.pet                 宠物—我的宝贝
+tw.bbs.rec.photo               摄影技术
+tw.bbs.rec.radio               广播, 无线电讨论区
+tw.bbs.rec.rail                铁道研究讨论区
+tw.bbs.rec.scouting            一日童军．一世童军
+tw.bbs.rec.stamp               集邮、集卡、各类□藏
+tw.bbs.rec.startrek            人类的终极边疆
+tw.bbs.rec.tea                 品茗香
+tw.bbs.rec.travel              海天游踪
+tw.bbs.rec.tv                  电视影集．卫视．录影带
+tw.bbs.rec.tv.x-files          Ｘ档案讨论区
+tw.bbs.rec.video               影音视听
+tw.bbs.rec.videogame           电视游乐器交流园地
+tw.bbs.rec.weapon              尖端武器技术交流
+tw.bbs.rec.wine                醇情时刻．调酒
+tw.bbs.sci.astrology           命理．星座．性格
+tw.bbs.sci.astronomy           天文知识
+tw.bbs.sci.biology             生物
+tw.bbs.sci.chemistry           化学
+tw.bbs.sci.destiny-prediction  命理精微
+tw.bbs.sci.economics           经济学讨论区
+tw.bbs.sci.electronics         电子电机
+tw.bbs.sci.finance             投资理财实务
+tw.bbs.sci.history             历史园地
+tw.bbs.sci.law                 法律讨论区
+tw.bbs.sci.math                数学
+tw.bbs.sci.mba                 经贸大势　放眼天下
+tw.bbs.sci.mechanics           力学
+tw.bbs.sci.medicine            医疗保健
+tw.bbs.sci.philosophy          哲学讨论区
+tw.bbs.sci.physics             物理
+tw.bbs.sci.psychology          心理学
+tw.bbs.sci.sex                 健康的性
+tw.bbs.soc.birds               飞羽苍穹
+tw.bbs.soc.changhua            半线之恋
+tw.bbs.soc.charity             慈善事业动态
+tw.bbs.soc.chiayi              才子嘉人讨论区
+tw.bbs.soc.green-earth         环保与生态
+tw.bbs.soc.hakka               客家文化讨论区
+tw.bbs.soc.handicapped         残友心声
+tw.bbs.soc.hsinchu             新竹风土民情与地方文化
+tw.bbs.soc.hualien             洄澜风情
+tw.bbs.soc.i-lan               兰阳风土民情与地方文化
+tw.bbs.soc.japan               日本风土文化街
+tw.bbs.soc.kaohsiung           高雄
+tw.bbs.soc.keelung             雨都情怀 -- 属于基隆的讨论天地
+tw.bbs.soc.malaysia            大马学术言论板
+tw.bbs.soc.media               媒介, 文化与社会
+tw.bbs.soc.motss               同性之爱 -- 同性恋讨论区
+tw.bbs.soc.overseas            天涯游子 / 游子乡
+tw.bbs.soc.pingtung            椰林风情
+tw.bbs.soc.politics            政治讨论区
+tw.bbs.soc.politics.dpp        民主进步党讨论区
+tw.bbs.soc.politics.kmt        国民党讨论区
+tw.bbs.soc.politics.np         新党讨论区
+tw.bbs.soc.religion            宗教与心灵世界
+tw.bbs.soc.religion.buddhism   buddhism
+tw.bbs.soc.socialwelfare       社会公益--关怀弱势团体
+tw.bbs.soc.society             社会板(公共议题讨论) (Moderated)
+tw.bbs.soc.tai-tung            砂城记事--台东
+tw.bbs.soc.taichung            台中
+tw.bbs.soc.tainan              赤□风情
+tw.bbs.soc.taipei              台北杂絮
+tw.bbs.soc.taiwanese           台湾文化讨论区
+tw.bbs.soc.tayal               原住民文化讨论园地
+tw.bbs.soc.transport           台湾交通
+tw.bbs.soc.tzuchi              慈济大专青年联谊会 Tsuchi
+tw.bbs.sports                  各类运动
+tw.bbs.sports.baseball         职棒动物园
+tw.bbs.sports.baseball.bears   职棒俊国熊俱乐部
+tw.bbs.sports.baseball.dragons 职棒味全龙俱乐部
+tw.bbs.sports.baseball.eagles  职棒时报鹰俱乐部
+tw.bbs.sports.baseball.elephants  职棒兄弟象俱乐部
+tw.bbs.sports.baseball.lions   职棒统一狮俱乐部
+tw.bbs.sports.baseball.tigers  职棒三商虎俱乐部
+tw.bbs.sports.basketball       篮球世界
+tw.bbs.sports.fishing          钓鱼讨论区
+tw.bbs.sports.kongfu           气功、拳术等传统养生健身之道
+tw.bbs.sports.mountain         山 -- 世界之脊
+tw.bbs.sports.soccer           足球天地
+tw.bbs.sports.swimming         浪里白涛任我行
+tw.bbs.sports.tennis           网球
+tw.bbs.sports.volleyball       排球
+tw.bbs.talk                    谈天说地．话古道今
+tw.bbs.talk.boy-girl           男孩与女生
+tw.bbs.talk.feeling            感性时间．心情故事
+tw.bbs.talk.friends            人生何处不相逢
+tw.bbs.talk.joke               笑话．脑筋急转弯
+tw.bbs.talk.ladytalk           小女子的私房话
+tw.bbs.talk.love               爱与恋．感情世界的探讨
+tw.bbs.talk.mentalk            男子汉的心声
+tw.bbs.talk.newscast           各类活动实况转播
+tw.bbs.talk.notepad            酸甜苦辣留言版
+tw.bbs.test                    测试专用
+tw.bbs.udnie                   联合资讯教育
+
+
+    ■  tw.*
+
+
+tw.announce                             [台湾地区公告]        
+tw.announce.archie                      [台湾地区公告] NCU Archie Announcements
+tw.cad                                  [电脑辅助设计]        
+tw.cam                                  [电脑辅助制造]        
+tw.comp.atmca                           中华民国非同步通讯协会        
+tw.comp.bbs                             [电子布告栏系统]        
+tw.comp.chinese                         [中文电脑化讨论]        
+tw.comp.dos                             [DOS]        
+tw.comp.mac                             [MAC]        
+tw.comp.sources.wanted                  [Program Source Wanted]      
+tw.comp.unix                            [UNIX]        
+tw.conference                           [台湾地区学术会议]        
+tw.digest                               [台湾地区短文小说及文摘]        
+tw.environment                          [台湾环保问题] Environmental news, 
+                                        hazardous waste, forests.   
+tw.fido.big5-modem                      fido Modem 技术讨论区      
+tw.fido.chinese                         fido 国际华人交流区       
+tw.fido.medicine                        fido 医学讨论区       
+tw.info-sharing                         [经验与资讯交流]        
+tw.lib-automation                       [图书馆自动化]        
+tw.misc                                 [其它]        
+tw.nsc.emc                              国科会电磁相容计划室 NSC 
+                                        Electro-Magnetic Compatibility 
+                                        Program Office   
+tw.pc-game                              [PC 电脑游戏]       
+tw.seminar                              [台湾地区研讨会]        
+tw.talk                                 [台湾地区意见交流]        
+tw.tanet                                [台湾学术网路]        
+tw.tanet.general                        [台湾学术网路]        
+tw.tanet.tech_news                      [台湾学术网路]        
+tw.test                                 [测试]        
+tw.uuserv.radio                         ● 广播频道       
+tw.wanted                               [求售, 求知, 求助, 求物 ....]    
+
+
+    ■  tw.*
+
+
+cna.today                               中央社 - 今日摘要新闻综合      
+cna.politics.domestic                   中央社 - 国内政治      
+cna.politics.foreign                    中央社 - 国外政治      
+cna.politics.mainland                   中央社 - 大陆政治      
+cna.congress.domestic                   中央社 - 国内国会      
+cna.congress.foreign                    中央社 - 国外国会      
+cna.overseas.domestic                   中央社 - 国内外交侨务      
+cna.overseas.foreign                    中央社 - 国外外交侨务      
+cna.overseas.mainland                   中央社 - 大陆外交侨务      
+cna.military.domestic                   中央社 - 国内军事      
+cna.military.foreign                    中央社 - 国外军事      
+cna.military.mainland                   中央社 - 大陆军事      
+cna.economics.domestic                  中央社 - 国内财经      
+cna.economics.foreign                   中央社 - 国外财经      
+cna.economics.mainland                  中央社 - 大陆财经      
+cna.economics.lists                     中央社 - 财经数据      
+cna.finance.domestic                    中央社 - 国内金融      
+cna.finance.foreign                     中央社 - 国外金融      
+cna.finance.mainland                    中央社 - 大陆金融      
+cna.finance.lists                       中央社 - 金融数据      
+cna.stock.domestic                      中央社 - 国内证券      
+cna.stock.foreign                       中央社 - 国外证券      
+cna.stock.mainland                      中央社 - 大陆证券      
+cna.stock.lists                         中央社 - 证券数据      
+cna.business.domestic                   中央社 - 国内贸易商情      
+cna.business.foreign                    中央社 - 国外贸易商情      
+cna.business.mainland                   中央社 - 大陆贸易商情      
+cna.business.lists                      中央社 - 贸易商情数据      
+cna.agriculture.domestic                中央社 - 国内农渔工矿      
+cna.agriculture.foreign                 中央社 - 国外农渔工矿      
+cna.agriculture.mainland                中央社 - 大陆农渔工矿      
+cna.transport.domestic                  中央社 - 国内交通邮电      
+cna.transport.foreign                   中央社 - 国外交通邮电      
+cna.transport.mainland                  中央社 - 大陆交通邮电      
+cna.tech.domestic                       中央社 - 国内科技      
+cna.tech.foreign                        中央社 - 国外科技      
+cna.tech.mainland                       中央社 - 大陆科技      
+cna.judiciary.domestic                  中央社 - 国内司法警政社会      
+cna.judiciary.foreign                   中央社 - 国外司法警政社会      
+cna.judiciary.mainland                  中央社 - 大陆司法警政社会      
+cna.health-n-welfare.domestic           中央社 - 国内医药环保社会福利      
+cna.health-n-welfare.foreign            中央社 - 国外医药环保社会福利      
+cna.health-n-welfare.mainland           中央社 - 大陆医药环保社会福利      
+cna.religion.domestic                   中央社 - 国内社团宗教      
+cna.religion.foreign                    中央社 - 国外社团宗教      
+cna.religion.mainland                   中央社 - 大陆社团宗教      
+cna.edu.domestic                        中央社 - 国内教育文化      
+cna.edu.foreign                         中央社 - 国外教育文化      
+cna.edu.mainland                        中央社 - 大陆教育文化      
+cna.rec.domestic                        中央社 - 国内体育影艺休闲      
+cna.rec.foreign                         中央社 - 国外体育影艺休闲      
+cna.rec.mainland                        中央社 - 大陆体育影艺休闲      
+cna.local.government                    中央社 - 地方政府      
+cna.local.congress                      中央社 - 地方议会      
+cna.weather                             中央社 - 气象      
+cna.misc.xx                             中央社 - 编辑公电      
+cna.misc.zz                             中央社 - 电传稿      
+cna.misc.yy                             中央社 - 封闭群文稿      
+
+

@@ -1,0 +1,96 @@
+<HTML><HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb_2312-80">
+<TITLE>@BBS_CNAME@ FTP 服务说明</TITLE>
+<link rel=stylesheet type=text/css href='/bbslg.css'>
+</HEAD>
+<H2><A NAME="t0"></A>@BBS_CNAME@ FTP 服务说明</H2><pre>
+<i>ylsdd ylsdd@tttan.com</i>
+
+@BBS_CNAME@开放了 ftp 服务, 下面是该服务的描述.
+
+<A HREF="#t1">一、登录方法</A> 
+<A HREF="#t2">二、目录组织</A> 
+<A HREF="#t3">三、资源限制</A>
+<A HREF="#t4">四、命令说明</A>
+<A NAME="t1"></A>
+一、登录方法 
+      FTP 服务开在@BBS_CNAME@服务器主机(@BBS_DOMAIN@), 端口为2121, 登录时
+      使用 bbs 的帐号和密码. 需要有版主权限才能登录. 每个IP限最多登录两个
+      进程.
+
+      客户端软件建议使用 cuteftp, bpftp, netants 等软件, 建议不要使用IE浏
+      览器.
+      
+      为了保护bbs用户的密码, ftp 系统会对短时间多次登录的IP进行自动封禁.
+<A HREF="#t0">返回顶部</A><A NAME="t2"></A>
+
+二、目录组织
+      FTP 目录的组织方式为
+
+      root(/)---+---pub 
+                | 
+                +---boards---+---triangle
+                |            | 
+                |            +---bbshelp--+--html
+                |            |            |
+                |            |            +...
+                |            | 
+                |            +---sysop--+--html
+                |            |          |
+                |            |          +...(其它文件/目录)
+                |            | 
+                +---其它     +...(其它版面)  
+
+      pub目录提供的是公共内容.
+
+      boards下是各个版面的目录, 每个版面的目录是应相应板主的要
+      求建立的. 非公开版面的目录已经按照版面的属性和帐号的权限
+      进行了必要的隐藏.
+
+      在每个版的目录下面板主可以自行控制, 其中, html目录是为版
+      面提供www界面的, 对此的说明参见<A HREF=bwwwhelp.html>自定义WWW界面说明</A>.
+
+      板主如果要使用 FTP 服务, 可以向站务或者系统维护提出开设本
+      版目录的要求, 可以在自己版面的目录下进行上/下传以及删除
+      的操作. 如果希望让其它用户上传, 可以在版面目录里任何地方
+      建立"incoming"目录(小写).
+
+      普通用户可以进行下载, 也可以在incoming目录及其子目录里进
+      行上载, 但是不能进行删除操作.
+<A HREF="#t0">返回顶部</A><A NAME="t3"></A>
+
+三、资源限制
+      为了保证基本的BBS服务, 系统对 ftp 所使用资源进行限制
+
+      系统限制最大总流量为100Kbyte/second, 最大登录人数为60人, 
+      每个ID/IP限制最多登录两个进程 
+
+      每个版面的硬盘空间目前还没有确切的限制. 但所有版面上载总
+      量有限制, 这个限制可以用'site quota'命令查看. 版主自觉控
+      制. 
+<A HREF="#t0">返回顶部</A><A NAME="t4"></A>
+
+四、命令说明
+      一般的 ftp 命令在此不做说明, 只描述一下特别有关的命令
+
+      rename
+      将文件/目录重命名，可以跨越目录，因此，如果版主想把
+      incoming里的内容移动出来，就要用这个命令
+
+      site who
+      这个命令列出当前登录 ftp 的用户
+
+      site kick pid
+      踢出某 ftp 用户, pid为进程号. 限制系统管理员使用
+
+      site quota
+      列出目前剩余的上传限额
+
+      site setquota type size
+      设置上传限额, type为quota命令所列出的限额类型, size是以
+      兆字节计算的大小. 限制系统管理员使用
+
+<A HREF="#t0">返回顶部</A>
+
+<I>更新时间: Tue May  3 17:10:38 EDT 2005</I>
+</PRE></BODY></HTML>

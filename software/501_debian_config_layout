@@ -1,0 +1,26 @@
+--- build-tree/apache_1.3.29/config.layout.orig	Thu May 16 10:32:31 2002
++++ build-tree/apache_1.3.29/config.layout	Wed Jun 19 11:53:37 2002
+@@ -304,3 +304,23 @@
+     proxycachedir: $localstatedir/cache/apache
+ </Layout>
+ 
++#   Debian GNU policy conforming path layout.
++<Layout Debian>
++    prefix:        /usr
++    exec_prefix:   $prefix
++    bindir:        $prefix/bin
++    sbindir:       $prefix/lib+
++    libexecdir:    $prefix/libexec
++    mandir:        $prefix/share/man
++    sysconfdir:    /etc+
++    datadir:       $prefix/lib
++    iconsdir:      $prefix/share/apache/icons
++    htdocsdir:     $datadir/htdocs
++    cgidir:        $datadir/cgi-bin
++    includedir:    $prefix/include+
++    localstatedir: /var
++    runtimedir:    $localstatedir/run
++    logfiledir:    $localstatedir/log+
++    proxycachedir: $localstatedir/cache+
++</Layout>
++

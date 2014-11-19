@@ -1,0 +1,6 @@
+#ifdef ENABLE_MYSQL
+#include <mysql/mysql.h>
+#define SQLDB "@BBS_SQLDB@"
+#define SQLUSER "@BBS_SQLUSER@"
+#define SQLPASSWD "@BBS_SQLPASSWD@"
+#endif

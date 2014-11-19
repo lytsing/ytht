@@ -1,0 +1,197 @@
+Index: html/blog.js
+===================================================================
+--- html/blog.js	(revision 7790)
++++ html/blog.js	(working copy)
+@@ -158,3 +158,24 @@
+ 	}
+ }
+ 
++
++function submitForm(form) {
++	form.submit.disabled = true;
++	form.submit.value = "ËØ∑Á®çÂÄô...";
++	if(form.title.value.length == 0) {
++		form.submit.disabled = false;
++		form.submit.value = "ÂèëË°®";
++		alert("ÊÇ®ËøòÊ≤°ÂÜôÊ†áÈ¢òÂë¢ÔºÅ");		
++		return false;
++	}
++	updateRTE('rte1');
++	if(form.rte1.value.length == 0) {
++		form.submit.disabled = false;
++		form.submit.value = "ÂèëË°®";
++		alert("Ë¶Å‰ª•Ê¥ãÊ¥ãÊ¥íÊ¥í‰∏∫Ëç£Ôºå‰ª•Á©∫ÊñáÁÅåÊ∞¥‰∏∫ËÄª„ÄÇ");
++		return false;
++	}	
++	form.content.value=form.rte1.value;
++	return true;
++}
++
+Index: bbsleft.c
+===================================================================
+--- bbsleft.c	(revision 7790)
++++ bbsleft.c	(working copy)
+@@ -110,7 +110,7 @@
+ 	    ("&nbsp; <a target=f3 href=bbsshownav?a1=class&a2=all>Ω¸»’æ´≤ ª∞Ã‚</a><br>\n");
+ 	printf("&nbsp; <a target=f3 href=bbstop10> Æ¥Û»»√≈ª∞Ã‚</a><br>\n");
+ 	printf("&nbsp; <a target=f3 href=bbs0an>æ´ª™π´≤º¿∏</a><br>\n");
+-	if (!strcmp(MY_BBS_ID, "TTTAN")) {
++	if (!strcmp(MY_BBS_ID, "ZSWX")) {
+ 		if (user_perm(currentuser, PERM_POST))
+ 			printf
+ 			    ("&nbsp; <a target=f3 href=blog?U=%s>Œ“µƒBlog(≤‚ ‘)</a><br>\n",
+Index: Makefile.am
+===================================================================
+--- Makefile.am	(revision 7790)
++++ Makefile.am	(working copy)
+@@ -41,7 +41,9 @@
+ 	bbsscanreg.c bbsshowfile.c bbsdt.c bbslt.c bbsincon.c bbssetscript.c bbscccmail.c bbsfwdmail.c \
+ 	bbsscanreg_findsurname.c bbsnt.c bbstopcon.c bbsdrawscore.c bbsmyclass.c bbssearchboard.c \
+ 	bbslastip.c bbsucss.c bbsdefcss.c bbsself_photo_vote.c bbsspam.c bbsspamcon.c bbssouke.c \
+-	bbsboardlistscript.c bbsolympic.c bbsicon.c bbstmpleft.c bbsdlprepare.c bbsnewattach.c bbsupload.c
++	bbsboardlistscript.c bbsolympic.c bbsicon.c bbstmpleft.c bbsdlprepare.c bbsnewattach.c bbsupload.c \
++	blogatom.c blogblog.c blogcomment.c blogdraft.c blogdraftread.c blogeditabstract.c blogeditconfig.c \
++	blogeditsubject.c blogedittag.c blogpage.c blogpost.c blogread.c blogrss2.c blogsend.c blogsetup.c blog.c strop.c
+ 
+ CFILEBACKUP = bbsdt.c bbslt.c bbsmovie.c bbst.c bbsusr.c bbsalluser.c bbsufind.c
+ #OTHERS	= usesql.h BBSLIB.c boardrc.c deny_users.c bbsupdatelastpost.c bbsred.c tshirt.h
+Index: proto.h
+===================================================================
+--- proto.h	(revision 7790)
++++ proto.h	(working copy)
+@@ -478,3 +478,97 @@
+ int bbsthdoc_main(void);
+ int bbsthcon_main(void);
+ 
++/* blogblog.c */
++void printXBlogHeader(void);
++void printXBlogEnd(void);
++void printBlogHeader(struct Blog *blog);
++void printBlogSideBox(struct Blog *blog);
++void printBlogFooter(struct Blog *blog);
++int printAbstract(struct Blog *blog, int n);
++void printAbstractsTime(struct Blog *blog, int start, int end);
++void printPages(char *link, int count, int currPage);
++void printAbstractsSubject(struct Blog *blog, int subject, int page);
++int tagedAs(struct BlogHeader *blh, int tag);
++void printAbstractsTag(struct Blog *blog, int tag, int page);
++void printAbstractsAll(struct Blog *blog, int page);
++int blogblog_main(void);
++/* blogread.c */
++int printPrevNext(struct Blog *blog, int n);
++int printBlogArticle(struct Blog *blog, int n);
++void printCommentFile(char *fileName, int commentTime, int i);
++void printComments(struct Blog *blog, int fileTime);
++void printCommentBox(struct Blog *blog, int fileTime);
++int blogread_main(void);
++/* blogpost.c */
++void printUploadUTF8(void);
++void printSelectSubject(struct Blog *blog, struct BlogHeader *blh);
++void printSelectTag(struct Blog *blog, struct BlogHeader *blh);
++void printTextarea(char *text, int size);
++int blogpost_main(void);
++/* blogsend.c */
++int saveTidyHtml(char *filename, char *content, int filterlevel);
++char *readFile(char *filename);
++int blogsend_main(void);
++/* blogeditabstract.c */
++void printBlogEditPostSideBox(struct Blog *blog, time_t fileTime);
++void printAbstractBox(struct Blog *blog, int n);
++int doSaveAbstract(struct Blog *blog, time_t fileTime, char *abstract);
++int blogeditabstract_main(void);
++/* blogeditconfig.c */
++void modifyConfig(struct Blog *blog, int echo);
++void printBlogSettingSideBox(struct Blog *blog);
++int blogeditconfig_main(void);
++/* blogeditsubject.c */
++int blogeditsubject_main(void);
++/* blogedittag.c */
++int blogedittag_main(void);
++/* blogdraft.c */
++int printDraftAbstract(struct BlogHeader *blh);
++int blogdraft_main(void);
++/* blogdraftread.c */
++int printDraftArticle(struct Blog *blog, int n);
++int blogdraftread_main(void);
++/* blogcomment.c */
++int blogcomment_main(void);
++/* blogsetup.c */
++void printLoginFormUTF8(void);
++int blogsetup_main(void);
++/* blogpage.c */
++int blogpage_main(void);
++/* blogrss2.c */
++char *gmtctime(const time_t *timep);
++int blogrss2_main(void);
++/* blogatom.c */
++char *gmtctime(const time_t *timep);
++int blogatom_main(void);
++/* blog.c */ 
++void setBlogFile(char *buf, char *userid, char *file); 
++void setBlogPost(char *buf, char *userid, time_t fileTime); 
++void setBlogAbstract(char *buf, char *userid, time_t fileTime); 
++void setBlogCommentIndex(char *buf, char *userid, time_t fileTime); 
++void setBlogComment(char *buf, char *userid, time_t fileTime,time_t commentTime); 
++int createBlog(char *userid); 
++int openBlog(struct Blog *blog, char *userid); 
++int openBlogW(struct Blog *blog, char *userid); 
++int openBlogD(struct Blog *blog, char *userid); 
++void closeBlog(struct Blog *blog); 
++void reopenBlog(struct Blog *blog); 
++int blogPost(struct Blog *blog, char *title, char *tmpfile,
++int subject, int tags[], int nTag); 
++int blogSaveAbstract(struct Blog *blog, time_t fileTime, char *abstract); 
++int blogUpdatePost(struct Blog *blog, time_t fileTime, char
++*title, char *tmpfile, int subject, int tags[], int nTag); 
++int blogPostDraft(struct Blog *blog, char *title, char *tmpfile, int draftID); 
++int deleteDraft(struct Blog *blog, int draftID); 
++int blogComment(struct Blog *blog, time_t fileTime, char *tmpfile); 
++int blogCheckMonth(struct Blog *blog, char buf[32], int year,
++int month); 
++int blogModifySubject(struct Blog *blog, int subjectID, char *title, int hide); 
++int blogModifyTag(struct Blog *blog, int tagID, char *title,
++int hide); 
++int findBlogArticle(struct Blog *blog, time_t fileTime); 
++void blogLog(char *fmt, ...); 
++/* strop.c */ 
++char *utf8cut(char *str, int maxsize); 
++char *gb2utf8(char *to0, int tolen0, char *from0); 
++
+Index: bbsmain.c
+===================================================================
+--- bbsmain.c	(revision 7790)
++++ bbsmain.c	(working copy)
+@@ -135,6 +135,21 @@
+ 	{bbstmpleft_main, {"bbstmpleft", "tmpleft", NULL}},
+ 	{bbsdlprepare_main, {"bbsdlprepare", NULL}},
+ 	{bbsupload_main, {"bbsupload", NULL}},
++	{blogblog_main, {"blogblog", "blog", NULL}}, 
++	{blogread_main, {"blogread", NULL}}, 
++	{blogpost_main, {"blogpost", NULL}}, 
++	{blogsend_main, {"blogsend", NULL}}, 
++	{blogeditabstract_main, {"blogeditabstract", NULL}}, 
++	{blogeditconfig_main, {"blogeditconfig", NULL}}, 
++	{blogeditsubject_main, {"blogeditsubject", NULL}}, 
++	{blogedittag_main, {"blogedittag", NULL}}, 
++	{blogdraft_main, {"blogdraft", NULL}}, 
++	{blogdraftread_main, {"blogdraftread", NULL}}, 
++	{blogcomment_main, {"blogcomment", NULL}}, 
++	{blogsetup_main, {"blogsetup", NULL}}, 
++	{blogpage_main, {"blogpage", NULL}}, 
++	{blogrss2_main, {"blogrss2", NULL}}, 
++	{blogatom_main, {"blogatom", NULL}}, 
+ 	{NULL}
+ };
+ 
+Index: bbslib.h
+===================================================================
+--- bbslib.h	(revision 7790)
++++ bbslib.h	(working copy)
+@@ -4,6 +4,7 @@
+ #include "ythtlib.h"
+ #include "ythtbbs.h"
+ #include "bbs.h"
++#include "blog.h"
+ #ifndef ENABLE_FASTCGI
+ #define FCGI_ToFILE(x) (x)
+ #define FCGI_FILE FILE

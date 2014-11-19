@@ -1,0 +1,93 @@
+a{TEXT-DECORATION:none;}
+A:VISITED {text-decoration:none;}
+A:LINK {text-decoration:none;}
+A:HOVER {COLOR:#ff0000;text-decoration:underline;background:#dddddd}
+.red{color:red;}
+.blk{color:black;}
+.blu{color:blue;}
+.tea{color:teal;}
+.gry{color:gray;}
+.sil{color:silver;}
+.pur{color:purple;}
+.mar{color:maroon; }
+.oli{color:olive; }
+.gre{color:green; }
+.lim{color:lime; }
+.whi{color:white; }
+.aqu{color:aqua; }
+.fuc{color:fuchsia; }
+.nav{color:navy; }
+.yel{color:yellow; }
+.c30{COLOR:#000000;}
+.c31{COLOR:#e00000;}
+.c32{COLOR:#008000;}
+.c33{COLOR:#808000;}
+.c34{COLOR:#0000ff;}
+.c35{COLOR:#d000d0;}
+.c36{COLOR:#33a0a0;}
+.c37{COLOR:#000000;}
+.cwhite{COLOR:#f0f0f0;}
+.b40{BACKGROUND-COLOR: #f0f0f0;}
+.b41{BACKGROUND-COLOR: #e00000;}
+.b42{BACKGROUND-COLOR: #008000;}
+.b43{BACKGROUND-COLOR: #808000;}
+.b44{BACKGROUND-COLOR: #0000ff;}
+.b45{BACKGROUND-COLOR: #d000d0;}
+.b46{BACKGROUND-COLOR: #33a0a0;}
+.b47{BACKGROUND-COLOR: #f0f0f0;}
+.h30{COLOR:#000000;}
+.h31{COLOR:#ff0000;}
+.h32{COLOR:#00ff00;}
+.h33{COLOR:#ffff00;}
+.h34{COLOR:#0000ff;}
+.h35{COLOR:#ff00ff;}
+.h36{COLOR:#33ffff;}
+.h37{COLOR:#000000;}
+.typeset{font-size:120%}
+.normal{font-size:120%}
+.f3{font-size:medium; font-family:ËÎÌו; }
+.f2{font-size:small; font-family:ËÎÌו; }
+.f1{font-size:9pt; font-family:ËÎÌו; }
+.sec0{BORDER-RIGHT:0px solid;BORDER-TOP:0px;BORDER-LEFT:0px;BORDER-BOTTOM: #ffffff 1px solid}
+.sec1{BORDER-RIGHT:gray 1px solid;BORDER-TOP:#ffffff 1px solid;BORDER-LEFT: #ffffff 1px solid;COLOR:#000000;BORDER-BOTTOM:#ffffff 1px solid;BACKGROUND-COLOR:#eeeeee}
+.sec2{BORDER-RIGHT:gray 2px solid;BORDER-TOP:#ffffff 2px solid;FONT-WEIGHT:bold;BORDER-LEFT:#ffffff 2px solid;COLOR:#000000;BACKGROUND-COLOR:#3366cc}
+body{BACKGROUND-COLOR:#fdf1f3;margin-top:2px}
+body,table,th,td,input,select{font-size:10.5pt;}
+textarea,p{font-size:12pt}
+.star{COLOR:yellow}
+.tb2_blk{BACKGROUND-COLOR:#abc8f2;COLOR:black}
+.def{COLOR:#000000;BACKGROUND-COLOR:#f8f5ff;}
+.hrcolor{BACKGROUND-COLOR:#3366cc}
+.docbgcolor{BACKGROUND-COLOR:#FFFFCC}
+.docbgcolor0{BACKGROUND-COLOR:#FFFFCC}
+.docbgcolor1{BACKGROUND-COLOR:#FFCCFF}
+.colortb1{background-color:#b3b7e6}
+.colortb2{background-color:#abc8f2}
+.colorstart{background-color:yellow}
+.title{font-size:12pt;font-weight:bold;background-color:#FFCCFF;padding:2pt 5pt 0pt 5pt;text-align:left}
+.contentfs{font-size:12pt;}
+.scontent0{font-size:10.5pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFFFCC;padding:1pt 5pt 1pt 5pt;text-align:left}
+.scontent1{font-size:10.5pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFCCFF;padding:1pt 5pt 1pt 5pt;text-align:left}
+.tcontent0{line-height:1.4em;font-size:12pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFFFCC;padding:3pt 5pt 1pt 5pt;text-align:left}
+.tcontent1{line-height:1.4em;font-size:12pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFCCFF;padding:3pt 5pt 1pt 5pt;text-align:left;font-size:130%;}
+.content0{line-height:1.4em;font-size:12pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFFFCC;padding:2pt 5pt 2pt 5pt;text-align:left}
+.content1{line-height:1.4em;font-size:12pt;border-left:1px solid #3366cc;border-right:1px solid #3366cc;background-color:#FFCCFF;padding:2pt 5pt 2pt 5pt;text-align:left}
+div.line{border-top:1px solid #3366cc;padding:0px 0px 0px 0px;}
+div.dline{border-top:1px dotted #3366cc;padding:0px 0px 0px 0px;}
+div.wline{padding:1px 0px 0px 0px}
+div.wline2{padding:2px 0px 0px 0px}
+div.wline3{padding:3px 0px 0px 0px}
+div.wline4{padding:4px 0px 0px 0px}
+div.wline5{padding:5px 0px 0px 0px}
+div.swidth{max-width:550pt;width:expression(document.body.clientWidth>900?"550pt":"auto");}
+div.swidth1{max-width:510pt;width:expression(document.body.clientWidth>900?"510pt":"auto");}
+.mypic{float:right;background-color:#FFCCFF;border-left:1px dotted #3366cc;border-right:1px solid #3366cc;border-bottom:1px dotted #3366cc;padding:2pt 2pt 2pt 2pt;width:100pt;text-align:left}
+.mypic b {font-size:12pt;}
+font.quote{color:#808080;font-size:10.5pt;line-height:1.1em}
+div.hleft{float:left;}
+div.hright{float:right;}
+.pages {BACKGROUND-COLOR:#FFCCFF;font-size:10.5pt;}
+.pages A:VISITED {text-decoration:none;}
+.pages A:LINK {text-decoration:none;}
+.pages A:HOVER {COLOR:#ff0000;text-decoration:underline;background:#dddddd}
+.pages input {font-size:7pt}

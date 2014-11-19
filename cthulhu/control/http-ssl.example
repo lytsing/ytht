@@ -1,0 +1,7 @@
+root <basedir>ssl
+server http-ssl
+bind 0:tcp:0.0.0.0:443
+uid 65535
+gid 65535
+open 2>><basedir>log/http-ssl.log
+fork

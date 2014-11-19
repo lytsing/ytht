@@ -1,0 +1,221 @@
+ytht bbs 安装手册
+
+本文由 ytht系统维护组负责维护。
+在参阅多人文章后整理得到。
+您认为在本文中发现了怀疑有错的地方，或是不通的语句、错字别字，请与sofire@ytht.net联系。
+
+准备工作：
+1:确认安装了常见开发软件包，如 gcc ，autoconf，automake等
+2:如果要安装运行web服务，确认安装了apache服务器
+3:有root权限，同时不要过分使用，否则很容易出权限问题
+4:可以不安装mysql, fastcgi等软件，这些可以在完善系统时考虑
+5:了解su useradd passwd cvs 等命令的使用，和环境变量的知识
+
+下面以rh9环境说明ytht的安装。
+过程中没有提到安装错误，如果遇到，请参阅本文后面的补充说明。
+
+一： 建立bbs用户
+使用下面的命令建立用户
+$ su - 
+[root]# useradd -u9999 -g99 －d /home/bbs bbs 
+[root]# passwd bbs
+添加bbs帐户，用户id是9999,组id是99，初始目录是/home/bbs ，目录可以按照需要改动。
+
+二：获得ytht最新代码
+设置CVSROOT环境变量：
+[root]# export CVSROOT=:pserver:bbsdev@162.105.31.222:/home/cvs
+[root]# cvs login
+输入密码：bbsdev
+下载ytht的源代码，并放在/home/src目录下，：
+[root]# cvs -z9 co -d /home/src bbs
+把代码属主更改成bbs：
+[root]# chown -R 9999.99 /home/src
+
+下面开始安装telnet服务的安装
+
+三：配置编译参数
+现在不需要用root权限，换成bbs用户吧。
+[bbs]$ cd /home/src
+[bbs]$ ./makedist.sh
+[bbs]$ ./configure
+注意 checking for xxx 信息，如果出现 no，表明有的服务暂时不能使用。但不影响基本服务的安装
+然后出现：
+
+Home directory of BBS --> [/home/bbs] 
+UID of BBS --> [9999] 
+GID of BBS --> [99] 
+USER of BBS --> [bbs] 
+The ID of your site --> [YTHT] 
+The name of your site --> [一塌糊涂 BBS] 
+The domain name of your site --> [ytht.net] 
+The ip address of your site --> [162.105.31.222] 
+The location of your site --> [北京大学] 
+Email of your bbs administrator --> [sysop@ytht.org] 
+Maximum number of users --> [250000] 
+Maximum number of boards --> [1000] 
+Maximum number of on-line users --> [30000] 
+Runtime Maximum number of on-line users --> [30000] 
+BBS listen port --> [23] 
+BBS listen port(BIG5) --> [2300] 
+MySQL DATABASE NAME --> [test] 
+MySQL USER NAME --> [test] 
+MySQL USER PASSWORD --> [test] 
+cgi install directory --> [/home/httpd/cgi-bin] 
+html install directory --> [/home/httpd/html/2001] 
+the initial mark string for webpage --> [Ytht.Net]
+
+上面的信息，按照实际情况填写，如果不满意，可以重新运行 ./configure ，再次填写。
+更多内容，请参阅 bbsconfig 文件。
+
+四：编译源代码并安装telnet服务
+[bbs]$ make
+这一步会自动编译安装 /home/src/ythtlib 和 /home/src/libythtbbs 下的内容，并编译
+/home/src/src 和 /home/src/local_utl 下的内容。编译通过后, 继续运行：
+[bbs]$ make install
+这一步会建立 bbs 的目录系统，并安装 /home/src/local_utl 和 /home/src/src 下的可
+执行程序到 bbs 的 bin 目录。
+
+如果已经存在/home/bbs目录，会出现提示： Warning: /home/bbs already exists, overwrite whole bbs
+输入 y 继续，请特别注意，如果以前安装过bbs， 会覆盖很多东西，比如 .BOARDS 文件，导致新开的版丢失；
+.PASSWDS文件，导致所有的用户资料丢失；就这两样你就知道这个操作的危险性了。
+所以，只有在首次安装bbs 或者完全重新安装时，才可以在/home/src 目录下使用 make install。
+
+为了更高效的运行telnet服务，加入下面工作：
+[root]# mount none /home/bbs/bbstmpfs -t tmpfs -o size=128m
+[bbs]$  cd /home/bbs
+[bbs]$  ln -s /home/bbs/bbstmpfs/tmp tmpfast 
+[bbs]$  ln -s /home/bbs/bbstmpfs/dynamic dynamic 
+
+初始化 shm：
+[bbs]$ /home/bbs/bin/shminit
+
+运行bbsd 守护程序：
+[root]# /home/bbs/bin/bbsd
+
+到此，telnet 服务基本安装完成！
+
+五：登录注册 SYSOP 和 guest 账号
+注意 SYSOP 账号的大小写。
+
+到此，就可以轻松一下了。
+
+六：配置web服务
+确认安装了apache，如果没有，可以用redhat9带的rpm包安装；也可以用ytht带的源代码安装，详情参阅补充说明，此处以rehdat9的默认安装为例。
+
+修改配置文件 httpd.conf
+
+本文使用ytht默认参数，故 
+user 和 group 属性就是 bbs
+cgi-bin目录的路径是： /home/httpd/cgi-bin
+html目录路径是：/home/httpd/html/2001
+SMAGIC ,即the initial mark string ，设置的是 Ytht.Net
+
+按照上面的参数修改配置文件（只列出修改过的地方），您在设置的时候，请使用正确的参数。：
+1. 修改user 和 group 属性
+    User bbs
+    Group bbs
+2. 修改cgi-bin的目录的路径
+    ScriptAlias /cgi-bin/ "/home/httpd/cgi-bin"
+    <Directory "/home/httpd/cgi-bin">
+3. 修改html目录的路径
+    DocumentRoot "/home/httpd/html/2001"
+    <Directory "/home/httpd/html/2001">
+4. 加上url重写规则，在配置文件最后添加上
+    RewriteEngine on
+    RewriteRule ^/Ytht.Net(.*)/bbschat(.*) /cgi-bin/www/bbschat [PT]
+    RewriteRule ^/Ytht.Net(.*)$ /cgi-bin/www [PT]
+    RewriteRule  ^/$        /cgi-bin/www [PT]
+
+七：运行web服务
+[root]# /etc/init.d/httpd start
+
+用浏览器登录，终于看到糊涂的小白菜了......
+并且能正常登录
+发表一下文章看看......正常
+
+到此，想必你已经精疲力尽了。该好好休息一下。
+
+八：补充说明
+安装bbs，没有不出问题的。所以，必须要有良好的心理素质。
+下面的问题，都是经典。不得不看。
+
+1. nobody的组号也是99
+   把/etc/group中的nobody改成bbs；或者把nobody的组号换成一个其他数，比如98，再建立bbs组，或者不改也可以。
+   顺便说一下， bbs的uid和gid没有固定的数值，可以是任意的；也没有固定的id，用sbb也可以。
+   只需要在 configure 时候填写正确的 bbsusername uid gid 即可
+  
+
+2. 运行./makedist.sh时出现下面的错误：
+  cp: cannot stat `/usr/share/automake/config.sub': No such file or directory
+  cp: cannot stat `/usr/share/automake/config.guess': No such file or directory
+  cp: cannot stat `/usr/share/automake/install-sh': No such file or directory
+  
+  在/usr/share目录下，可能有 automake-1.4 automake-1.5 automake-1.6 ，但没有 automake 目录，
+  所以，修改一下makedist.sh文件，把/usr/share/automake换成/usr/share/automake-1.6，
+  或者用下面命令：
+  [root]# ln -s /usr/share/automake-1.6 /usr/share/automake
+  此处选择了版本较高的automake，没有特别的原因。
+
+3. 运行./configure命令时出现 checking for xxxxxxx   no
+  如果不影响下一步，可以暂时不管。在完善系统时再安装。当然，现在安装上更好。具体安装方法参阅其他文章。（如过还没有，请到ytht的bbsdev版查找）
+  
+4. the initial mark string for webpage是什么意思？
+   看个实例： http://www.ytht.net/Ytht.NetBNLAAACWVZHCONHFTJTZHNCXDGEEFBVRCWZWP_B/?t=1080891866
+                                 ～～～～～就是这个
+   在bbsconfig 文件中是 LAST_SMAGIC
+				 
+5. 不想每次运行./configure 时都重新填写一遍
+   修改/home/bbs/bbsconfig 文件 。
+
+6. 关于mount命令
+  因为tmpfs每次重启机器都要mount，于是在/etc/fstab的最后加一行
+  /home/bbs/bbstmpfs      /home/bbs/bbstmpfs      tmpfs   size=8M 0 0
+  大小的选择：一般来说，18000人的站点，tmpfs 尺寸在512M比较合适，
+  一般的站点，根据自己的内存规模和上站人数适当调整即可，
+  由于内核的分配特点，这里如果分配大了，实际上不会浪费内存的
+
+7. 为什么不能把 bbsd 绑定在 23号端口
+  使用 root 账号
+
+8. 错误提示： please init shm first 
+  没有运行 bin/shminit 程序
+  没有这个程序？忘了在 local_utl目录下运行 make install 了。
+
+9. 注册了 sysop 账号，但不是 SYSOP（注意全是大写），怎么办
+  重新注册！ 把账号文件 /home/bbs/.PASSWDS 删了，或者把文件中的sysop改成其他账号名，然后重新注册。
+
+10. 怎么配置 httpd.conf 都不能成
+  运行下面的命令，看看输出:
+  export SCRIPT_URL=/
+  /home/httpd/cgi-bin/www
+  如果正确，应该是 ytht 的首页
+
+11. 什么是“没有实现的功能”
+   输入了不正确的参数给www，比如把login 输入为 logni ，或者其他一些不知名的原因。
+
+12. 不能看图   
+   上面的安装说明中没有安装这个附件：atthttpd
+   到 /home/bbs/src/atthttpd 目录下运行：
+     make
+     [bbs] ./atthttpd
+   注意：不要 用root账号，而 是 bbs 账号
+
+13. 寻找错误的蛛丝马迹
+   stdout stderr －－标准输出，标准错误输出，其实是指屏幕信息，大部分的问题都在屏幕上
+   /home/bbs/deverrlog －－ bbs 常见错误
+   /var/log/httpd/*  －－httpd 服务不正常，就赶紧到这里来看原因，有的系统可能不在这里，而在其他地方。
+   gdb －－自己调试吧
+
+14. 怎么安装 software 目录下的软件
+   太复杂，这儿提供不了，得在其他文档中说明。
+
+15. 怎么安装 xxx ？
+   请参阅《安装xxx》（可能还没有写呢，别急，会有的）。
+
+本文参考：
+littleflypig的《今天cvs安装ytht的笔记》
+小椰子的《2003.01.10 ythtbbs代码的安装步骤》
+lepton的《关于BBS代码安装使用修改的几个tips》
+
+										sofire@ytht.net
+										2004.4.2

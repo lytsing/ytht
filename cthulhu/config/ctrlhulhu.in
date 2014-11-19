@@ -1,0 +1,52 @@
+
+#
+# SIGHUP  = reinit domains
+# SIGINT  = kill connections
+# SIGUSR1 = reserved
+# SIGUSR2 = reserved
+#
+
+start ()
+{
+	exec ipinit control/cthulhu -i
+}
+
+service ()
+{
+	[ -f control/$1 ] && [ ! -f log/$1.pid ] && ipinit control/$1 $2 $3
+}
+
+all_start ()
+{
+	service cgi-exec
+	service auth
+	service http-ssl -m 128
+	start
+}
+
+cd $BASEDIR
+
+[ -z $1 ] && { echo "Syntax: $0 [start|reinit|killconn|restart|status]"; exit 2; }
+
+[ -f control/cthulhu ] || { echo "configure Cthulhu first"; exit 23; }
+
+[ "start" = "$1" ] && all_start
+
+[ -f $BASEDIR/log/cthulhu.pid ] || {
+	echo "Could not find PID-file -- probably cthulhu was not yet started"
+	exit 1
+}
+
+[ "$1" = "stop" ] && SIGNAL=TERM
+[ "$1" = "reinit" ] && SIGNAL=HUP;
+[ "$1" = "killconn" ] && SIGNAL=INT;
+[ "$1" = "restart" ] && {
+	kill -INT `cat $BASEDIR/log/cthulhu.pid`
+	kill `cat $BASEDIR/log/cthulhu.pid`
+	start
+}
+[ "$1" = "status" ] && { tail -n 1 $BASEDIR/errors.log; exit 0; }
+
+[ -z $SIGNAL ] && { echo "Invalid option: '$1'."; exit 3; }
+
+kill "-$SIGNAL" `cat $BASEDIR/log/cthulhu.pid`

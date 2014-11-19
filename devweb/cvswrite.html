@@ -1,0 +1,353 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Read-write CVS access</title>
+</head>
+
+<body>
+
+<h1>Read-write CVS access</h1>
+
+<p>如果你有代码可写,那么你就可以得到CVS的读写权限.</p>
+
+<hr />
+<h2>Contents</h2>
+<ol>
+  <li><a href="#authenticated">Authenticated access</a></li>
+  <li><a href="#setup">Setting up your local CVS tree</a></li>
+  <li><a href="#policies">Write access policies</a></li>
+  <li><a href="#testing">Testing changes</a></li>
+  <li><a href="#checkin">Checking in a change</a></li>
+  <li><a href="#example">Example check-in session</a></li>
+  <li><a href="#branches">Creating branches</a></li>
+</ol>
+
+<hr />
+<h2><a name="authenticated">Authenticated access</a></h2>
+
+<p>Authenticated access is provided via the SSH protocol. Please
+provide us with your public key, which you can generate via the
+<code>ssh-keygen</code> program.  This will store your public key in
+the file <code>.ssh/identity.pub</code> in your home directory.
+
+<p>Once we have this information we will set up an account on
+<code>ytht.net</code> and inform you by mail.  At this point you
+should be able to check out a tree with CVS and add yourself to the
+devweb/steering.html file to test write access.  See <a
+href="#checkin">Checking in a change</a> for how to proceed with
+checking in your changes.</p>
+
+<hr />
+<h2><a name="setup">Setting up your local CVS tree</a></h2>
+
+<p>Once you can login to the machine, it's trivial to start using ssh
+from your remote machine.  Set <code>CVS_RSH</code> in your
+environment to "<code>ssh</code>".  Then issue the command</p>
+
+<blockquote><p><code>
+cvs -z 9 -d :ext:<i>username</i>@ytht.net:/home/cvs co bbs
+</code></p></blockquote>
+
+<p>where <i>username</i> is your user name at
+<code>ytht.net</code>.  This will check out a new CVS tree that you
+should be able to work with in the normal fashion, including
+committing changes.</p>
+
+<p>It is also possible to convert an existing CVS tree to use ssh by
+replacing all the "Root" files in the local tree with the following
+contents:</p>
+
+<blockquote><p><code>
+<i>username</i>@ytht.net:/home/cvs
+</code></p></blockquote>
+
+<p>To avoid the nuisance of having to supply your passphrase for each
+operation, you may want to use <code>ssh-agent</code>(1) followed by
+<code>ssh-add</code>(1) and entering your passphrase once for all.
+Either start your session as a child of <code>ssh-agent</code> or run
+it as a daemon and set the values of the environment variables
+<code>SSH_AUTHENTICATION_SOCKET</code> and <code>SSH_AGENT_PID</code>
+in each relevant process to what <code>ssh-agent</code> prints when it
+starts.  To avoid messages about (lack of) X11 forwarding, put in your
+<samp>$HOME/.ssh/config</samp> an entry like:</p>
+
+<blockquote><p><code>
+Host ytht.net<br />
+ForwardX11 no
+</code></p></blockquote>
+
+<h2>Web pages</h2>
+
+<p>When you check in changes to our web pages, they will
+automatically be checked out into the web server's data area.</p>
+
+<hr />
+<h2><a name="policies">Write access policies</a></h2>
+
+<p>The GCC project grants some developers various levels of write
+access to the GCC master sources.  CVS doesn't provide fine grained
+control over access to the repository; therefore, we depend on each
+developer to follow the appropriate policies.</p>
+
+<dl>
+  <dt>Global write permission.</dt>
+  <dd><p>A very limited number of developers have global write
+  permission over the entire repository.  They may check in changes to
+  any part of the compiler without approval from anyone else.  They
+  may also approve other people's changes to any part of the
+  compiler.</p></dd>
+
+  <dt>Write after approval.</dt>
+  <dd><p>This is folks that make regular contributions.People with 
+  write after approval need to submit their patches to the list; once the
+  patches have been approved by the appropriate maintainers the
+  patches may be checked into the YTHT BBS sources.</p></dd>
+</dl>
+
+<p>The list of folks with write access to the repository can be found
+in the devweb/steering file in the GCC distribution.</p>
+
+<p>Also note that fixes for obvious typos in ChangeLog files, docs,
+web pages, comments and similar stuff need not be approved.  Just
+check in the fix.  We don't want to get overly anal about checkin
+policies.</p>
+
+<hr />
+<h2><a name="testing">Testing changes</a></h2>
+
+<p>All changes must be tested 
+before they are checked in.  If you wrote the patch yourself, you
+should test it yourself, unless there is a reason why someone else
+must do it for you (for instance, if you are fixing a problem on a
+system you do not have access to).  If you are checking in a patch for
+someone else, you only need to test it if they did not.</p>
+
+<p>You must test exactly the change you intend to check in; 
+It is a good idea to re-test patches which were
+submitted a long time ago before applying them, even if nothing
+appears to have changed.</p>
+
+<p>These rules are designed to ensure that checked-in code does not
+contain bugs that prevent other people from continuing to get their
+work done.  There will always be bugs, but these rules help to
+minimize the amount of time where the tree does not build at
+all. Repeated failure to adhere to these rules could result in the
+revocation of check-in privileges.</p>
+
+<hr />
+<h2><a name="checkin">Checking in a change</a></h2>
+
+<p>The following is meant to provide a very quick overview of how to
+check in a change.  It is not meant to be a replacement for the CVS
+manual but instead a supplement.  The CVS manual is distributed as
+part of the CVS sources as a texinfo file.  <a
+href="http://www.cvshome.org/cyclic/cvs/doc-blandy.html">
+http://www.cvshome.org/cyclic/cvs/doc-blandy.html</a> contains a link
+to an reasonably simple introduction to CVS.</p>
+
+<p>In all the commands listed below, you can give an explicit list of
+filenames to the cvs command.  We recommend you list files explicitly
+when performing checkins to avoid accidental checkins of local
+code.</p>
+
+<p>We prefer that each CVS checkin be of a complete, single logical
+change, which may affect multiple files.  The log message for that
+checkin should be the complete ChangeLog entry for the change.  This
+makes it easier to correlate changes across files, and minimizes the
+time the repository is inconsistent.  If you have several unrelated
+changes, you should check them in with separate cvs commit
+commands.</p>
+
+<ol>
+<li>Sync your sources with the master repository via "<code>cvs
+update -dP</code>" before attempting a checkin; this will save you a little
+time if someone else has modified that file since the last time you
+synced your sources.  It will also identify any files in your local
+tree that you have modified.</li>
+
+<li>Apply the patch to your local tree and update the ChangeLog file.
+Use the current date/time for the ChangeLog entry, not the time that
+the patch was submitted.</li>
+
+<li>Make sure to rebuild any generated files that would be affected by
+the patch.  Make sure to check them in along with the files explicitly
+modified by the patch.</li>
+
+<li>We recommend using "<code>cvs diff</code>" after applying a patch to a
+local tree.  Review the output to make sure that only the changes you
+wanted to check in will be checked in.  Also check to see if the
+copyright dates need to be updated.</li>
+
+<li>Use "<code>cvs commit</code>" to check in the patch.  You can enter
+the log message via the "<code>-m</code>" argument to commit, or wait for
+the editor window to appear and enter the log message in the editor
+window.</li>
+
+<li>After exiting the editor, CVS will connect to the YTHT BBS cvs server
+and check in your changes.  When your prompt returns the checkin is
+finished.  A message will be sent to the YTHT BBS  mailing
+list indicating that a change was made.  CVS will provide a message if
+an error occurs and it will not check in any files.</li>
+</ol>
+
+<hr />
+<h2><a name="example">Example check-in session</a></h2>
+
+<p>Here's an actual check-in session for a patch John Carr recently
+sent to the GCC list.  This was the ChangeLog for his change:</p>
+
+<blockquote><pre>
+Sun Feb  8 08:02:13 1998  John Carr  &lt;jfc@mit.edu>
+
+   * bitmap.c (bitmap_debug_file): HOST_PTR_PRINTF converts a pointer,
+   not a HOST_WIDE_INT.
+
+   * calls.c (expand_call): Change test of expand_inline_function
+   return value to stop compiler warning.
+
+   * genattrtab.c (RTL_HASH): Cast pointer to long, not HOST_WIDE_INT.
+</pre></blockquote>
+
+<h3>First, I sync my local repository.</h3>
+
+<blockquote><pre>
+[/law/gcc] cvs update
+? libobjc
+? gcc/.ada
+? gcc/jump.c.SAVE
+? gcc/loop.c.SAVE
+M MAINTAINERS
+M Makefile.in
+M gcc/loop.c
+M gcc/cp/parse.c
+M gcc/objc/Make-lang.in
+M gcc/objc/Makefile.in
+</pre></blockquote>
+
+<p>The question marks indicate files in my local repository that are
+not part of the official sources.  The "M" indicates files I've
+changed locally for some unrelated work -- thus I have to be careful
+to avoid checking them in.  A "U" would have indicated a file that CVS
+updated because my local copy was out of date relative to the master
+sources.</p>
+
+<p>The local repository is now up to date.</p>
+
+<h3>Apply the patch to the local source</h3>
+
+<blockquote><pre>
+[/law/gcc/gcc] patch &lt; ~/Mail/gcc/pendingpatches/42
+Hmm...  Looks like a new-style context diff to me...
+The text leading up to this was:
+<i>[ uninteresting text deleted ]</i>
+|*** bitmap.c.egcs      Sat Dec 20 06:31:11 1997
+|--- bitmap.c   Sun Feb  8 08:01:32 1998
+--------------------------
+Patching file bitmap.c using Plan A...
+Hunk #1 succeeded at 563.
+Hunk #2 succeeded at 573.
+Hmm...  The next patch looks like a new-style context diff to me...
+The text leading up to this was:
+--------------------------
+|*** calls.c.egcs       Sun Feb  8 07:44:02 1998
+|--- calls.c    Sun Feb  8 08:00:08 1998
+--------------------------
+Patching file calls.c using Plan A...
+Hunk #1 succeeded at 730.
+Hmm...  The next patch looks like a new-style context diff to me...
+The text leading up to this was:
+--------------------------
+|*** genattrtab.c.egcs  Sun Feb  8 07:44:04 1998
+|--- genattrtab.c       Sun Feb  8 08:05:36 1998
+--------------------------
+Patching file genattrtab.c using Plan A...
+Hunk #1 succeeded at 506.
+done
+</pre></blockquote>
+
+<h3>Add ChangeLog entry by hand</h3>
+
+<p>ChangeLog entries should be handled as straight text;
+patches against ChangeLogs rarely apply correctly.</p>
+
+<h3>Review changes for correctness</h3>
+
+<p>The patch and its associated <code>ChangeLog</code> entry are in my
+local tree; now I run <code>cvs diff</code> on the modified files and
+review the output, verifying that it only contains the changes we want.</p>
+
+<blockquote><pre>
+[/law/gcc/gcc] cvs diff -c3p bitmap.c calls.c genattrtab.c
+</pre></blockquote>
+
+<h3>Update Copyrights</h3>
+
+<p>Review the changed files to see if any copyrights need updating, in
+this particular case all three needed their copyrights updated.</p>
+
+<blockquote><pre>
+[/law/gcc/gcc] vi bitmap.c calls.c genattrtab.c
+</pre></blockquote>
+
+<h3>Commit the changes to the central repository</h3>
+
+<blockquote><pre>
+[/law/gcc/gcc] cvs commit ChangeLog bitmap.c calls.c genattrtab.c
+</pre></blockquote>
+
+<p>My editor starts and I enter the log message; the lines starting
+with <code>CVS:</code> are automatically added by CVS and will be
+automatically removed:</p>
+
+<blockquote><pre>
+        * bitmap.c (bitmap_debug_file): HOST_PTR_PRINTF converts a pointer,
+        not a HOST_WIDE_INT.
+
+        * calls.c (expand_call): Change test of expand_inline_function
+        return value to stop compiler warning.
+
+        * genattrtab.c (RTL_HASH): Cast pointer to long, not HOST_WIDE_INT.
+
+CVS: ----------------------------------------------------------------------
+CVS: Enter Log.  Lines beginning with `CVS:' are removed automatically
+CVS:
+CVS: Committing in .
+CVS:
+CVS: Modified Files:
+CVS:    ChangeLog bitmap.c calls.c genattrtab.c
+CVS: ----------------------------------------------------------------------
+</pre></blockquote>
+
+<p>Now write &amp; quit from the editor, and CVS will start the actual
+checkin process....</p>
+
+<blockquote><pre>
+Checking in ChangeLog;
+/cvs/gcc/./gcc/ChangeLog,v  &lt;--  ChangeLog
+new revision: 1.746; previous revision: 1.745
+done
+Checking in bitmap.c;
+/cvs/gcc/./gcc/bitmap.c,v  &lt;--  bitmap.c
+new revision: 1.6; previous revision: 1.5
+done
+Checking in calls.c;
+/cvs/gcc/./gcc/calls.c,v  &lt;--  calls.c
+new revision: 1.12; previous revision: 1.11
+done
+Checking in genattrtab.c;
+/cvs/gcc/./gcc/genattrtab.c,v  &lt;--  genattrtab.c
+new revision: 1.15; previous revision: 1.14
+done
+[/law/gcc/gcc]
+</pre></blockquote>
+
+<p>And that's it!</p>
+
+<hr />
+<h2><a name="branches">Creating branches</a></h2>
+
+<p>When creating a branch for development, you should first tag the
+branchpoint.</p>
+
+</body>
+</html>

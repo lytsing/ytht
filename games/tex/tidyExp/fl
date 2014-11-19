@@ -1,0 +1,54 @@
+%{
+#include <stdio.h>
+%}
+
+/* Prevent the need for linking with -lfl */
+/*%option noyywrap*/
+%option caseless
+%x SCRIPT IFRAME STYLE OBJECT
+
+%%
+<INITIAL>"<script"[^>]*">"|"<SCRIPT"[^>]*">"    {BEGIN(SCRIPT);}
+<INITIAL>"<IFRAME"[^>]*">"|"<iframe"[^>]*">"    {BEGIN(IFRAME);}
+<INITIAL>"<STYLE"[^>]*">"|"<style"[^>]*">"      {BEGIN(STYLE);}
+<INITIAL>"<!--"(.|\n)*"-->"                     {;}
+<INITIAL>"<OBJECT"[^>]*">"|"<object"[^>]*">"    {BEGIN(OBJECT);}
+<INITIAL>"<body"(.|\n)*">"|"<BODY"(.|\n)*">"   {printf("<body>");};
+<INITIAL>"<div"(.|\n)*">"|"<DIV"(.|\n)*">"        {;}
+<INITIAL>"<\/div"(.|\n)*">"|"<\/DIV"(.|\n)*">"    {;}
+<INITIAL>"<form"(.|\n)*">"|"<FORM"(.|\n)*">"         {;}
+<INITIAL>.      {printf("%s", yytext);}
+
+<OBJECT>{
+"<\/OBJECT>"|"<\/object>"		       {BEGIN(INITIAL);}
+.|\n	{;}
+}
+
+<SCRIPT>{
+"<\/script>"|"<\/SCRIPT>"      {BEGIN(INITIAL);}
+.|\n               {;}
+}
+
+<IFRAME>{
+"<\/iframe>"|"<\/iframe>"      {BEGIN(INITIAL);}
+.|\n               {;}
+}
+
+<STYLE>{
+"<\/style>"|"<\/STYLE>"      {BEGIN(INITIAL);}
+.|\n               {;}
+}
+
+%%
+
+void main()
+{
+
+        yylex(); /* start the analysis*/
+}
+
+int yywrap()
+{
+        return 1;
+}
+

@@ -1,0 +1,41 @@
+diff -urN postfix/canonical postfix4bbs/canonical
+--- postfix/canonical	Mon Feb  4 13:42:39 2002
++++ postfix4bbs/canonical	Thu Mar  4 18:15:36 2004
+@@ -184,4 +184,5 @@
+ #        Yorktown Heights, NY 10598, USA
+ # 
+ #                                                                 1
+-# 
++#
++/^(.*)\.bbs@ytht.net$/ $1@ytht.org
+diff -urN postfix/main.cf postfix4bbs/main.cf
+--- postfix/main.cf	Thu Mar  4 16:37:16 2004
++++ postfix4bbs/main.cf	Thu Mar  4 18:20:49 2004
+@@ -17,3 +17,5 @@
+ mailbox_command = procmail -a "$EXTENSION"
+ mailbox_size_limit = 0
+ recipient_delimiter = 
++canonical_maps = regexp:/etc/postfix/canonical
++transport_maps = hash:/etc/postfix/transport 
+diff -urN postfix/master.cf postfix4bbs/master.cf
+--- postfix/master.cf	Mon Feb  4 13:42:39 2002
++++ postfix4bbs/master.cf	Thu Mar  4 18:20:05 2004
+@@ -99,6 +99,8 @@
+   flags=Fq. user=bsmtp argv=/usr/lib/bsmtp/bsmtp -d -t$nexthop -f$sender $recipient
+ scalemail-backend unix	-	n	n	-	2	pipe
+   flags=R user=scalemail argv=/usr/lib/scalemail/bin/scalemail-store ${nexthop} ${user} ${extension}
++bbsmail	  unix -        n       n       -       -       pipe
++  flags=R user=bbs argv=/home/bbs/bin/bbsmail_wrap ${user} $sender
+ 
+ # only used by postfix-tls
+ #smtps	  inet	n	-	n	-	-	smtpd -o smtpd_tls_wrappermode=yes -o smtpd_sasl_auth_enable=yes
+diff -urN postfix/transport postfix4bbs/transport
+--- postfix/transport	Mon Feb  4 13:42:39 2002
++++ postfix4bbs/transport	Thu Mar  4 18:15:55 2004
+@@ -183,4 +183,5 @@
+ #        Yorktown Heights, NY 10598, USA
+ # 
+ #                                                                 1
+-# 
++#
++ytht.org bbsmail:

@@ -1,0 +1,39 @@
+See HOWTO for information on installing and configuring Cthulhu.
+See LICENSE for licensing information.
+
+The Cthulhu 0.23a source distribution is
+
+		Copyright (C) 2002, 2003 Thomas M. Ogrisegg
+
+Send any comments to the Author: <tom-cthulhu@fnord.at>
+
+Cthulhu should compile on any platform with a SUSV2 compatible build environment
+and a c89 Compiler which supports alloca (or with an alloca library routine).
+
+Build process for the impatient:
+
+1.) Edit 'localconf'
+2.) Run ./configure
+3.) Run 'make'
+4.) Run 'make install'
+
+Cthulhu has been successfully compiled and tested on the following platforms:
+
+	Linux 2.4.x (gcc 2.95.x) -- x86
+	HP-UX 11.11i (HP cc) -- PA-RISC
+	FreeBSD 4.6 (gcc 2.95.3) -- x86
+	UnixWare 7.1.1 (UCB cc) -- x86
+	SunOS 5.6 (gcc 2.95.2) -- sun4m
+
+If you want to contribute to Cthulhu contact me. There's a lot to do
+(coding as well as documenting).
+
+If youre using Cthulhu on your site then please integrate the
+"Powered by Cthulhu" Logo into your website to promote Cthulhu
+(the logo is called "powered-by.gif" in the source root).
+
+This could be done by the following HTML-Code:
+<a href="http://cthulhu.fnord.at/">
+<img src="http://cthulhu.fnord.at/powered-by.gif" alt="Powered by Cthulhu">
+</img>
+</a>

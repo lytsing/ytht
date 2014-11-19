@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+	<title>Text Color</title>
+	<script language="JavaScript" type="text/javascript">
+	<!--
+	function selectSmile(smile) {
+		self.parent.AddSmilies("/smilies/"+smile);
+	}
+	
+	function InitSmilies() {
+		var smilies=new Array("icon_biggrin.gif","icon_confused.gif","icon_cool.gif","icon_cry.gif","icon_drink.gif","icon_eek.gif","icon_evil.gif","icon_frown.gif","icon_hammer.gif","icon_idea.gif","icon_lol.gif","icon_mad.gif","icon_razz.gif","icon_redface.gif","icon_rolleyes.gif","icon_smile.gif","icon_wink.gif","icon_wall.gif");
+		var s="";
+		for(var i=0; i<smilies.length;i++) {
+			s+="<img style=\"border: 1px dotted white;\" id=\""+smilies[i]+"\" src=\"" + smilies[i] + "\">";
+		}
+		document.getElementById("list").innerHTML=s;
+		if (document.getElementsByTagName)
+			var x = document.getElementsByTagName('img');
+		else if (document.all)
+			var x = document.all.tags('img');
+		for (var i=0;i<x.length;i++) {
+			x[i].onmouseover = over;
+			x[i].onmouseout = out;
+			x[i].onclick = click;
+		}
+	}
+	
+	function out() {
+		this.style.border='1px dotted white';
+	}
+	
+	function over() {
+		this.style.border='1px solid gray';
+	}
+	
+	function click() {
+		selectSmile(this.id);
+	}
+	--></script>
+
+</head>
+<body bgcolor="white" onLoad="InitSmilies()" leftmargin="0" rightmargin="0" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0"><div id="list" name="list"></div>
+</body>
+</html>

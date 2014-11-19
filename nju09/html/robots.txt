@@ -1,0 +1,11 @@
+User-agent: googlebot-Image 
+Disallow:
+
+User-agent: googlebot
+Disallow:
+
+User-agent: ia_archiver
+Disallow:
+
+User-agent: *
+Disallow: /
