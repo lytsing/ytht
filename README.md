@@ -3,9 +3,14 @@ ytht
 
 YTHT code source, a Bulletin Board System which supports SSH/telnet, http(s) to access to, fork from http://bbsdev.ytht.net 2008-08-23 version.
 
-本项目功能不做增加，仅仅维护能在新的Linux发行版本(CentOS,Ubuntu等)编译通过，供后来学习者使用。安装使用指南，请参看[wiki页面](https://github.com/lytsing/ytht/wiki)
+本项目功能不做增加，仅仅维护能在新的Linux发行版本(CentOS,Ubuntu等)编译通过，希望对YTHT代码和BBS感兴趣的朋友，以及希望用这个项目提高C/C++开发能力的在校学生提供一些帮助。安装使用指南，请参看[wiki页面](https://github.com/lytsing/ytht/wiki)
 
-原来的开发组已经停止维护，有一分支是　[天天坛](http://tttan.com/)，由 ylsdd　维护，代码未公开。西安交大兵马俑也维护自己的[分支](https://github.com/bmybbs/bmybbs)
+原来的开发组已经停止维护，有一些分支还在继续着，生活也是一样继续着。
+
+* [天天坛](http://tttan.com/)，由原维护组三大牛之一的 ylsdd　维护，代码未公开。
+* [一见如故](https://yjrg.net)，有一个板块叫做[一塌糊涂代码维护中心] (https://yjrg.net/HT/home?B=218)
+* [西安交大兵马俑](http://bbs.xjtu.edu.cn/)，也维护自己的[分支](https://github.com/bmybbs/bmybbs)
+* [一路BBS](http://www.yilubbs.com/)，他们的代码在放在 [google code](https://code.google.com/p/ythtbbs/)
 
 ## OLD README
 这个系统是在 FireBird BBS 3.0KCN 版本 上修改来的,现在用于一塌糊涂 BBS.
