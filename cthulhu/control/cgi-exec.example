@@ -1,6 +1,0 @@
-server <basedir>bin/cgi-exec
-cwd <basedir>
-bind 0:unix:<basedir>dev/cgi:23:80
-open 2>><basedir>log/cgi-exec.log
-pidfile <basedir>log/cgi-exec.pid
-fork

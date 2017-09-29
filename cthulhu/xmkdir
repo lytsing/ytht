@@ -1,5 +1,0 @@
-#!/bin/sh
-
-. ./localconf
-
-[ -d $1 ] || { mkdir -p $1; chown $XUSER:$XGROUP $1; }

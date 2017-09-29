@@ -1,7 +1,0 @@
-server <basedir>bin/ctauth
-cwd <basedir>config/ctauth/
-bind 0:unix:<basedir>dev/auth:23:80
-uid 123
-gid 456
-open 2>><basedir>log/auth.log
-fork

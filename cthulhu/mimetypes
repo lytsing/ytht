@@ -1,9 +1,0 @@
-# comment
-
-html	text/html
-html.gz	text/html
-doc 	application/msword
-gif		image/gif
-png		image/png
-jpg		image/jpg
-php		application/x-httpd-php4

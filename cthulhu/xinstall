@@ -1,6 +1,0 @@
-#!/bin/sh
-
-. ./localconf
-
-[ "$1" = "-f" ] && { cp -f "$2" "$3"; chown $XUSER:$XGROUP "$3"; exit; }
-[ -f "$2/$1" ] || { cp "$1" "$2/$1"; chown $XUSER:$XGROUP "$2/$1"; }
