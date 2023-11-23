@@ -3,7 +3,7 @@ ytht
 
 YTHT code source, a Bulletin Board System which supports SSH/telnet, http(s) to access to, fork from http://bbsdev.ytht.net 2008-08-23 version.
 
-本项目功能不做增加，仅仅维护能在新的Linux发行版本(CentOS,Ubuntu等)编译通过，希望对YTHT代码和BBS感兴趣的朋友，以及希望用这个项目提高C/C++开发能力的在校学生提供一些帮助。安装使用指南，请参看[wiki页面](https://github.com/lytsing/ytht/wiki)
+本项目功能不做增加，仅仅维护能在新的 Linux 发行版本(CentOS、Ubuntu 等)编译通过，希望对 YTHT 代码和 BBS 感兴趣的朋友，以及希望用这个项目提高 C/C++ 开发能力的在校学生提供一些帮助。安装使用指南，请参看[wiki页面](https://github.com/lytsing/ytht/wiki)
 
 原来的开发组已经停止维护，有一些分支还在继续着，生活也是一样继续着。
 
